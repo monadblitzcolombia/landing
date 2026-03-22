@@ -24,63 +24,63 @@ export interface BuildMenuColumn {
 
 export const BUILD_MENU_COLUMNS: BuildMenuColumn[] = [
   {
-    heading: "BUILD",
+    heading: "CONSTRUIR",
     items: [
       {
-        title: "Start Building",
+        title: "Empezar a construir",
         description:
-          "Explore programs, resources, and a world-class community for founders and developers building on Monad.",
+          "Explora programas, recursos y una comunidad de primer nivel para fundadores y developers que construyen en Monad.",
         href: "https://www.monad.xyz/build",
         icon: Rocket,
       },
       {
-        title: "Documentation",
-        description: "Learn how to write smart contracts on Monad.",
+        title: "Documentación",
+        description: "Aprende a escribir smart contracts en Monad.",
         href: "https://docs.monad.xyz/",
         icon: BookOpen,
       },
       {
-        title: "Developer Portal",
+        title: "Portal de Developers",
         description:
-          "Join the Monad developer community. Deploy contracts, complete missions, and build on the fastest EVM.",
+          "Únete a la comunidad de developers de Monad. Despliega contratos, completa misiones y construye en la EVM más rápida.",
         href: "https://developers.monad.xyz/",
         icon: SquareTerminal,
       },
       {
-        title: "Infra Directory",
+        title: "Directorio de Infra",
         description:
-          "Explore our directory of tools and services used to build on Monad.",
+          "Explora nuestro directorio de herramientas y servicios para construir en Monad.",
         href: "https://www.monad.xyz/infra",
         icon: Blocks,
       },
       {
-        title: "Research Forum",
-        description: "Discuss research on decentralization and performance.",
+        title: "Foro de Investigación",
+        description: "Discusiones sobre descentralización y rendimiento.",
         href: "https://forum.monad.xyz/",
         icon: MessageSquareText,
       },
     ],
   },
   {
-    heading: "PROGRAMS",
+    heading: "PROGRAMAS",
     items: [
       {
         title: "DeltaV",
         description:
-          "Connect with investors, mentors, and resources to fuel your startup journey.",
+          "Conecta con inversionistas, mentores y recursos para impulsar tu startup.",
         href: "https://deltav.monad.xyz/",
         icon: Zap,
       },
       {
         title: "Monad Momentum",
-        description: "Incentive program fueling growth on Monad Mainnet.",
+        description: "Programa de incentivos que impulsa el crecimiento en Monad Mainnet.",
         href: "https://momentum.monad.xyz/",
         icon: Flame,
       },
       {
         title: "Monad Madness",
         description:
-          "Monad Madness is a global pitch competition for ambitious founders building on Monad.",
+          "Competencia global de pitch para fundadores ambiciosos que construyen en Monad.",
         href: "https://madness.monad.xyz/",
         icon: Trophy,
       },

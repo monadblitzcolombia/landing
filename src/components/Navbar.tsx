@@ -11,7 +11,7 @@ import { BUILD_MENU_COLUMNS } from "@/lib/buildMenuData";
 const navLinks = [
   { label: "Sobre", href: "#sobre" },
   { label: "Ciudades", href: "#ciudades" },
-  { label: "Partners", href: "#partners" },
+  { label: "Aliados", href: "#partners" },
 ];
 
 export default function Navbar() {
@@ -91,7 +91,7 @@ export default function Navbar() {
             onMouseLeave={closeBuild}
           >
             <ScrambleLink
-              text="Build"
+              text="Construir"
               className="text-sm text-white/70 hover:text-white transition-colors font-mono flex items-center gap-1 cursor-pointer"
             >
               <ChevronDown
@@ -167,7 +167,7 @@ export default function Navbar() {
               onClick={() => setBuildMobileOpen(!buildMobileOpen)}
               className="flex items-center justify-between w-full text-sm text-white/70 hover:text-white font-mono"
             >
-              <span>Build</span>
+              <span>Construir</span>
               <ChevronDown
                 className={`w-4 h-4 transition-transform duration-200 ${
                   buildMobileOpen ? "rotate-180" : ""

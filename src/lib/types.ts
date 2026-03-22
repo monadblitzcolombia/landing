@@ -11,5 +11,5 @@ export interface City {
 
 export interface Partner {
   name: string;
-  logo: string;
+  logo: string | null;
 }

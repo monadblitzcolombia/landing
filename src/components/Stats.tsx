@@ -58,11 +58,11 @@ function StatCounter({ value, prefix = "", suffix, label, duration = 2 }: StatPr
 }
 
 const stats: StatProps[] = [
-  { value: 10000, suffix: "", label: "Transactions per second" },
-  { value: 200, suffix: "+", label: "Validators" },
-  { value: 100, suffix: "%", label: "EVM-Compatible" },
-  { value: 0, prefix: "0.", suffix: "s", label: "Finality", duration: 0 },
-  { value: 0, prefix: "0.", suffix: "s", label: "Block times", duration: 0 },
+  { value: 10000, suffix: "", label: "Transacciones por segundo" },
+  { value: 200, suffix: "+", label: "Validadores" },
+  { value: 100, suffix: "%", label: "Compatible con EVM" },
+  { value: 0, prefix: "0.", suffix: "s", label: "Finalidad", duration: 0 },
+  { value: 0, prefix: "0.", suffix: "s", label: "Tiempo de bloque", duration: 0 },
 ];
 
 // Special handling for decimal stats
@@ -89,11 +89,11 @@ export default function Stats() {
   return (
     <section className="px-6 border-y border-glass-border">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-5">
-        <StatCounter value={10000} suffix="" label="Transactions per second" />
-        <StatCounter value={200} suffix="+" label="Validators" />
-        <StatCounter value={100} suffix="%" label="EVM-Compatible" />
-        <DecimalStat value="0.8s" label="Finality" />
-        <DecimalStat value="0.4s" label="Block times" />
+        <StatCounter value={10000} suffix="" label="Transacciones por segundo" />
+        <StatCounter value={200} suffix="+" label="Validadores" />
+        <StatCounter value={100} suffix="%" label="Compatible con EVM" />
+        <DecimalStat value="0.8s" label="Finalidad" />
+        <DecimalStat value="0.4s" label="Tiempo de bloque" />
       </div>
     </section>
   );

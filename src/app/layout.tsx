@@ -6,11 +6,11 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const robotoMono = Roboto_Mono({ subsets: ["latin"], variable: "--font-roboto-mono" });
 
 export const metadata: Metadata = {
-  title: "Monad Tour Colombia 2026 — MonadBlitz Hackathons",
+  title: "Monad Tour Colombia 2026 | Hackathons MonadBlitz",
   description:
     "Recorre Colombia con Monad. Hackathons, workshops y comunidad blockchain en Cartagena, Barranquilla, Medellín y Bogotá.",
   openGraph: {
-    title: "Monad Tour Colombia 2026 — MonadBlitz Hackathons",
+    title: "Monad Tour Colombia 2026 | Hackathons MonadBlitz",
     description:
       "Recorre Colombia con Monad. Hackathons, workshops y comunidad blockchain en Cartagena, Barranquilla, Medellín y Bogotá.",
     type: "website",

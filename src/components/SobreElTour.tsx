@@ -23,7 +23,7 @@ const features = [
     icon: Code2,
     title: "Código",
     description:
-      "Construye sobre Monad EVM con ejecución paralela y finalidad sub-segundo. Despliega tus contratos Solidity directamente — 100% compatible a nivel de bytecode.",
+      "Construye sobre Monad EVM con ejecución paralela y finalidad sub-segundo. Despliega tus contratos Solidity directamente, 100% compatible a nivel de bytecode.",
   },
   {
     icon: Users,
@@ -55,7 +55,7 @@ export default function SobreElTour() {
           </h2>
           <p className="text-lg text-white/60 max-w-2xl mx-auto">
             Una serie de hackathons MonadBlitz recorriendo Colombia. Construye
-            sobre la blockchain más rápida compatible con EVM — 10,000 TPS sin
+            sobre la blockchain más rápida compatible con EVM. 10,000 TPS sin
             compromisos.
           </p>
         </motion.div>

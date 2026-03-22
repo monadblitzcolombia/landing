@@ -31,7 +31,7 @@ export default function Footer() {
               Ciudades
             </a>
             <a href="#partners" className="hover:text-white transition-colors">
-              Partners
+              Aliados
             </a>
           </div>
 
@@ -45,14 +45,6 @@ export default function Footer() {
             >
               Discord
             </a>
-            <a
-              href="https://x.com/moaboradweb3"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/40 hover:text-monad-primary transition-colors text-sm font-mono"
-            >
-              X / Twitter
-            </a>
           </div>
         </div>
 
@@ -60,7 +52,7 @@ export default function Footer() {
           <p className="text-xs text-white/30">
             © 2026 Monad. Todos los derechos reservados.
           </p>
-          <p className="text-xs text-white/20 mt-1">Powered by Monad</p>
+          <p className="text-xs text-white/20 mt-1">Impulsado por Monad</p>
         </div>
       </div>
     </footer>

@@ -7,7 +7,7 @@ const sections = [
   { id: "hero", label: "Inicio" },
   { id: "sobre", label: "Sobre" },
   { id: "ciudades", label: "Ciudades" },
-  { id: "partners", label: "Partners" },
+  { id: "partners", label: "Aliados" },
 ];
 
 export default function ScrollNav() {

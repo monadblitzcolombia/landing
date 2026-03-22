@@ -29,7 +29,7 @@ export default function Partners() {
           transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 font-heading">Partners</h2>
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 font-heading">Aliados</h2>
           <p className="text-lg text-white/60">
             Construyendo el ecosistema blockchain colombiano juntos.
           </p>
@@ -49,9 +49,17 @@ export default function Partners() {
               whileHover={{ scale: 1.05 }}
               className="bg-glass-bg border border-glass-border rounded-xl px-8 py-6 backdrop-blur-sm flex items-center justify-center min-w-[200px] hover:border-monad-primary/30 transition-colors card-glow"
             >
-              <span className="text-white/70 font-semibold text-sm text-center">
-                {partner.name}
-              </span>
+              {partner.logo ? (
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="h-8 w-auto object-contain brightness-0 invert opacity-70"
+                />
+              ) : (
+                <span className="text-white/70 font-semibold text-sm text-center">
+                  {partner.name}
+                </span>
+              )}
             </motion.div>
           ))}
         </motion.div>

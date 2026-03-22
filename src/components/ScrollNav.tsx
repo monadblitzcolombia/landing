@@ -37,7 +37,7 @@ export default function ScrollNav() {
   }, []);
 
   return (
-    <nav className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-center gap-3">
+    <nav className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-end gap-4">
       {sections.map(({ id, label }) => (
         <a
           key={id}
@@ -46,17 +46,17 @@ export default function ScrollNav() {
           aria-label={label}
         >
           {/* Tooltip label */}
-          <span className="absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity text-xs text-white/70 font-mono whitespace-nowrap bg-monad-bg/90 px-2 py-1 rounded">
+          <span className="absolute right-8 opacity-0 group-hover:opacity-100 transition-opacity text-xs text-white/70 font-mono whitespace-nowrap bg-monad-bg/90 px-2 py-1 rounded">
             {label}
           </span>
-          {/* Dot */}
+          {/* Line indicator */}
           <motion.span
-            className="block rounded-full transition-colors"
+            className="block rounded-full"
             animate={{
-              width: activeSection === id ? 10 : 6,
-              height: activeSection === id ? 10 : 6,
+              width: activeSection === id ? 24 : 16,
+              height: 2,
               backgroundColor:
-                activeSection === id ? "#6E54FF" : "rgba(255, 255, 255, 0.3)",
+                activeSection === id ? "#6E54FF" : "rgba(255, 255, 255, 0.2)",
             }}
             transition={{ duration: 0.3 }}
           />

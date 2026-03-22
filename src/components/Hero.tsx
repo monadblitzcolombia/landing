@@ -69,10 +69,12 @@ export default function Hero() {
                 Regístrate
               </a>
               <a
-                href="#sobre"
+                href="https://app.monad.xyz/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="border border-white/20 text-white font-medium px-8 py-3 rounded-md hover:border-monad-primary/50 transition-colors text-center font-mono"
               >
-                Explorar
+                Explore Ecosystem
               </a>
             </div>
           </div>

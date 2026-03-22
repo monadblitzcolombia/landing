@@ -1,7 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import ScrambleLink from "./ScrambleLink";
+import BuildMegaMenu from "./BuildMegaMenu";
+import { BUILD_MENU_COLUMNS } from "@/lib/buildMenuData";
 
 const navLinks = [
   { label: "Sobre", href: "#sobre" },
@@ -12,12 +17,47 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [buildOpen, setBuildOpen] = useState(false);
+  const [buildMobileOpen, setBuildMobileOpen] = useState(false);
+  const buildRef = useRef<HTMLDivElement>(null);
+  const buildTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Close mega menu on click outside
+  useEffect(() => {
+    if (!buildOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (buildRef.current && !buildRef.current.contains(e.target as Node)) {
+        setBuildOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [buildOpen]);
+
+  // Close mega menu on Escape
+  useEffect(() => {
+    if (!buildOpen) return;
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setBuildOpen(false);
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [buildOpen]);
+
+  const openBuild = () => {
+    if (buildTimeoutRef.current) clearTimeout(buildTimeoutRef.current);
+    setBuildOpen(true);
+  };
+
+  const closeBuild = () => {
+    buildTimeoutRef.current = setTimeout(() => setBuildOpen(false), 150);
+  };
 
   return (
     <nav
@@ -43,15 +83,38 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
+          {/* Build dropdown trigger */}
+          <div
+            ref={buildRef}
+            className="relative"
+            onMouseEnter={openBuild}
+            onMouseLeave={closeBuild}
+          >
+            <ScrambleLink
+              text="Build"
+              className="text-sm text-white/70 hover:text-white transition-colors font-mono flex items-center gap-1 cursor-pointer"
+            >
+              <ChevronDown
+                className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                  buildOpen ? "rotate-180" : ""
+                }`}
+              />
+            </ScrambleLink>
+
+            <AnimatePresence>
+              {buildOpen && <BuildMegaMenu />}
+            </AnimatePresence>
+          </div>
+
           {navLinks.map((link) => (
-            <a
+            <ScrambleLink
               key={link.href}
+              text={link.label}
               href={link.href}
               className="text-sm text-white/70 hover:text-white transition-colors font-mono"
-            >
-              {link.label}
-            </a>
+            />
           ))}
+
           <a
             href="#ciudades"
             className="bg-monad-primary text-white text-sm font-bold px-5 py-2 rounded-md hover:brightness-110 transition-all font-mono uppercase tracking-wide btn-glow"
@@ -97,6 +160,58 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+
+          {/* Build accordion */}
+          <div>
+            <button
+              onClick={() => setBuildMobileOpen(!buildMobileOpen)}
+              className="flex items-center justify-between w-full text-sm text-white/70 hover:text-white font-mono"
+            >
+              <span>Build</span>
+              <ChevronDown
+                className={`w-4 h-4 transition-transform duration-200 ${
+                  buildMobileOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            <AnimatePresence>
+              {buildMobileOpen && (
+                <motion.div
+                  key="build-mobile"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="overflow-hidden"
+                >
+                  <div className="pt-3 pb-1 pl-4 space-y-3">
+                    {BUILD_MENU_COLUMNS.map((column) => (
+                      <div key={column.heading}>
+                        <p className="text-[10px] font-bold tracking-[3px] text-white/30 font-mono uppercase mb-2">
+                          {column.heading}
+                        </p>
+                        {column.items.map((item) => (
+                          <a
+                            key={item.title}
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 py-2 text-sm text-white/60 hover:text-white transition-colors"
+                            onClick={() => setMenuOpen(false)}
+                          >
+                            <item.icon className="w-4 h-4 text-monad-primary" />
+                            <span>{item.title}</span>
+                          </a>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           <a
             href="#ciudades"
             className="block bg-monad-primary text-white text-sm font-bold px-5 py-2 rounded-md text-center font-mono uppercase tracking-wide"

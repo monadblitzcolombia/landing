@@ -1,58 +1,92 @@
 import Image from "next/image";
+import { FOOTER_NAV, SOCIAL_LINKS } from "@/lib/constants";
+
+const COLUMNS = ["principal", "construir", "programas", "comunidad"] as const;
 
 export default function Footer() {
   return (
-    <footer className="border-t border-glass-border py-12 px-6 mt-auto">
+    <footer className="bg-monad-dark border-t border-white/10 py-16 sm:py-20 px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+        {/* Navigation columns */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 mb-12">
+          {COLUMNS.map((key) => {
+            const col = FOOTER_NAV[key];
+            return (
+              <div key={key}>
+                <h4 className="text-[10px] font-bold tracking-[3px] text-white/40 font-mono uppercase mb-4">
+                  {col.title}
+                </h4>
+                <ul className="space-y-3">
+                  {col.links.map((link) => {
+                    const isExternal = link.href.startsWith("http");
+                    return (
+                      <li key={link.label}>
+                        <a
+                          href={link.href}
+                          {...(isExternal && {
+                            target: "_blank",
+                            rel: "noopener noreferrer",
+                          })}
+                          className="text-sm text-white/50 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block font-mono"
+                        >
+                          {link.label}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Divider */}
+        <div className="h-px bg-white/10 mb-8" />
+
+        {/* Bottom row */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           {/* Logo */}
           <div className="flex items-center gap-2.5">
             <Image
               src="/images/monad/logo-mark.svg"
               alt="Monad"
-              width={24}
-              height={24}
+              width={20}
+              height={20}
               className="rounded-sm"
             />
-            <span className="text-lg font-extrabold tracking-tight">
+            <span className="text-sm font-extrabold tracking-tight">
               <span className="text-white">MONAD</span>
-              <span className="text-white/50 ml-1 text-sm font-medium">
+              <span className="text-white/40 ml-1 text-xs font-medium">
                 TOUR COLOMBIA
               </span>
             </span>
           </div>
 
-          {/* Nav links */}
-          <div className="flex gap-6 text-sm text-white/50 font-mono">
-            <a href="#sobre" className="hover:text-white transition-colors">
-              Sobre
-            </a>
-            <a href="#ciudades" className="hover:text-white transition-colors">
-              Ciudades
-            </a>
-            <a href="#partners" className="hover:text-white transition-colors">
-              Aliados
-            </a>
+          {/* Social links */}
+          <div className="flex gap-6">
+            {SOCIAL_LINKS.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-white/40 hover:text-white transition-colors font-mono uppercase tracking-wider"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
 
-          {/* Socials */}
-          <div className="flex gap-4">
-            <a
-              href="https://discord.gg/monad"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/40 hover:text-monad-primary transition-colors text-sm font-mono"
-            >
-              Discord
+          {/* Legal */}
+          <div className="flex items-center gap-4 text-xs text-white/30 font-mono">
+            <span>&copy; 2026 Monad</span>
+            <a href="#" className="hover:text-white/50 transition-colors">
+              Privacy
+            </a>
+            <a href="#" className="hover:text-white/50 transition-colors">
+              Terms
             </a>
           </div>
-        </div>
-
-        <div className="mt-8 pt-6 border-t border-glass-border text-center">
-          <p className="text-xs text-white/30">
-            © 2026 Monad. Todos los derechos reservados.
-          </p>
-          <p className="text-xs text-white/20 mt-1">Impulsado por Monad</p>
         </div>
       </div>
     </footer>

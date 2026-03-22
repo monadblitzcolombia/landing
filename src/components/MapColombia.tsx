@@ -51,7 +51,7 @@ export default function MapColombia() {
           <Tooltip
             direction="top"
             offset={[0, -10]}
-            className="!bg-monad-deep !text-white !border-monad-primary !rounded-md !text-xs !font-bold"
+            className="!bg-monad-dark !text-white !border-monad-primary !rounded-md !text-xs !font-bold"
           >
             {city.name}
             {city.confirmed && " ✦"}

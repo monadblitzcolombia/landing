@@ -7,6 +7,12 @@ export interface City {
   confirmed: boolean;
   registrationUrl: string | null;
   description: string;
+  eventType?: string;
+}
+
+export interface FooterLink {
+  label: string;
+  href: string;
 }
 
 export interface Partner {

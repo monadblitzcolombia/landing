@@ -9,9 +9,9 @@ import BuildMegaMenu from "./BuildMegaMenu";
 import { BUILD_MENU_COLUMNS } from "@/lib/buildMenuData";
 
 const navLinks = [
-  { label: "Sobre", href: "#sobre" },
-  { label: "Ciudades", href: "#ciudades" },
-  { label: "Aliados", href: "#partners" },
+  { label: "Eventos", href: "#eventos" },
+  { label: "Explorar", href: "#explorar" },
+  { label: "Aliados", href: "#aliados" },
 ];
 
 export default function Navbar() {
@@ -28,7 +28,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mega menu on click outside
   useEffect(() => {
     if (!buildOpen) return;
     const handleClickOutside = (e: MouseEvent) => {
@@ -40,7 +39,6 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [buildOpen]);
 
-  // Close mega menu on Escape
   useEffect(() => {
     if (!buildOpen) return;
     const handleEscape = (e: KeyboardEvent) => {
@@ -60,9 +58,12 @@ export default function Navbar() {
   };
 
   return (
-    <nav
+    <motion.nav
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-monad-bg/95 backdrop-blur-md shadow-lg" : "bg-transparent"
+        scrolled ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -76,8 +77,8 @@ export default function Navbar() {
             className="rounded-md"
           />
           <span className="text-lg font-extrabold tracking-tight">
-            <span className="text-white">MONAD</span>
-            <span className="text-white/50 ml-1 text-sm font-medium">TOUR</span>
+            <span className={scrolled ? "text-gray-900" : "text-white"}>MONAD</span>
+            <span className={`ml-1 text-sm font-medium ${scrolled ? "text-gray-400" : "text-white/50"}`}>TOUR</span>
           </span>
         </a>
 
@@ -92,7 +93,9 @@ export default function Navbar() {
           >
             <ScrambleLink
               text="Construir"
-              className="text-sm text-white/70 hover:text-white transition-colors font-mono flex items-center gap-1 cursor-pointer"
+              className={`text-sm transition-colors font-mono flex items-center gap-1 cursor-pointer ${
+                scrolled ? "text-gray-500 hover:text-gray-900" : "text-white/70 hover:text-white"
+              }`}
             >
               <ChevronDown
                 className={`w-3.5 h-3.5 transition-transform duration-200 ${
@@ -111,15 +114,17 @@ export default function Navbar() {
               key={link.href}
               text={link.label}
               href={link.href}
-              className="text-sm text-white/70 hover:text-white transition-colors font-mono"
+              className={`text-sm transition-colors font-mono ${
+                scrolled ? "text-gray-500 hover:text-gray-900" : "text-white/70 hover:text-white"
+              }`}
             />
           ))}
 
           <a
-            href="#ciudades"
-            className="bg-monad-primary text-white text-sm font-bold px-5 py-2 rounded-md hover:brightness-110 transition-all font-mono uppercase tracking-wide btn-glow"
+            href="#eventos"
+            className="bg-monad-primary text-white text-sm font-bold px-5 py-2 rounded-full hover:brightness-110 transition-all font-mono uppercase tracking-wide btn-glow"
           >
-            Regístrate
+            Registrate
           </a>
         </div>
 
@@ -130,97 +135,105 @@ export default function Navbar() {
           aria-label="Menu"
         >
           <span
-            className={`block w-6 h-0.5 bg-white transition-transform ${
-              menuOpen ? "rotate-45 translate-y-2" : ""
-            }`}
+            className={`block w-6 h-0.5 transition-transform ${
+              scrolled ? "bg-gray-900" : "bg-white"
+            } ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
           />
           <span
-            className={`block w-6 h-0.5 bg-white transition-opacity ${
-              menuOpen ? "opacity-0" : ""
-            }`}
+            className={`block w-6 h-0.5 transition-opacity ${
+              scrolled ? "bg-gray-900" : "bg-white"
+            } ${menuOpen ? "opacity-0" : ""}`}
           />
           <span
-            className={`block w-6 h-0.5 bg-white transition-transform ${
-              menuOpen ? "-rotate-45 -translate-y-2" : ""
-            }`}
+            className={`block w-6 h-0.5 transition-transform ${
+              scrolled ? "bg-gray-900" : "bg-white"
+            } ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
           />
         </button>
       </div>
 
       {/* Mobile menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-monad-bg/95 backdrop-blur-md border-t border-glass-border px-6 py-4 space-y-4">
-          {navLinks.map((link) => (
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100 px-6 py-4 space-y-4 overflow-hidden"
+          >
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="block text-sm text-gray-500 hover:text-gray-900 font-mono"
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            ))}
+
+            {/* Build accordion */}
+            <div>
+              <button
+                onClick={() => setBuildMobileOpen(!buildMobileOpen)}
+                className="flex items-center justify-between w-full text-sm text-gray-500 hover:text-gray-900 font-mono"
+              >
+                <span>Construir</span>
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${
+                    buildMobileOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              <AnimatePresence>
+                {buildMobileOpen && (
+                  <motion.div
+                    key="build-mobile"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pt-3 pb-1 pl-4 space-y-3">
+                      {BUILD_MENU_COLUMNS.map((column) => (
+                        <div key={column.heading}>
+                          <p className="text-[10px] font-bold tracking-[3px] text-gray-400 font-mono uppercase mb-2">
+                            {column.heading}
+                          </p>
+                          {column.items.map((item) => (
+                            <a
+                              key={item.title}
+                              href={item.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 py-2 text-sm text-gray-500 hover:text-gray-900 transition-colors"
+                              onClick={() => setMenuOpen(false)}
+                            >
+                              <item.icon className="w-4 h-4 text-monad-primary" />
+                              <span>{item.title}</span>
+                            </a>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
             <a
-              key={link.href}
-              href={link.href}
-              className="block text-sm text-white/70 hover:text-white font-mono"
+              href="#eventos"
+              className="block bg-monad-primary text-white text-sm font-bold px-5 py-2 rounded-full text-center font-mono uppercase tracking-wide"
               onClick={() => setMenuOpen(false)}
             >
-              {link.label}
+              Registrate
             </a>
-          ))}
-
-          {/* Build accordion */}
-          <div>
-            <button
-              onClick={() => setBuildMobileOpen(!buildMobileOpen)}
-              className="flex items-center justify-between w-full text-sm text-white/70 hover:text-white font-mono"
-            >
-              <span>Construir</span>
-              <ChevronDown
-                className={`w-4 h-4 transition-transform duration-200 ${
-                  buildMobileOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-
-            <AnimatePresence>
-              {buildMobileOpen && (
-                <motion.div
-                  key="build-mobile"
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.25 }}
-                  className="overflow-hidden"
-                >
-                  <div className="pt-3 pb-1 pl-4 space-y-3">
-                    {BUILD_MENU_COLUMNS.map((column) => (
-                      <div key={column.heading}>
-                        <p className="text-[10px] font-bold tracking-[3px] text-white/30 font-mono uppercase mb-2">
-                          {column.heading}
-                        </p>
-                        {column.items.map((item) => (
-                          <a
-                            key={item.title}
-                            href={item.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 py-2 text-sm text-white/60 hover:text-white transition-colors"
-                            onClick={() => setMenuOpen(false)}
-                          >
-                            <item.icon className="w-4 h-4 text-monad-primary" />
-                            <span>{item.title}</span>
-                          </a>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          <a
-            href="#ciudades"
-            className="block bg-monad-primary text-white text-sm font-bold px-5 py-2 rounded-md text-center font-mono uppercase tracking-wide"
-            onClick={() => setMenuOpen(false)}
-          >
-            Regístrate
-          </a>
-        </div>
-      )}
-    </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 }

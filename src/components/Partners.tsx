@@ -53,7 +53,7 @@ export default function Partners() {
                 <img
                   src={partner.logo}
                   alt={partner.name}
-                  className="h-8 w-auto object-contain brightness-0 invert opacity-70"
+                  className="h-10 w-auto object-contain"
                 />
               ) : (
                 <span className="text-white/70 font-semibold text-sm text-center">

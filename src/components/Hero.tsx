@@ -1,11 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import MapStatic from "./MapStatic";
 
 const MapColombia = dynamic(() => import("./MapColombia"), {
   ssr: false,
-  loading: () => <MapStatic />,
+  loading: () => <div className="w-full h-full bg-white/5 rounded-xl animate-pulse" />,
 });
 
 export default function Hero() {

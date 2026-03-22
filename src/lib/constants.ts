@@ -46,10 +46,10 @@ export const CITIES: City[] = [
 ];
 
 export const PARTNERS: Partner[] = [
-  { name: "CTG OnChain", logo: null },
+  { name: "Cartagena OnChain", logo: "/images/partners/ctg-onchain.svg" },
   {
     name: "Medellín Blockchain Community",
-    logo: "/images/partners/medellin-blockchain.png",
+    logo: "/images/partners/medellin-blockchain.svg",
   },
   { name: "DevLabX3", logo: null },
 ];

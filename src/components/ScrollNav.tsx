@@ -5,13 +5,27 @@ import { motion } from "framer-motion";
 
 const sections = [
   { id: "hero", label: "Inicio" },
-  { id: "sobre", label: "Sobre" },
-  { id: "ciudades", label: "Ciudades" },
-  { id: "partners", label: "Aliados" },
+  { id: "stats", label: "Stats" },
+  { id: "construir", label: "Construir" },
+  { id: "eventos", label: "Eventos" },
+  { id: "aliados", label: "Aliados" },
+  { id: "explorar", label: "Explorar" },
 ];
+
+// Sections with dark backgrounds
+const darkSections = new Set(["hero", "eventos"]);
 
 export default function ScrollNav() {
   const [activeSection, setActiveSection] = useState("hero");
+  const [visible, setVisible] = useState(false);
+
+  const isDark = darkSections.has(activeSection);
+
+  useEffect(() => {
+    // Delayed entrance
+    const timer = setTimeout(() => setVisible(true), 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
@@ -26,7 +40,7 @@ export default function ScrollNav() {
             setActiveSection(id);
           }
         },
-        { threshold: 0.3 }
+        { threshold: 0.2 }
       );
 
       observer.observe(el);
@@ -37,31 +51,58 @@ export default function ScrollNav() {
   }, []);
 
   return (
-    <nav className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-end gap-4">
-      {sections.map(({ id, label }) => (
-        <a
-          key={id}
-          href={`#${id}`}
-          className="group relative flex items-center"
-          aria-label={label}
-        >
-          {/* Tooltip label */}
-          <span className="absolute right-8 opacity-0 group-hover:opacity-100 transition-opacity text-xs text-white/70 font-mono whitespace-nowrap bg-monad-bg/90 px-2 py-1 rounded">
-            {label}
-          </span>
-          {/* Line indicator */}
-          <motion.span
-            className="block rounded-full"
-            animate={{
-              width: activeSection === id ? 24 : 16,
-              height: 2,
-              backgroundColor:
-                activeSection === id ? "#6E54FF" : "rgba(255, 255, 255, 0.2)",
-            }}
-            transition={{ duration: 0.3 }}
-          />
-        </a>
-      ))}
-    </nav>
+    <motion.nav
+      className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-center gap-3"
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: visible ? 1 : 0, x: visible ? 0 : 20 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
+    >
+      {sections.map(({ id, label }) => {
+        const isActive = activeSection === id;
+        return (
+          <a
+            key={id}
+            href={`#${id}`}
+            className="group relative flex items-center justify-center p-1"
+            aria-label={label}
+          >
+            {/* Tooltip */}
+            <motion.span
+              className={`absolute right-10 text-xs font-mono whitespace-nowrap px-2.5 py-1 rounded-md pointer-events-none ${
+                isDark
+                  ? "bg-white/10 backdrop-blur-sm text-white/80 border border-white/10"
+                  : "bg-white text-gray-600 shadow-sm border border-gray-100"
+              }`}
+              initial={{ opacity: 0, x: 4 }}
+              whileHover={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.2 }}
+              style={{ opacity: 0 }}
+            >
+              {label}
+            </motion.span>
+
+            {/* Dot indicator */}
+            <motion.span
+              className="block rounded-full"
+              animate={{
+                width: isActive ? 10 : 6,
+                height: isActive ? 10 : 6,
+                backgroundColor: isActive
+                  ? "#6E54FF"
+                  : isDark
+                  ? "rgba(255, 255, 255, 0.25)"
+                  : "rgba(0, 0, 0, 0.15)",
+                boxShadow: isActive ? "0 0 12px rgba(110, 84, 255, 0.4)" : "none",
+              }}
+              whileHover={{
+                scale: 1.4,
+                backgroundColor: "#6E54FF",
+              }}
+              transition={{ duration: 0.3, type: "spring", stiffness: 400, damping: 20 }}
+            />
+          </a>
+        );
+      })}
+    </motion.nav>
   );
 }

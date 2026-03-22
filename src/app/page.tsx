@@ -1,24 +1,25 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Stats from "@/components/Stats";
-import SobreElTour from "@/components/SobreElTour";
-import CiudadesYFechas from "@/components/CiudadesYFechas";
-import Partners from "@/components/Partners";
-import Galeria from "@/components/Galeria";
+
+import BuildFeatures from "@/components/BuildFeatures";
+import EventsTable from "@/components/EventsTable";
+import ExploreCards from "@/components/ExploreCards";
+import Marquee from "@/components/Marquee";
 import Footer from "@/components/Footer";
 import ScrollNav from "@/components/ScrollNav";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-monad-bg">
+    <main className="min-h-screen bg-white">
       <Navbar />
       <ScrollNav />
       <Hero />
       <Stats />
-      <SobreElTour />
-      <CiudadesYFechas />
-      <Partners />
-      <Galeria />
+      <EventsTable />
+      <BuildFeatures />
+      <Marquee />
+      <ExploreCards />
       <Footer />
     </main>
   );

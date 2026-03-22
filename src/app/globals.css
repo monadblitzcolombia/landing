@@ -1,28 +1,29 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Official Monad primary palette */
-  --color-monad-bg: #0E091C;
+  /* Monad official palette */
+  --color-monad-bg: #FFFFFF;
+  --color-monad-dark: #0E091C;
   --color-monad-primary: #6E54FF;
   --color-monad-light: #DDD7FE;
-  --color-monad-deep: #0a0614;
+  --color-monad-deep: #F8F8FC;
 
-  /* Official Monad secondary palette */
+  /* Monad secondary palette */
   --color-monad-cyan: #85E6FF;
   --color-monad-pink: #FF8EE4;
   --color-monad-orange: #FFAE45;
 
-  /* Glass effects */
+  /* Glass effects (dark sections) */
   --color-glass-bg: rgba(255, 255, 255, 0.05);
   --color-glass-border: rgba(255, 255, 255, 0.08);
 
   /* Typography */
   --font-sans: "Inter", sans-serif;
-  --font-heading: "Britti Sans", "Inter", sans-serif;
+  --font-heading: var(--font-space-grotesk), "Inter", sans-serif;
   --font-mono: "Roboto Mono", monospace;
 }
 
-/* ─── Animated gradient text ─── */
+/* Animated gradient text */
 @keyframes gradient-shift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -31,31 +32,31 @@
 
 .text-gradient-monad {
   background: linear-gradient(
-    90deg,
+    105deg,
     #6E54FF 0%,
-    #85E6FF 25%,
-    #FF8EE4 50%,
-    #FFAE45 75%,
+    #85E6FF 30%,
+    #DDD7FE 50%,
+    #FF8EE4 70%,
     #6E54FF 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradient-shift 6s ease infinite;
+  animation: gradient-shift 10s ease infinite;
 }
 
-/* ─── Map marker pulse ─── */
+/* Map marker pulse */
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 8px 2px rgba(110, 84, 255, 0.5); }
-  50% { box-shadow: 0 0 20px 6px rgba(110, 84, 255, 0.8); }
+  0%, 100% { box-shadow: 0 0 8px 2px rgba(110, 84, 255, 0.4); }
+  50% { box-shadow: 0 0 20px 6px rgba(110, 84, 255, 0.7); }
 }
 
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
-/* ─── Floating blobs ─── */
+/* Floating blobs - Hero background */
 @keyframes float-blob-1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33% { transform: translate(30px, -40px) scale(1.05); }
@@ -74,31 +75,29 @@
   66% { transform: translate(-35px, -25px) scale(0.92); }
 }
 
-/* ─── Noise texture overlay ─── */
-.noise-overlay::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
-}
-
-/* ─── Card glow hover ─── */
+/* Card glow hover - light sections */
 .card-glow {
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
 }
 
 .card-glow:hover {
   box-shadow:
-    0 0 20px rgba(110, 84, 255, 0.15),
-    0 0 40px rgba(110, 84, 255, 0.05);
+    0 8px 30px rgba(110, 84, 255, 0.12),
+    0 2px 10px rgba(0, 0, 0, 0.06);
 }
 
-/* ─── Animated gradient border ─── */
+/* Card glow hover - dark sections */
+.card-glow-dark {
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.card-glow-dark:hover {
+  box-shadow:
+    0 0 30px rgba(110, 84, 255, 0.2),
+    0 0 60px rgba(110, 84, 255, 0.05);
+}
+
+/* Animated gradient border */
 @property --border-angle {
   syntax: "<angle>";
   inherits: false;
@@ -141,7 +140,7 @@
   background: #0E091C;
 }
 
-/* ─── Button glow hover ─── */
+/* Button glow hover */
 .btn-glow {
   position: relative;
   transition: all 0.3s ease;
@@ -150,8 +149,56 @@
 .btn-glow:hover {
   transform: translateY(-1px);
   box-shadow:
-    0 0 20px rgba(110, 84, 255, 0.4),
-    0 4px 15px rgba(110, 84, 255, 0.2);
+    0 0 20px rgba(110, 84, 255, 0.3),
+    0 4px 12px rgba(110, 84, 255, 0.15);
+}
+
+/* Marquee infinite scroll */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Explore card gradient overlays */
+.explore-card-gradient {
+  background: linear-gradient(135deg, #6E54FF 0%, #85E6FF 100%);
+}
+
+.explore-card-gradient-alt {
+  background: linear-gradient(135deg, #FF8EE4 0%, #FFAE45 100%);
+}
+
+/* Events table row hover */
+.event-row {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.event-row:hover {
+  background-color: rgba(110, 84, 255, 0.08);
+}
+
+/* Section reveal divider line */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(110, 84, 255, 0.3), transparent);
+}
+
+/* Fix Leaflet tile seam gaps */
+.leaflet-tile {
+  outline: 1px solid transparent;
+}
+
+.leaflet-tile-pane {
+  will-change: transform;
 }
 
 html {
@@ -159,6 +206,6 @@ html {
 }
 
 body {
-  background: #0E091C;
-  color: #FFFFFF;
+  background: #FFFFFF;
+  color: #1a1a2e;
 }

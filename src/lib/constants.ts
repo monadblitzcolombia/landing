@@ -1,6 +1,4 @@
-import { City, Partner } from "./types";
-
-export const SHOW_GALLERY = false;
+import { City, Partner, FooterLink } from "./types";
 
 export const CITIES: City[] = [
   {
@@ -12,6 +10,7 @@ export const CITIES: City[] = [
     confirmed: false,
     registrationUrl: null,
     description: "La ciudad amurallada se prepara para el blockchain.",
+    eventType: "MonadBlitz Hackathon",
   },
   {
     id: "barranquilla",
@@ -22,6 +21,7 @@ export const CITIES: City[] = [
     confirmed: false,
     registrationUrl: null,
     description: "La puerta de oro de Colombia entra al mundo Web3.",
+    eventType: "MonadBlitz Hackathon",
   },
   {
     id: "medellin",
@@ -32,6 +32,7 @@ export const CITIES: City[] = [
     confirmed: true,
     registrationUrl: "#",
     description: "La ciudad de la innovación recibe a MonadBlitz.",
+    eventType: "MonadBlitz Hackathon",
   },
   {
     id: "bogota",
@@ -42,6 +43,7 @@ export const CITIES: City[] = [
     confirmed: false,
     registrationUrl: null,
     description: "La capital se une al tour Monad.",
+    eventType: "MonadBlitz Hackathon",
   },
 ];
 
@@ -52,4 +54,45 @@ export const PARTNERS: Partner[] = [
     logo: "/images/partners/medellin-blockchain.svg",
   },
   { name: "DevLabX3", logo: null },
+];
+
+export const FOOTER_NAV: Record<string, { title: string; links: FooterLink[] }> = {
+  principal: {
+    title: "PRINCIPAL",
+    links: [
+      { label: "Inicio", href: "#hero" },
+      { label: "Explorar Ecosistema", href: "https://app.monad.xyz/" },
+      { label: "Eventos", href: "#eventos" },
+    ],
+  },
+  construir: {
+    title: "CONSTRUIR",
+    links: [
+      { label: "Empezar a Construir", href: "https://www.monad.xyz/build" },
+      { label: "Portal de Developers", href: "https://developers.monad.xyz/" },
+      { label: "Documentacion", href: "https://docs.monad.xyz/" },
+      { label: "Directorio de Infra", href: "https://www.monad.xyz/infra" },
+      { label: "Foro de Investigacion", href: "https://forum.monad.xyz/" },
+    ],
+  },
+  programas: {
+    title: "PROGRAMAS",
+    links: [
+      { label: "DeltaV", href: "https://deltav.monad.xyz/" },
+      { label: "Monad Momentum", href: "https://momentum.monad.xyz/" },
+      { label: "Monad Madness", href: "https://madness.monad.xyz/" },
+    ],
+  },
+  comunidad: {
+    title: "COMUNIDAD",
+    links: [
+      { label: "Monad Foundation", href: "https://www.monad.xyz/" },
+      { label: "Brand & Media Kit", href: "https://www.monad.xyz/brand" },
+    ],
+  },
+};
+
+export const SOCIAL_LINKS = [
+  { label: "X", href: "https://x.com/monad_xyz" },
+  { label: "Discord", href: "https://discord.gg/monad" },
 ];

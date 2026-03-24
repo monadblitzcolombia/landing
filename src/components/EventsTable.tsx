@@ -76,6 +76,8 @@ export default function EventsTable() {
                 {city.confirmed ? (
                   <a
                     href={city.registrationUrl || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 border border-monad-primary text-monad-primary rounded-full px-5 py-2 text-[10px] sm:text-xs font-mono uppercase tracking-[2px] hover:bg-monad-primary hover:text-white hover:gap-3 transition-all duration-300"
                   >
                     Registrate
@@ -112,6 +114,8 @@ export default function EventsTable() {
                   {city.confirmed && (
                     <a
                       href={city.registrationUrl || "#"}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-xs font-mono text-monad-primary uppercase tracking-wider"
                     >
                       Registrate

@@ -53,7 +53,7 @@ export const PARTNERS: Partner[] = [
     name: "Medellín Blockchain Community",
     logo: "/images/partners/medellin-blockchain.svg",
   },
-  { name: "DevLabX3", logo: null },
+  { name: "DevLabX3", logo: "/images/partners/devlabx3.svg" },
 ];
 
 export const FOOTER_NAV: Record<string, { title: string; links: FooterLink[] }> = {

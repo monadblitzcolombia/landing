@@ -133,7 +133,9 @@ export default function Hero() {
               className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start px-2 sm:px-0"
             >
               <motion.a
-                href="#eventos"
+                href="https://forms.gle/3WnVunWMqAkz9KQC8"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-monad-primary text-white font-bold px-6 sm:px-8 py-3 rounded-full hover:brightness-110 transition-all text-center font-mono uppercase tracking-wide btn-glow text-sm sm:text-base"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}

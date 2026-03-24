@@ -121,7 +121,9 @@ export default function Navbar() {
           ))}
 
           <a
-            href="#eventos"
+            href="https://forms.gle/3WnVunWMqAkz9KQC8"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-monad-primary text-white text-sm font-bold px-5 py-2 rounded-full hover:brightness-110 transition-all font-mono uppercase tracking-wide btn-glow"
           >
             Registrate
@@ -225,7 +227,9 @@ export default function Navbar() {
             </div>
 
             <a
-              href="#eventos"
+              href="https://forms.gle/3WnVunWMqAkz9KQC8"
+              target="_blank"
+              rel="noopener noreferrer"
               className="block bg-monad-primary text-white text-sm font-bold px-5 py-2 rounded-full text-center font-mono uppercase tracking-wide"
               onClick={() => setMenuOpen(false)}
             >

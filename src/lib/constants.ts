@@ -30,7 +30,7 @@ export const CITIES: City[] = [
     lng: -75.5812,
     date: "30 de Mayo, 2026",
     confirmed: true,
-    registrationUrl: "#",
+    registrationUrl: "https://forms.gle/3WnVunWMqAkz9KQC8",
     description: "La ciudad de la innovación recibe a MonadBlitz.",
     eventType: "MonadBlitz Hackathon",
   },

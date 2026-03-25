@@ -143,14 +143,14 @@ export default function Hero() {
                 Registrate
               </motion.a>
               <motion.a
-                href="https://app.monad.xyz/"
+                href="https://chat.whatsapp.com/JboPU2owNWU7ysj5TEvgyO"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border border-white/20 text-white font-medium px-6 sm:px-8 py-3 rounded-full hover:border-monad-primary/50 transition-colors text-center font-mono text-sm sm:text-base"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Explorar Ecosistema
+                Unirse a la Comunidad
               </motion.a>
             </motion.div>
           </motion.div>

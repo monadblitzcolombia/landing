@@ -2,6 +2,28 @@ import { City, Partner, FooterLink } from "./types";
 
 export const CITIES: City[] = [
   {
+    id: "medellin",
+    name: "Medellín",
+    lat: 6.2442,
+    lng: -75.5812,
+    date: "30 de Mayo, 2026",
+    confirmed: true,
+    registrationUrl: "https://forms.gle/3WnVunWMqAkz9KQC8",
+    description: "La ciudad de la innovación recibe a MonadBlitz.",
+    eventType: "MonadBlitz Hackathon",
+  },
+  {
+    id: "bogota",
+    name: "Bogotá",
+    lat: 4.711,
+    lng: -74.0721,
+    date: "4 de Julio, 2026",
+    confirmed: true,
+    registrationUrl: "https://forms.gle/3WnVunWMqAkz9KQC8",
+    description: "La capital se une al tour Monad.",
+    eventType: "MonadBlitz Hackathon",
+  },
+  {
     id: "cartagena",
     name: "Cartagena",
     lat: 10.391,
@@ -24,31 +46,19 @@ export const CITIES: City[] = [
     eventType: "MonadBlitz Hackathon",
   },
   {
-    id: "medellin",
-    name: "Medellín",
-    lat: 6.2442,
-    lng: -75.5812,
-    date: "30 de Mayo, 2026",
-    confirmed: true,
-    registrationUrl: "https://forms.gle/3WnVunWMqAkz9KQC8",
-    description: "La ciudad de la innovación recibe a MonadBlitz.",
-    eventType: "MonadBlitz Hackathon",
-  },
-  {
-    id: "bogota",
-    name: "Bogotá",
-    lat: 4.711,
-    lng: -74.0721,
+    id: "cali",
+    name: "Cali",
+    lat: 3.4516,
+    lng: -76.532,
     date: null,
     confirmed: false,
     registrationUrl: null,
-    description: "La capital se une al tour Monad.",
+    description: "La capital de la salsa se suma al tour blockchain.",
     eventType: "MonadBlitz Hackathon",
   },
 ];
 
 export const PARTNERS: Partner[] = [
-  { name: "Cartagena OnChain", logo: "/images/partners/ctg-onchain.svg" },
   {
     name: "Medellín Blockchain Community",
     logo: "/images/partners/medellin-blockchain.svg",

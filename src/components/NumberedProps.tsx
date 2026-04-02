@@ -53,7 +53,7 @@ export default function NumberedProps() {
           className="mb-20"
         >
           <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[3px] text-gray-400 mb-4">
-            // PROPUESTA
+            {'// PROPUESTA'}
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-gray-900 max-w-2xl">
             Un nuevo benchmark para Colombia.

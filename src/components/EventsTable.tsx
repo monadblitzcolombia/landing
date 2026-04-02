@@ -24,7 +24,7 @@ export default function EventsTable() {
           className="mb-16"
         >
           <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[3px] text-white/40 mb-4">
-            // EVENTOS
+            {'// EVENTOS'}
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-white max-w-3xl">
             La comunidad Monad esta onchain - y en persona.

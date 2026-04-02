@@ -33,12 +33,12 @@ export default function MapColombia() {
         <CircleMarker
           key={city.id}
           center={[city.lat, city.lng]}
-          radius={city.confirmed ? 10 : 7}
+          radius={city.confirmed ? 10 : 5}
           pathOptions={{
-            fillColor: "#6E54FF",
-            fillOpacity: city.confirmed ? 0.9 : 0.6,
-            color: "#6E54FF",
-            weight: 2,
+            fillColor: city.confirmed ? "#6E54FF" : "#FFFFFF",
+            fillOpacity: city.confirmed ? 0.7 : 0.4,
+            color: city.confirmed ? "#6E54FF" : "#FFFFFF",
+            weight: 1,
           }}
           eventHandlers={{
             click: () => {

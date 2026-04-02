@@ -148,7 +148,7 @@ export default function Stats() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: EASING }}
             >
-              // RENDIMIENTO
+              {'// RENDIMIENTO'}
             </motion.p>
 
             <motion.h2

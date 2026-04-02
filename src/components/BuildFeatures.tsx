@@ -237,12 +237,12 @@ function FeatureCard({
 
       {/* Number label - top right */}
       <span className="absolute top-5 right-14 text-[11px] font-mono text-gray-800 tracking-wider">
-        // {number}
+        {'// '}{number}
       </span>
 
       {/* Category label - bottom left */}
       <span className="absolute bottom-5 left-14 text-[11px] font-mono text-gray-800 tracking-wider">
-        // {label}
+        {'// '}{label}
       </span>
 
       {/* SVG illustration */}

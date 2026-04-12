@@ -7,16 +7,14 @@ const EASING = [0.16, 1, 0.3, 1] as const;
 const CARDS = [
   {
     title: "Explora el Ecosistema",
-    description:
-      "Descubre apps en vivo, protocolos y oportunidades en Monad.",
+    description: "Descubre apps en vivo, protocolos y oportunidades en Monad.",
     cta: "Explorar",
     href: "https://app.monad.xyz/",
     gradient: "linear-gradient(135deg, #6E54FF 0%, #85E6FF 100%)",
   },
   {
     title: "Empieza a Construir",
-    description:
-      "Programas, recursos y comunidad para fundadores y developers.",
+    description: "Programas, recursos y comunidad para fundadores y developers.",
     cta: "Construir",
     href: "https://www.monad.xyz/build",
     gradient: "linear-gradient(135deg, #FF8EE4 0%, #FFAE45 100%)",
@@ -36,7 +34,7 @@ export default function ExploreCards() {
           className="mb-12"
         >
           <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[3px] text-gray-400 mb-4">
-            {'// EXPLORAR'}
+            {"// EXPLORAR"}
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-gray-900 max-w-2xl">
             Explora el mundo onchain en Monad
@@ -77,9 +75,7 @@ export default function ExploreCards() {
                 <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-white mb-2">
                   {card.title}
                 </h3>
-                <p className="text-sm text-white/70 mb-4 max-w-sm">
-                  {card.description}
-                </p>
+                <p className="text-sm text-white/70 mb-4 max-w-sm">{card.description}</p>
                 <span className="inline-flex items-center border border-white/30 text-white rounded-full px-5 py-2 text-[10px] sm:text-xs font-mono uppercase tracking-[2px] group-hover:border-white group-hover:bg-white/10 transition-colors">
                   {card.cta}
                 </span>

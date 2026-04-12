@@ -19,13 +19,7 @@ const CARDS = [
 type CardNumber = (typeof CARDS)[number]["number"];
 
 /* ─── Polygon helper ─── */
-function regularPolygon(
-  cx: number,
-  cy: number,
-  r: number,
-  sides: number,
-  rotDeg = 0
-): string {
+function regularPolygon(cx: number, cy: number, r: number, sides: number, rotDeg = 0): string {
   const rot = (rotDeg * Math.PI) / 180;
   return Array.from({ length: sides }, (_, i) => {
     const angle = (i * 2 * Math.PI) / sides - Math.PI / 2 + rot;
@@ -63,26 +57,25 @@ function PerformanceSVG({ pos }: { pos: Position }) {
       {/* Dashed square */}
       <g style={layer(pos, 8)}>
         <rect
-          x="85" y="95" width="230" height="220"
-          fill="none" stroke="#222" strokeWidth="1.2"
+          x="85"
+          y="95"
+          width="230"
+          height="220"
+          fill="none"
+          stroke="#222"
+          strokeWidth="1.2"
           strokeDasharray="14 10"
         />
       </g>
 
       {/* Diamond (45deg rotated square) */}
       <g style={layer(pos, 18)}>
-        <polygon
-          points="200,72 328,205 200,338 72,205"
-          fill="none" stroke="#222" strokeWidth="1"
-        />
+        <polygon points="200,72 328,205 200,338 72,205" fill="none" stroke="#222" strokeWidth="1" />
       </g>
 
       {/* Inner small rectangle */}
       <g style={layer(pos, 28)}>
-        <rect
-          x="142" y="145" width="116" height="120"
-          fill="none" stroke="#222" strokeWidth="1"
-        />
+        <rect x="142" y="145" width="116" height="120" fill="none" stroke="#222" strokeWidth="1" />
       </g>
     </svg>
   );
@@ -106,7 +99,9 @@ function DecentralizationSVG({ pos }: { pos: Position }) {
       <g style={layer(pos, 8)}>
         <polygon
           points={regularPolygon(200, 205, 160, 8, -8)}
-          fill="none" stroke="#222" strokeWidth="1"
+          fill="none"
+          stroke="#222"
+          strokeWidth="1"
         />
       </g>
 
@@ -114,7 +109,9 @@ function DecentralizationSVG({ pos }: { pos: Position }) {
       <g style={layer(pos, 16)}>
         <polygon
           points={regularPolygon(200, 205, 152, 8, 16)}
-          fill="none" stroke="#222" strokeWidth="1"
+          fill="none"
+          stroke="#222"
+          strokeWidth="1"
         />
       </g>
 
@@ -122,7 +119,9 @@ function DecentralizationSVG({ pos }: { pos: Position }) {
       <g style={layer(pos, 26)}>
         <polygon
           points={regularPolygon(200, 205, 115, 8, 5)}
-          fill="none" stroke="#222" strokeWidth="1.2"
+          fill="none"
+          stroke="#222"
+          strokeWidth="1.2"
           strokeDasharray="14 10"
         />
       </g>
@@ -153,8 +152,13 @@ function CommunitySVG({ pos }: { pos: Position }) {
       {/* Saturn ring (tilted ellipse) */}
       <g style={layer(pos, 18)}>
         <ellipse
-          cx="200" cy="220" rx="190" ry="35"
-          fill="none" stroke="#222" strokeWidth="1"
+          cx="200"
+          cy="220"
+          rx="190"
+          ry="35"
+          fill="none"
+          stroke="#222"
+          strokeWidth="1"
           transform="rotate(-15, 200, 220)"
         />
       </g>
@@ -162,8 +166,12 @@ function CommunitySVG({ pos }: { pos: Position }) {
       {/* Inner dashed circle */}
       <g style={layer(pos, 26)}>
         <circle
-          cx="200" cy="200" r="85"
-          fill="none" stroke="#222" strokeWidth="1.2"
+          cx="200"
+          cy="200"
+          r="85"
+          fill="none"
+          stroke="#222"
+          strokeWidth="1.2"
           strokeDasharray="12 8"
         />
       </g>
@@ -224,8 +232,7 @@ function FeatureCard({
       }}
       className="relative aspect-[4/5] overflow-hidden cursor-default select-none transition-shadow duration-300 ring-1 ring-transparent hover:ring-gray-200 hover:shadow-xl hover:shadow-black/10"
       style={{
-        backgroundImage:
-          "radial-gradient(circle, #c8c8c8 0.7px, transparent 0.7px)",
+        backgroundImage: "radial-gradient(circle, #c8c8c8 0.7px, transparent 0.7px)",
         backgroundSize: "20px 20px",
       }}
     >
@@ -237,12 +244,14 @@ function FeatureCard({
 
       {/* Number label - top right */}
       <span className="absolute top-5 right-14 text-[11px] font-mono text-gray-800 tracking-wider">
-        {'// '}{number}
+        {"// "}
+        {number}
       </span>
 
       {/* Category label - bottom left */}
       <span className="absolute bottom-5 left-14 text-[11px] font-mono text-gray-800 tracking-wider">
-        {'// '}{label}
+        {"// "}
+        {label}
       </span>
 
       {/* SVG illustration */}
@@ -283,20 +292,15 @@ export default function BuildFeatures() {
             Construye sin limites
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            Escala sin compromisos. Monad combina rendimiento extremo con total
-            compatibilidad EVM y una comunidad global de builders.
+            Escala sin compromisos. Monad combina rendimiento extremo con total compatibilidad EVM y
+            una comunidad global de builders.
           </p>
         </motion.div>
 
         {/* Feature cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {CARDS.map((card, i) => (
-            <FeatureCard
-              key={card.number}
-              number={card.number}
-              label={card.label}
-              index={i}
-            />
+            <FeatureCard key={card.number} number={card.number} label={card.label} index={i} />
           ))}
         </div>
 
@@ -316,7 +320,13 @@ export default function BuildFeatures() {
           >
             Conoce el rendimiento de Monad
             <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path
+                d="M3 8h10M9 4l4 4-4 4"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </a>
         </motion.div>

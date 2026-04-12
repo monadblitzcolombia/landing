@@ -66,8 +66,7 @@ export const BUILD_MENU_COLUMNS: BuildMenuColumn[] = [
     items: [
       {
         title: "DeltaV",
-        description:
-          "Conecta con inversionistas, mentores y recursos para impulsar tu startup.",
+        description: "Conecta con inversionistas, mentores y recursos para impulsar tu startup.",
         href: "https://deltav.monad.xyz/",
         icon: Zap,
       },

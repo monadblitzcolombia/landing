@@ -56,9 +56,7 @@ export default function Footer() {
             />
             <span className="text-sm font-extrabold tracking-tight">
               <span className="text-white">MONAD</span>
-              <span className="text-white/40 ml-1 text-xs font-medium">
-                TOUR COLOMBIA
-              </span>
+              <span className="text-white/40 ml-1 text-xs font-medium">TOUR COLOMBIA</span>
             </span>
           </div>
 

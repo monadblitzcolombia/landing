@@ -21,7 +21,7 @@ export default function Marquee() {
           className="text-center"
         >
           <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[3px] text-white/40 mb-3">
-            {'// ALIADOS'}
+            {"// ALIADOS"}
           </p>
           <h3 className="text-xl sm:text-2xl font-heading font-bold text-white">
             Aliados del Tour
@@ -33,8 +33,7 @@ export default function Marquee() {
       <div
         className="relative"
         style={{
-          maskImage:
-            "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+          maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
           WebkitMaskImage:
             "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
         }}
@@ -62,7 +61,6 @@ export default function Marquee() {
           ))}
         </div>
       </div>
-
     </section>
   );
 }

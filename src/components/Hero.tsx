@@ -47,7 +47,11 @@ export default function Hero() {
   const gridOpacity = useTransform(scrollYProgress, [0, 0.3], [0.03, 0]);
 
   return (
-    <section ref={sectionRef} id="hero" className="relative min-h-screen flex items-center overflow-hidden bg-monad-dark">
+    <section
+      ref={sectionRef}
+      id="hero"
+      className="relative min-h-screen flex items-center overflow-hidden bg-monad-dark"
+    >
       {/* Background grid with scroll fade */}
       <motion.div
         className="absolute inset-0"
@@ -124,23 +128,22 @@ export default function Hero() {
               variants={fadeUp}
               className="text-base sm:text-lg text-white/60 max-w-md mx-auto lg:mx-0 mb-8 px-2 sm:px-0"
             >
-              La blockchain de alto rendimiento llega a Colombia. 10,000 TPS,
-              finalidad sub-segundo y compatibilidad 100% EVM. Hackathons en
-              4 ciudades.
+              La blockchain de alto rendimiento llega a Colombia. 10,000 TPS, finalidad sub-segundo
+              y compatibilidad 100% EVM. Hackathons en 4 ciudades.
             </motion.p>
             <motion.div
               variants={fadeUp}
               className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start px-2 sm:px-0"
             >
               <motion.a
-                href="https://forms.gle/3WnVunWMqAkz9KQC8"
+                href="https://luma.com/medellinblockchain"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-monad-primary text-white font-bold px-6 sm:px-8 py-3 rounded-full hover:brightness-110 transition-all text-center font-mono uppercase tracking-wide btn-glow text-sm sm:text-base"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Registrate
+                Ver Calendario
               </motion.a>
               <motion.a
                 href="https://chat.whatsapp.com/JboPU2owNWU7ysj5TEvgyO"
@@ -180,25 +183,41 @@ export default function Hero() {
             <div className="w-1 h-12 bg-gray-300 rounded-full group-hover:bg-monad-primary/60 transition-colors duration-300" />
           </div>
           <div className="bg-white border border-gray-100 rounded-l-xl divide-y divide-gray-100">
-          <div className="px-5 py-4">
-            <span className="text-2xl xl:text-3xl font-extrabold text-gray-900 font-heading tabular-nums">10,000</span>
-            <p className="text-[9px] tracking-[2px] mt-1 font-mono uppercase text-gray-400">Transacciones por segundo</p>
-          </div>
-          <div className="px-5 py-4">
-            <div className="flex items-baseline gap-0.5">
-              <span className="text-2xl xl:text-3xl font-extrabold text-gray-900 font-heading">100</span>
-              <span className="text-xl xl:text-2xl font-bold text-gray-600 font-heading">%</span>
+            <div className="px-5 py-4">
+              <span className="text-2xl xl:text-3xl font-extrabold text-gray-900 font-heading tabular-nums">
+                10,000
+              </span>
+              <p className="text-[9px] tracking-[2px] mt-1 font-mono uppercase text-gray-400">
+                Transacciones por segundo
+              </p>
             </div>
-            <p className="text-[9px] tracking-[2px] mt-1 font-mono uppercase text-gray-400">Compatible con EVM</p>
-          </div>
-          <div className="px-5 py-4">
-            <span className="text-2xl xl:text-3xl font-extrabold text-gray-900 font-heading">0.8s</span>
-            <p className="text-[9px] tracking-[2px] mt-1 font-mono uppercase text-gray-400">Finalidad</p>
-          </div>
-          <div className="px-5 py-4">
-            <span className="text-2xl xl:text-3xl font-extrabold text-gray-900 font-heading">0.4s</span>
-            <p className="text-[9px] tracking-[2px] mt-1 font-mono uppercase text-gray-400">Tiempo de bloque</p>
-          </div>
+            <div className="px-5 py-4">
+              <div className="flex items-baseline gap-0.5">
+                <span className="text-2xl xl:text-3xl font-extrabold text-gray-900 font-heading">
+                  100
+                </span>
+                <span className="text-xl xl:text-2xl font-bold text-gray-600 font-heading">%</span>
+              </div>
+              <p className="text-[9px] tracking-[2px] mt-1 font-mono uppercase text-gray-400">
+                Compatible con EVM
+              </p>
+            </div>
+            <div className="px-5 py-4">
+              <span className="text-2xl xl:text-3xl font-extrabold text-gray-900 font-heading">
+                0.8s
+              </span>
+              <p className="text-[9px] tracking-[2px] mt-1 font-mono uppercase text-gray-400">
+                Finalidad
+              </p>
+            </div>
+            <div className="px-5 py-4">
+              <span className="text-2xl xl:text-3xl font-extrabold text-gray-900 font-heading">
+                0.4s
+              </span>
+              <p className="text-[9px] tracking-[2px] mt-1 font-mono uppercase text-gray-400">
+                Tiempo de bloque
+              </p>
+            </div>
           </div>
         </div>
       </div>

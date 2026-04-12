@@ -42,9 +42,7 @@ export default function MapColombia() {
           }}
           eventHandlers={{
             click: () => {
-              document
-                .getElementById(`city-${city.id}`)
-                ?.scrollIntoView({ behavior: "smooth" });
+              document.getElementById(`city-${city.id}`)?.scrollIntoView({ behavior: "smooth" });
             },
           }}
         >

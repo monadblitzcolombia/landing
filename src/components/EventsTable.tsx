@@ -24,14 +24,13 @@ export default function EventsTable() {
           className="mb-16"
         >
           <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[3px] text-white/40 mb-4">
-            {'// EVENTOS'}
+            {"// EVENTOS"}
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-white max-w-3xl">
             La comunidad Monad esta onchain - y en persona.
           </h2>
           <p className="text-base sm:text-lg text-white/50 mt-4 max-w-xl">
-            Hackathons MonadBlitz en 4 ciudades colombianas. Encuentra el
-            evento mas cercano.
+            Hackathons MonadBlitz en 4 ciudades colombianas. Encuentra el evento mas cercano.
           </p>
         </motion.div>
 
@@ -62,9 +61,7 @@ export default function EventsTable() {
                   {city.confirmed && (
                     <span className="w-2 h-2 rounded-full bg-monad-primary animate-pulse-glow flex-shrink-0" />
                   )}
-                  <span className="text-lg font-heading font-bold text-white">
-                    {city.name}
-                  </span>
+                  <span className="text-lg font-heading font-bold text-white">{city.name}</span>
                 </div>
 
                 {/* Event type */}
@@ -82,7 +79,13 @@ export default function EventsTable() {
                   >
                     Registrate
                     <svg className="w-3 h-3" viewBox="0 0 16 16" fill="none">
-                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <path
+                        d="M3 8h10M9 4l4 4-4 4"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                     </svg>
                   </a>
                 ) : (
@@ -99,9 +102,7 @@ export default function EventsTable() {
                     {city.confirmed && (
                       <span className="w-2 h-2 rounded-full bg-monad-primary animate-pulse-glow flex-shrink-0" />
                     )}
-                    <span className="text-lg font-heading font-bold text-white">
-                      {city.name}
-                    </span>
+                    <span className="text-lg font-heading font-bold text-white">{city.name}</span>
                   </div>
                   <span className="text-xs font-mono text-white/40">
                     {city.confirmed ? city.date : "Proximamente"}

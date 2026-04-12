@@ -2,16 +2,16 @@
 
 @theme inline {
   /* Monad official palette */
-  --color-monad-bg: #FFFFFF;
-  --color-monad-dark: #0E091C;
-  --color-monad-primary: #6E54FF;
-  --color-monad-light: #DDD7FE;
-  --color-monad-deep: #F8F8FC;
+  --color-monad-bg: #ffffff;
+  --color-monad-dark: #0e091c;
+  --color-monad-primary: #6e54ff;
+  --color-monad-light: #ddd7fe;
+  --color-monad-deep: #f8f8fc;
 
   /* Monad secondary palette */
-  --color-monad-cyan: #85E6FF;
-  --color-monad-pink: #FF8EE4;
-  --color-monad-orange: #FFAE45;
+  --color-monad-cyan: #85e6ff;
+  --color-monad-pink: #ff8ee4;
+  --color-monad-orange: #ffae45;
 
   /* Glass effects (dark sections) */
   --color-glass-bg: rgba(255, 255, 255, 0.05);
@@ -25,19 +25,25 @@
 
 /* Animated gradient text */
 @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .text-gradient-monad {
   background: linear-gradient(
     105deg,
-    #6E54FF 0%,
-    #85E6FF 30%,
-    #DDD7FE 50%,
-    #FF8EE4 70%,
-    #6E54FF 100%
+    #6e54ff 0%,
+    #85e6ff 30%,
+    #ddd7fe 50%,
+    #ff8ee4 70%,
+    #6e54ff 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -48,8 +54,13 @@
 
 /* Map marker pulse */
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 8px 2px rgba(110, 84, 255, 0.4); }
-  50% { box-shadow: 0 0 20px 6px rgba(110, 84, 255, 0.7); }
+  0%,
+  100% {
+    box-shadow: 0 0 8px 2px rgba(110, 84, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 6px rgba(110, 84, 255, 0.7);
+  }
 }
 
 .animate-pulse-glow {
@@ -58,26 +69,49 @@
 
 /* Floating blobs - Hero background */
 @keyframes float-blob-1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -40px) scale(1.05); }
-  66% { transform: translate(-20px, 20px) scale(0.95); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -40px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
 }
 
 @keyframes float-blob-2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(-40px, 30px) scale(0.95); }
-  66% { transform: translate(25px, -15px) scale(1.1); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-40px, 30px) scale(0.95);
+  }
+  66% {
+    transform: translate(25px, -15px) scale(1.1);
+  }
 }
 
 @keyframes float-blob-3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(20px, 30px) scale(1.08); }
-  66% { transform: translate(-35px, -25px) scale(0.92); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(20px, 30px) scale(1.08);
+  }
+  66% {
+    transform: translate(-35px, -25px) scale(0.92);
+  }
 }
 
 /* Card glow hover - light sections */
 .card-glow {
-  transition: box-shadow 0.4s ease, transform 0.4s ease;
+  transition:
+    box-shadow 0.4s ease,
+    transform 0.4s ease;
 }
 
 .card-glow:hover {
@@ -88,7 +122,9 @@
 
 /* Card glow hover - dark sections */
 .card-glow-dark {
-  transition: box-shadow 0.4s ease, transform 0.4s ease;
+  transition:
+    box-shadow 0.4s ease,
+    transform 0.4s ease;
 }
 
 .card-glow-dark:hover {
@@ -105,7 +141,9 @@
 }
 
 @keyframes rotate-border {
-  to { --border-angle: 360deg; }
+  to {
+    --border-angle: 360deg;
+  }
 }
 
 .card-animated-border {
@@ -124,8 +162,8 @@
   background: conic-gradient(
     from var(--border-angle, 0deg),
     transparent 40%,
-    #6E54FF 50%,
-    #85E6FF 55%,
+    #6e54ff 50%,
+    #85e6ff 55%,
     transparent 60%
   );
   animation: rotate-border 4s linear infinite;
@@ -137,7 +175,7 @@
   inset: 1px;
   z-index: -1;
   border-radius: inherit;
-  background: #0E091C;
+  background: #0e091c;
 }
 
 /* Button glow hover */
@@ -155,8 +193,12 @@
 
 /* Marquee infinite scroll */
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .marquee-track {
@@ -170,16 +212,18 @@
 
 /* Explore card gradient overlays */
 .explore-card-gradient {
-  background: linear-gradient(135deg, #6E54FF 0%, #85E6FF 100%);
+  background: linear-gradient(135deg, #6e54ff 0%, #85e6ff 100%);
 }
 
 .explore-card-gradient-alt {
-  background: linear-gradient(135deg, #FF8EE4 0%, #FFAE45 100%);
+  background: linear-gradient(135deg, #ff8ee4 0%, #ffae45 100%);
 }
 
 /* Events table row hover */
 .event-row {
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .event-row:hover {
@@ -206,6 +250,6 @@ html {
 }
 
 body {
-  background: #FFFFFF;
+  background: #ffffff;
   color: #1a1a2e;
 }

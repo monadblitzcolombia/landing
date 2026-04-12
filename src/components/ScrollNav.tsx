@@ -90,8 +90,8 @@ export default function ScrollNav() {
                 backgroundColor: isActive
                   ? "#6E54FF"
                   : isDark
-                  ? "rgba(255, 255, 255, 0.25)"
-                  : "rgba(0, 0, 0, 0.15)",
+                    ? "rgba(255, 255, 255, 0.25)"
+                    : "rgba(0, 0, 0, 0.15)",
                 boxShadow: isActive ? "0 0 12px rgba(110, 84, 255, 0.4)" : "none",
               }}
               whileHover={{

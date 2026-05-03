@@ -20,7 +20,6 @@ export async function POST(request: Request) {
         twitter: validated.twitter ?? null,
         instagram: validated.instagram ?? null,
         city: validated.city as City,
-        availability: validated.availability ?? null,
         ...(validated.role === "mentor" && {
           mentorPrimarySkills: validated.mentor_primary_skills,
           mentorMonadExperience: validated.mentor_monad_experience,

@@ -14,14 +14,6 @@ const ROLE_LABELS: Record<string, string> = {
   judge: "Jurado",
 };
 
-const AVAILABILITY_LABELS: Record<string, string> = {
-  todo_el_evento: "Todo el evento",
-  solo_hackathon: "Solo dias de hackathon",
-  solo_presentaciones: "Solo presentaciones finales",
-  medio_dia: "Medio dia",
-  flexible: "Flexible / a confirmar",
-};
-
 export default function AdminApplicationsPage() {
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
@@ -283,19 +275,12 @@ export default function AdminApplicationsPage() {
                 )}
               </div>
 
-              {/* Ciudad y Disponibilidad */}
+              {/* Ciudad */}
               <div className="space-y-2">
-                <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
-                  Disponibilidad
-                </h4>
+                <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">Ciudad</h4>
                 <p className="text-white">
-                  Ciudad: {selectedApp.city === "both" ? "Ambas" : selectedApp.city}
+                  {selectedApp.city === "both" ? "Ambas" : selectedApp.city}
                 </p>
-                {selectedApp.availability && (
-                  <p className="text-white">
-                    {AVAILABILITY_LABELS[selectedApp.availability] || selectedApp.availability}
-                  </p>
-                )}
               </div>
 
               {/* Campos de Mentor */}

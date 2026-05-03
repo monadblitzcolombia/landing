@@ -32,20 +32,10 @@ const instagramSchema = z
 const MAX_MEDIUM = 500;
 const MAX_LONG = 1000;
 
-// Availability options
-export const AVAILABILITY_OPTIONS = [
-  "todo_el_evento",
-  "solo_hackathon",
-  "solo_presentaciones",
-  "medio_dia",
-  "flexible",
-] as const;
-
-// Mentor skill options
+// Mentor skill options (Monad hackathon focused)
 export const TECHNICAL_SKILLS = [
   "Solidity",
-  "Rust",
-  "Move",
+  "EVM",
   "Frontend (React/Next.js)",
   "Backend (Node/Python/Go)",
   "Smart Contracts",
@@ -77,9 +67,6 @@ const baseSchema = z
     twitter: twitterSchema,
     instagram: instagramSchema,
     city: z.enum(["medellin", "bogota", "both"]),
-    availability: z.enum(AVAILABILITY_OPTIONS, {
-      message: "Por favor selecciona tu disponibilidad",
-    }),
   })
   .refine(
     (data) => {

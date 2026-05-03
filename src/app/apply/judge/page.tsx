@@ -195,11 +195,9 @@ export default function JudgeApplicationPage() {
               />
             </div>
 
-            {/* Disponibilidad */}
+            {/* Ciudad */}
             <div className="space-y-6">
-              <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">
-                Disponibilidad
-              </h2>
+              <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">Ciudad</h2>
 
               <FormSelect
                 label="En que evento puedes ser jurado?"
@@ -213,19 +211,9 @@ export default function JudgeApplicationPage() {
                 ]}
               />
 
-              <FormSelect
-                label="Disponibilidad durante el evento"
-                required
-                {...register("availability")}
-                error={errors.availability?.message}
-                options={[
-                  { value: "todo_el_evento", label: "Todo el evento" },
-                  { value: "solo_hackathon", label: "Solo dias de hackathon" },
-                  { value: "solo_presentaciones", label: "Solo presentaciones finales" },
-                  { value: "medio_dia", label: "Medio dia" },
-                  { value: "flexible", label: "Flexible / a confirmar" },
-                ]}
-              />
+              <p className="text-sm text-white/50">
+                El evento es de un solo dia. Se requiere disponibilidad completa.
+              </p>
             </div>
 
             {/* Perfil Profesional */}

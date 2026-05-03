@@ -3,6 +3,25 @@
 import { useState, useEffect } from "react";
 import type { Application } from "@prisma/client";
 
+const STATUS_LABELS: Record<string, string> = {
+  pending: "Pendiente",
+  approved: "Aprobado",
+  rejected: "Rechazado",
+};
+
+const ROLE_LABELS: Record<string, string> = {
+  mentor: "Mentor",
+  judge: "Jurado",
+};
+
+const AVAILABILITY_LABELS: Record<string, string> = {
+  todo_el_evento: "Todo el evento",
+  solo_hackathon: "Solo dias de hackathon",
+  solo_presentaciones: "Solo presentaciones finales",
+  medio_dia: "Medio dia",
+  flexible: "Flexible / a confirmar",
+};
+
 export default function AdminApplicationsPage() {
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
@@ -11,6 +30,13 @@ export default function AdminApplicationsPage() {
     "all"
   );
   const [selectedApp, setSelectedApp] = useState<Application | null>(null);
+
+  const getToken = () => {
+    if (typeof window !== "undefined") {
+      return sessionStorage.getItem("admin_token") || "";
+    }
+    return "";
+  };
 
   const fetchApplications = async () => {
     setLoading(true);
@@ -21,17 +47,17 @@ export default function AdminApplicationsPage() {
 
       const response = await fetch(`/api/admin/applications?${params}`, {
         headers: {
-          Authorization: `Bearer monad2026`,
+          Authorization: `Bearer ${getToken()}`,
         },
       });
 
-      if (!response.ok) throw new Error("Failed to fetch applications");
+      if (!response.ok) throw new Error("Error al cargar aplicaciones");
 
       const { data } = await response.json();
       setApplications(data || []);
     } catch (error) {
       console.error("Error fetching applications:", error);
-      alert("Failed to load applications");
+      alert("Error al cargar aplicaciones");
     } finally {
       setLoading(false);
     }
@@ -48,19 +74,19 @@ export default function AdminApplicationsPage() {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer monad2026`,
+          Authorization: `Bearer ${getToken()}`,
         },
         body: JSON.stringify({ status }),
       });
 
-      if (!response.ok) throw new Error("Failed to update status");
+      if (!response.ok) throw new Error("Error al actualizar estado");
 
       await fetchApplications();
       setSelectedApp(null);
-      alert(`Application ${status} successfully`);
+      alert(`Aplicacion ${STATUS_LABELS[status]?.toLowerCase() || status} exitosamente`);
     } catch (error) {
       console.error("Error updating status:", error);
-      alert("Failed to update status");
+      alert("Error al actualizar estado");
     }
   };
 
@@ -74,36 +100,36 @@ export default function AdminApplicationsPage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-white">Applications</h2>
+        <h2 className="text-2xl font-bold text-white">Aplicaciones</h2>
         <button
           onClick={fetchApplications}
           className="px-4 py-2 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors"
         >
-          Refresh
+          Actualizar
         </button>
       </div>
 
-      {/* Filters */}
+      {/* Filtros */}
       <div className="bg-white/5 border border-white/10 rounded-lg p-6 space-y-4">
         <div className="grid md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-mono uppercase tracking-wide text-white/90 mb-2">
-              Role
+              Rol
             </label>
             <select
               value={selectedRole}
               onChange={(e) => setSelectedRole(e.target.value as "all" | "mentor" | "judge")}
               className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:border-monad-primary"
             >
-              <option value="all">All ({filteredCount.all})</option>
-              <option value="mentor">Mentors ({filteredCount.mentor})</option>
-              <option value="judge">Judges ({filteredCount.judge})</option>
+              <option value="all">Todos ({filteredCount.all})</option>
+              <option value="mentor">Mentores ({filteredCount.mentor})</option>
+              <option value="judge">Jurados ({filteredCount.judge})</option>
             </select>
           </div>
 
           <div>
             <label className="block text-sm font-mono uppercase tracking-wide text-white/90 mb-2">
-              Status
+              Estado
             </label>
             <select
               value={selectedStatus}
@@ -112,20 +138,20 @@ export default function AdminApplicationsPage() {
               }
               className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:border-monad-primary"
             >
-              <option value="all">All</option>
-              <option value="pending">Pending ({filteredCount.pending})</option>
-              <option value="approved">Approved</option>
-              <option value="rejected">Rejected</option>
+              <option value="all">Todos</option>
+              <option value="pending">Pendientes ({filteredCount.pending})</option>
+              <option value="approved">Aprobados</option>
+              <option value="rejected">Rechazados</option>
             </select>
           </div>
         </div>
       </div>
 
-      {/* Applications List */}
+      {/* Lista de Aplicaciones */}
       {loading ? (
-        <div className="text-center text-white/70 py-12">Loading...</div>
+        <div className="text-center text-white/70 py-12">Cargando...</div>
       ) : applications.length === 0 ? (
-        <div className="text-center text-white/70 py-12">No applications found</div>
+        <div className="text-center text-white/70 py-12">No se encontraron aplicaciones</div>
       ) : (
         <div className="bg-white/5 border border-white/10 rounded-lg overflow-hidden">
           <div className="overflow-x-auto">
@@ -133,22 +159,22 @@ export default function AdminApplicationsPage() {
               <thead className="bg-white/5 border-b border-white/10">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-mono uppercase tracking-wider text-white/70">
-                    Name
+                    Nombre
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-mono uppercase tracking-wider text-white/70">
-                    Role
+                    Rol
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-mono uppercase tracking-wider text-white/70">
-                    City
+                    Ciudad
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-mono uppercase tracking-wider text-white/70">
-                    Status
+                    Estado
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-mono uppercase tracking-wider text-white/70">
-                    Date
+                    Fecha
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-mono uppercase tracking-wider text-white/70">
-                    Actions
+                    Acciones
                   </th>
                 </tr>
               </thead>
@@ -162,11 +188,11 @@ export default function AdminApplicationsPage() {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {app.fullName}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white/70 capitalize">
-                      {app.role}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white/70">
+                      {ROLE_LABELS[app.role] || app.role}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-white/70 capitalize">
-                      {app.city}
+                      {app.city === "both" ? "Ambas" : app.city}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span
@@ -178,11 +204,11 @@ export default function AdminApplicationsPage() {
                               : "bg-yellow-500/20 text-yellow-400"
                         }`}
                       >
-                        {app.status}
+                        {STATUS_LABELS[app.status] || app.status}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-white/70">
-                      {new Date(app.createdAt).toLocaleDateString()}
+                      {new Date(app.createdAt).toLocaleDateString("es-CO")}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                       <button
@@ -192,7 +218,7 @@ export default function AdminApplicationsPage() {
                         }}
                         className="text-monad-primary hover:text-monad-primary/80"
                       >
-                        View
+                        Ver
                       </button>
                     </td>
                   </tr>
@@ -203,7 +229,7 @@ export default function AdminApplicationsPage() {
         </div>
       )}
 
-      {/* Application Detail Modal */}
+      {/* Modal de Detalle */}
       {selectedApp && (
         <div
           className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
@@ -216,7 +242,9 @@ export default function AdminApplicationsPage() {
             <div className="flex justify-between items-start mb-6">
               <div>
                 <h3 className="text-2xl font-bold text-white">{selectedApp.fullName}</h3>
-                <p className="text-white/70 capitalize">{selectedApp.role} Application</p>
+                <p className="text-white/70">
+                  Aplicacion de {ROLE_LABELS[selectedApp.role] || selectedApp.role}
+                </p>
               </div>
               <button
                 onClick={() => setSelectedApp(null)}
@@ -227,11 +255,13 @@ export default function AdminApplicationsPage() {
             </div>
 
             <div className="space-y-6">
-              {/* Basic Info */}
+              {/* Contacto */}
               <div className="space-y-2">
-                <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">Contact</h4>
+                <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
+                  Contacto
+                </h4>
                 <p className="text-white">Email: {selectedApp.email}</p>
-                {selectedApp.phone && <p className="text-white">Phone: {selectedApp.phone}</p>}
+                {selectedApp.phone && <p className="text-white">Telefono: {selectedApp.phone}</p>}
                 {selectedApp.linkedin && (
                   <p className="text-white">
                     LinkedIn:{" "}
@@ -245,19 +275,53 @@ export default function AdminApplicationsPage() {
                     </a>
                   </p>
                 )}
+                {selectedApp.twitter && (
+                  <p className="text-white">Twitter: {selectedApp.twitter}</p>
+                )}
+                {selectedApp.instagram && (
+                  <p className="text-white">Instagram: {selectedApp.instagram}</p>
+                )}
               </div>
 
-              {/* Role-specific fields */}
+              {/* Ciudad y Disponibilidad */}
+              <div className="space-y-2">
+                <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
+                  Disponibilidad
+                </h4>
+                <p className="text-white">
+                  Ciudad: {selectedApp.city === "both" ? "Ambas" : selectedApp.city}
+                </p>
+                {selectedApp.availability && (
+                  <p className="text-white">
+                    {AVAILABILITY_LABELS[selectedApp.availability] || selectedApp.availability}
+                  </p>
+                )}
+              </div>
+
+              {/* Campos de Mentor */}
               {selectedApp.role === "mentor" && (
                 <>
                   <div className="space-y-2">
                     <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
-                      Skills & Experience
+                      Habilidades y Experiencia
                     </h4>
-                    <p className="text-white">{selectedApp.mentorPrimarySkills}</p>
+                    <p className="text-white">
+                      Tecnicas: {selectedApp.mentorPrimarySkills?.join(", ") || "-"}
+                    </p>
                     <p className="text-white">
                       Blockchain: {selectedApp.mentorBlockchainExperience}
                     </p>
+                    {selectedApp.mentorNonTechnicalSkills?.length > 0 && (
+                      <p className="text-white">
+                        No tecnicas: {selectedApp.mentorNonTechnicalSkills.join(", ")}
+                      </p>
+                    )}
+                    <p className="text-white/70">
+                      Experiencia Monad/EVM: {selectedApp.mentorMonadExperience ? "Si" : "No"}
+                    </p>
+                    {selectedApp.mentorMonadExperienceDetails && (
+                      <p className="text-white">{selectedApp.mentorMonadExperienceDetails}</p>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">Bio</h4>
@@ -265,23 +329,55 @@ export default function AdminApplicationsPage() {
                   </div>
                   <div className="space-y-2">
                     <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
-                      Motivation
+                      Motivacion
                     </h4>
                     <p className="text-white">{selectedApp.mentorWhy}</p>
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
+                      Compromiso
+                    </h4>
+                    <p className="text-white">Equipos: {selectedApp.mentorTeamCommitment}</p>
+                    <p className="text-white/70">
+                      Mentoria previa: {selectedApp.mentorPreviousExperience ? "Si" : "No"}
+                    </p>
+                    {selectedApp.mentorPreviousDetails && (
+                      <p className="text-white">{selectedApp.mentorPreviousDetails}</p>
+                    )}
                   </div>
                 </>
               )}
 
+              {/* Campos de Jurado */}
               {selectedApp.role === "judge" && (
                 <>
                   <div className="space-y-2">
                     <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
-                      Professional Background
+                      Perfil Profesional
                     </h4>
                     <p className="text-white">{selectedApp.judgeCurrentRole}</p>
                     <p className="text-white/70">
-                      {selectedApp.judgeYearsBlockchain} years blockchain /{" "}
-                      {selectedApp.judgeYearsTotal} years total
+                      {selectedApp.judgeYearsBlockchain} anos blockchain /{" "}
+                      {selectedApp.judgeYearsTotal} anos total
+                    </p>
+                    <p className="text-white/70">
+                      Nivel tecnico:{" "}
+                      {selectedApp.judgeTechnicalLevel === "highly_technical"
+                        ? "Altamente Tecnico"
+                        : selectedApp.judgeTechnicalLevel === "moderate"
+                          ? "Moderado"
+                          : "Enfoque en Negocios"}
+                    </p>
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
+                      Areas de Expertise
+                    </h4>
+                    <p className="text-white">
+                      {selectedApp.judgeExpertiseAreas?.join(", ") || "-"}
+                    </p>
+                    <p className="text-white/70">
+                      Experiencia: {selectedApp.judgeSpecificExperience?.join(", ") || "-"}
                     </p>
                   </div>
                   <div className="space-y-2">
@@ -290,27 +386,49 @@ export default function AdminApplicationsPage() {
                   </div>
                   <div className="space-y-2">
                     <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
-                      Motivation
+                      Motivacion
                     </h4>
                     <p className="text-white">{selectedApp.judgeWhy}</p>
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
+                      Conflictos de Interes
+                    </h4>
+                    <p className="text-white">
+                      {selectedApp.judgeConflicts === "ninguno" ? "Ninguno" : "Si"}
+                    </p>
+                    {selectedApp.judgeOtherConflicts && (
+                      <p className="text-white/70">Detalles: {selectedApp.judgeOtherConflicts}</p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
+                      Experiencia como Jurado
+                    </h4>
+                    <p className="text-white/70">
+                      Jurado previo: {selectedApp.judgePreviousExperience ? "Si" : "No"}
+                    </p>
+                    {selectedApp.judgePreviousDetails && (
+                      <p className="text-white">{selectedApp.judgePreviousDetails}</p>
+                    )}
                   </div>
                 </>
               )}
 
-              {/* Actions */}
+              {/* Acciones */}
               {selectedApp.status === "pending" && (
                 <div className="flex gap-4 pt-6 border-t border-white/10">
                   <button
                     onClick={() => updateStatus(selectedApp.id, "approved")}
                     className="flex-1 bg-green-600 text-white px-6 py-3 rounded-full font-mono uppercase tracking-wide hover:bg-green-700 transition-colors"
                   >
-                    Approve
+                    Aprobar
                   </button>
                   <button
                     onClick={() => updateStatus(selectedApp.id, "rejected")}
                     className="flex-1 bg-red-600 text-white px-6 py-3 rounded-full font-mono uppercase tracking-wide hover:bg-red-700 transition-colors"
                   >
-                    Reject
+                    Rechazar
                   </button>
                 </div>
               )}

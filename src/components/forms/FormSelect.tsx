@@ -30,7 +30,7 @@ export const FormSelect = forwardRef<HTMLSelectElement, FormSelectProps>(
           `}
         >
           <option value="" disabled>
-            Select an option
+            Selecciona una opcion
           </option>
           {options.map((option) => (
             <option key={option.value} value={option.value}>

@@ -3,7 +3,7 @@ import { z } from "zod";
 // Format validators for social/contact fields
 const phoneSchema = z
   .string()
-  .regex(/^\d{10}$/, "Must be 10 digits (e.g. 3001234567)")
+  .regex(/^\d{10}$/, "Debe tener 10 digitos (ej. 3001234567)")
   .or(z.literal(""))
   .optional();
 
@@ -11,34 +11,75 @@ const linkedinSchema = z
   .string()
   .regex(
     /^https?:\/\/(www\.)?linkedin\.com\/in\/[\w-]+\/?$/,
-    "Must be a valid LinkedIn URL (e.g. https://linkedin.com/in/yourprofile)"
+    "Debe ser una URL valida de LinkedIn (ej. https://linkedin.com/in/tuperfil)"
   )
   .or(z.literal(""))
   .optional();
 
 const twitterSchema = z
   .string()
-  .regex(/^@?[\w]{1,15}$/, "Invalid handle (e.g. @yourhandle)")
+  .regex(/^@?[\w]{1,15}$/, "Handle invalido (ej. @tuhandle)")
   .or(z.literal(""))
   .optional();
 
 const instagramSchema = z
   .string()
-  .regex(/^@?[\w.]{1,30}$/, "Invalid handle (e.g. @yourhandle)")
+  .regex(/^@?[\w.]{1,30}$/, "Handle invalido (ej. @tuhandle)")
   .or(z.literal(""))
   .optional();
+
+// Max lengths for free-text fields
+const MAX_MEDIUM = 500;
+const MAX_LONG = 1000;
+
+// Availability options
+export const AVAILABILITY_OPTIONS = [
+  "todo_el_evento",
+  "solo_hackathon",
+  "solo_presentaciones",
+  "medio_dia",
+  "flexible",
+] as const;
+
+// Mentor skill options
+export const TECHNICAL_SKILLS = [
+  "Solidity",
+  "Rust",
+  "Move",
+  "Frontend (React/Next.js)",
+  "Backend (Node/Python/Go)",
+  "Smart Contracts",
+  "DeFi",
+  "NFTs/Gaming",
+  "Infraestructura/DevOps",
+  "Seguridad/Auditorias",
+] as const;
+
+export const NON_TECHNICAL_SKILLS = [
+  "UX/UI Design",
+  "Pitching/Presentaciones",
+  "Modelo de Negocio",
+  "Marketing/Growth",
+  "Comunidad/Partnerships",
+  "Legal/Regulatorio",
+] as const;
 
 // Shared fields for both mentor and judge applications
 const baseSchema = z
   .object({
-    full_name: z.string().min(2, "Name must be at least 2 characters"),
-    email: z.string().email("Invalid email address"),
+    full_name: z
+      .string()
+      .min(2, "El nombre debe tener al menos 2 caracteres")
+      .max(100, "El nombre debe tener maximo 100 caracteres"),
+    email: z.string().email("Correo electronico invalido"),
     phone: phoneSchema,
     linkedin: linkedinSchema,
     twitter: twitterSchema,
     instagram: instagramSchema,
     city: z.enum(["medellin", "bogota", "both"]),
-    availability: z.string().min(10, "Please describe your availability (at least 10 characters)"),
+    availability: z.enum(AVAILABILITY_OPTIONS, {
+      message: "Por favor selecciona tu disponibilidad",
+    }),
   })
   .refine(
     (data) => {
@@ -48,68 +89,165 @@ const baseSchema = z
       return filled.length >= 2;
     },
     {
-      message: "Please fill in at least 2 of: Phone, LinkedIn, Twitter, Instagram",
-      path: ["phone"],
+      message: "Por favor completa al menos 2 de: Telefono, LinkedIn, Twitter, Instagram",
+      path: ["instagram"],
     }
   );
 
 // Mentor application schema
 export const mentorSchema = baseSchema.and(
-  z.object({
-    role: z.literal("mentor"),
-    mentor_primary_skills: z
-      .string()
-      .min(10, "Please describe your primary skills (at least 10 characters)"),
-    mentor_monad_experience: z.boolean(),
-    mentor_monad_experience_details: z.string().optional(),
-    mentor_blockchain_experience: z
-      .string()
-      .min(10, "Please describe your blockchain experience (at least 10 characters)"),
-    mentor_non_technical_skills: z.string().optional(),
-    mentor_previous_experience: z.boolean(),
-    mentor_previous_details: z.string().optional(),
-    mentor_bio: z
-      .string()
-      .min(50, "Bio must be at least 50 characters")
-      .max(500, "Bio must be at most 500 characters"),
-    mentor_why: z
-      .string()
-      .min(20, "Please tell us why you want to mentor (at least 20 characters)"),
-    mentor_team_commitment: z.enum(["1-2", "3-5", "5+", "flexible"]),
-  })
+  z
+    .object({
+      role: z.literal("mentor"),
+      mentor_primary_skills: z
+        .array(z.string())
+        .min(1, "Por favor selecciona al menos una habilidad tecnica"),
+      mentor_monad_experience: z.boolean(),
+      mentor_monad_experience_details: z
+        .string()
+        .max(MAX_MEDIUM, `Maximo ${MAX_MEDIUM} caracteres`)
+        .optional(),
+      mentor_blockchain_experience: z
+        .string()
+        .min(10, "Por favor describe tu experiencia en blockchain (al menos 10 caracteres)")
+        .max(MAX_MEDIUM, `Maximo ${MAX_MEDIUM} caracteres`),
+      mentor_non_technical_skills: z.array(z.string()).optional(),
+      mentor_previous_experience: z.boolean(),
+      mentor_previous_details: z
+        .string()
+        .max(MAX_MEDIUM, `Maximo ${MAX_MEDIUM} caracteres`)
+        .optional(),
+      mentor_bio: z
+        .string()
+        .min(50, "La bio debe tener al menos 50 caracteres")
+        .max(500, "La bio debe tener maximo 500 caracteres"),
+      mentor_why: z
+        .string()
+        .min(20, "Por favor cuentanos por que quieres ser mentor (al menos 20 caracteres)")
+        .max(MAX_LONG, `Maximo ${MAX_LONG} caracteres`),
+      mentor_team_commitment: z.enum(["1-2", "3-5", "5+", "flexible"]),
+    })
+    .refine(
+      (data) => {
+        if (
+          data.mentor_monad_experience &&
+          (!data.mentor_monad_experience_details ||
+            data.mentor_monad_experience_details.trim() === "")
+        ) {
+          return false;
+        }
+        return true;
+      },
+      {
+        message: "Por favor describe tu experiencia con Monad/EVM",
+        path: ["mentor_monad_experience_details"],
+      }
+    )
+    .refine(
+      (data) => {
+        if (
+          data.mentor_previous_experience &&
+          (!data.mentor_previous_details || data.mentor_previous_details.trim() === "")
+        ) {
+          return false;
+        }
+        return true;
+      },
+      {
+        message: "Por favor describe tu experiencia previa como mentor",
+        path: ["mentor_previous_details"],
+      }
+    )
 );
+
+// Judging criteria keys
+const CRITERIA_KEYS = ["innovation", "technical", "team", "market", "ux"] as const;
 
 // Judge application schema
 export const judgeSchema = baseSchema.and(
-  z.object({
-    role: z.literal("judge"),
-    judge_current_role: z
-      .string()
-      .min(5, "Please provide your current role (at least 5 characters)"),
-    judge_years_blockchain: z
-      .number()
-      .min(0, "Years must be at least 0")
-      .max(50, "Years must be less than 50"),
-    judge_years_total: z
-      .number()
-      .min(0, "Years must be at least 0")
-      .max(70, "Years must be less than 70"),
-    judge_bio: z
-      .string()
-      .min(100, "Bio must be at least 100 characters")
-      .max(800, "Bio must be at most 800 characters"),
-    judge_technical_level: z.enum(["highly_technical", "moderate", "business_focused"]),
-    judge_expertise_areas: z.array(z.string()).min(1, "Please select at least one expertise area"),
-    judge_specific_experience: z
-      .array(z.string())
-      .min(1, "Please select at least one specific experience"),
-    judge_previous_experience: z.boolean(),
-    judge_previous_details: z.string().optional(),
-    judge_criteria_ranking: z.record(z.string(), z.number()),
-    judge_conflicts: z.string(),
-    judge_other_conflicts: z.string().optional(),
-    judge_why: z.string().min(20, "Please tell us why you want to judge (at least 20 characters)"),
-  })
+  z
+    .object({
+      role: z.literal("judge"),
+      judge_current_role: z
+        .string()
+        .min(5, "Por favor indica tu rol actual (al menos 5 caracteres)")
+        .max(200, "Maximo 200 caracteres"),
+      judge_years_blockchain: z
+        .number()
+        .min(0, "Los anos deben ser al menos 0")
+        .max(50, "Los anos deben ser menos de 50"),
+      judge_years_total: z
+        .number()
+        .min(0, "Los anos deben ser al menos 0")
+        .max(70, "Los anos deben ser menos de 70"),
+      judge_bio: z
+        .string()
+        .min(100, "La bio debe tener al menos 100 caracteres")
+        .max(800, "La bio debe tener maximo 800 caracteres"),
+      judge_technical_level: z.enum(["highly_technical", "moderate", "business_focused"]),
+      judge_expertise_areas: z
+        .array(z.string())
+        .min(1, "Por favor selecciona al menos un area de expertise"),
+      judge_specific_experience: z
+        .array(z.string())
+        .min(1, "Por favor selecciona al menos una experiencia especifica"),
+      judge_previous_experience: z.boolean(),
+      judge_previous_details: z
+        .string()
+        .max(MAX_MEDIUM, `Maximo ${MAX_MEDIUM} caracteres`)
+        .optional(),
+      judge_criteria_ranking: z.record(z.string(), z.number()),
+      judge_conflicts: z.enum(["ninguno", "si"], {
+        message: "Por favor selecciona una opcion",
+      }),
+      judge_conflict_details: z.string().max(MAX_LONG, `Maximo ${MAX_LONG} caracteres`).optional(),
+      judge_why: z
+        .string()
+        .min(20, "Por favor cuentanos por que quieres ser jurado (al menos 20 caracteres)")
+        .max(MAX_LONG, `Maximo ${MAX_LONG} caracteres`),
+    })
+    .refine(
+      (data) => {
+        const ranking = data.judge_criteria_ranking;
+        return CRITERIA_KEYS.every(
+          (key) => typeof ranking[key] === "number" && ranking[key] >= 1 && ranking[key] <= 5
+        );
+      },
+      {
+        message: "Por favor asigna un ranking (1-5) a cada criterio de evaluacion",
+        path: ["judge_criteria_ranking"],
+      }
+    )
+    .refine(
+      (data) => {
+        if (
+          data.judge_conflicts === "si" &&
+          (!data.judge_conflict_details || data.judge_conflict_details.trim() === "")
+        ) {
+          return false;
+        }
+        return true;
+      },
+      {
+        message: "Por favor describe tus conflictos de interes",
+        path: ["judge_conflict_details"],
+      }
+    )
+    .refine(
+      (data) => {
+        if (
+          data.judge_previous_experience &&
+          (!data.judge_previous_details || data.judge_previous_details.trim() === "")
+        ) {
+          return false;
+        }
+        return true;
+      },
+      {
+        message: "Por favor describe tu experiencia previa como jurado",
+        path: ["judge_previous_details"],
+      }
+    )
 );
 
 // Inferred types

@@ -1,9 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { mentorSchema, type MentorApplication } from "@/lib/validations/applications";
+import {
+  mentorSchema,
+  type MentorApplication,
+  TECHNICAL_SKILLS,
+  NON_TECHNICAL_SKILLS,
+} from "@/lib/validations/applications";
 import { FormField } from "@/components/forms/FormField";
 import { FormSelect } from "@/components/forms/FormSelect";
 import { FormTextarea } from "@/components/forms/FormTextarea";
@@ -19,6 +24,7 @@ export default function MentorApplicationPage() {
     register,
     handleSubmit,
     watch,
+    control,
     formState: { errors },
   } = useForm<MentorApplication>({
     resolver: zodResolver(mentorSchema),
@@ -26,6 +32,8 @@ export default function MentorApplicationPage() {
       role: "mentor",
       mentor_monad_experience: false,
       mentor_previous_experience: false,
+      mentor_primary_skills: [],
+      mentor_non_technical_skills: [],
     },
   });
 
@@ -46,13 +54,13 @@ export default function MentorApplicationPage() {
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.error || "Failed to submit application");
+        throw new Error(error.error || "Error al enviar la aplicacion");
       }
 
       setIsSuccess(true);
     } catch (error) {
       console.error("Submission error:", error);
-      alert(error instanceof Error ? error.message : "Failed to submit application");
+      alert(error instanceof Error ? error.message : "Error al enviar la aplicacion");
     } finally {
       setIsSubmitting(false);
     }
@@ -81,16 +89,15 @@ export default function MentorApplicationPage() {
               />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-white mb-2">Application Submitted!</h2>
+          <h2 className="text-2xl font-bold text-white mb-2">Aplicacion Enviada!</h2>
           <p className="text-white/70 mb-6">
-            Thank you for applying to be a mentor. We&apos;ll review your application and get back
-            to you soon.
+            Gracias por aplicar como mentor. Revisaremos tu aplicacion y te contactaremos pronto.
           </p>
           <Link
             href="/"
             className="inline-block bg-monad-primary text-white px-6 py-3 rounded-full font-mono uppercase tracking-wide hover:brightness-110 transition-all"
           >
-            Back to Home
+            Volver al Inicio
           </Link>
         </motion.div>
       </div>
@@ -106,9 +113,9 @@ export default function MentorApplicationPage() {
           transition={{ duration: 0.6 }}
         >
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Mentor Application</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Aplicacion de Mentor</h1>
             <p className="text-white/70 text-lg">
-              Help shape the next generation of blockchain builders in Colombia
+              Ayuda a formar la proxima generacion de builders blockchain en Colombia
             </p>
           </div>
 
@@ -116,22 +123,22 @@ export default function MentorApplicationPage() {
             onSubmit={handleSubmit(onSubmit)}
             className="bg-white/5 border border-white/10 rounded-2xl p-8 space-y-6"
           >
-            {/* Basic Information */}
+            {/* Informacion Basica */}
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">
-                Basic Information
+                Informacion Basica
               </h2>
 
               <FormField
-                label="Full Name"
+                label="Nombre Completo"
                 required
                 {...register("full_name")}
                 error={errors.full_name?.message}
-                placeholder="Juan Pérez"
+                placeholder="Juan Perez"
               />
 
               <FormField
-                label="Email"
+                label="Correo Electronico"
                 type="email"
                 required
                 {...register("email")}
@@ -139,10 +146,12 @@ export default function MentorApplicationPage() {
                 placeholder="juan@example.com"
               />
 
-              <p className="text-sm text-white/50">Fill at least 2 of the following 4 fields</p>
+              <p className="text-sm text-white/50">
+                Completa al menos 2 de los siguientes 4 campos
+              </p>
 
               <FormField
-                label="Phone"
+                label="Telefono"
                 type="tel"
                 {...register("phone")}
                 error={errors.phone?.message}
@@ -150,166 +159,225 @@ export default function MentorApplicationPage() {
               />
 
               <FormField
-                label="LinkedIn Profile"
+                label="Perfil de LinkedIn"
                 {...register("linkedin")}
                 error={errors.linkedin?.message}
                 placeholder="https://linkedin.com/in/monadcolombia"
               />
 
               <FormField
-                label="Twitter/X Handle"
+                label="Twitter/X"
                 {...register("twitter")}
                 error={errors.twitter?.message}
                 placeholder="@monadcolombia"
               />
 
               <FormField
-                label="Instagram Handle"
+                label="Instagram"
                 {...register("instagram")}
                 error={errors.instagram?.message}
                 placeholder="@monadcolombia"
               />
             </div>
 
-            {/* Availability */}
+            {/* Disponibilidad */}
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">
-                Availability
+                Disponibilidad
               </h2>
 
               <FormSelect
-                label="Which city can you attend?"
+                label="A que ciudad puedes asistir?"
                 required
                 {...register("city")}
                 error={errors.city?.message}
                 options={[
-                  { value: "medellin", label: "Medellín (June 6, 2026)" },
-                  { value: "bogota", label: "Bogotá (July 4, 2026)" },
-                  { value: "both", label: "Both cities" },
+                  { value: "medellin", label: "Medellin (Junio 6, 2026)" },
+                  { value: "bogota", label: "Bogota (Julio 4, 2026)" },
+                  { value: "both", label: "Ambas ciudades" },
                 ]}
               />
 
-              <FormTextarea
-                label="Availability during hackathon"
+              <FormSelect
+                label="Disponibilidad durante el hackathon"
                 required
                 {...register("availability")}
                 error={errors.availability?.message}
-                placeholder="Describe when you'll be available (e.g., full event, specific days/hours)"
+                options={[
+                  { value: "todo_el_evento", label: "Todo el evento" },
+                  { value: "solo_hackathon", label: "Solo dias de hackathon" },
+                  { value: "solo_presentaciones", label: "Solo presentaciones finales" },
+                  { value: "medio_dia", label: "Medio dia" },
+                  { value: "flexible", label: "Flexible / a confirmar" },
+                ]}
               />
             </div>
 
-            {/* Expertise */}
+            {/* Experiencia */}
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">
-                Expertise
+                Experiencia
               </h2>
 
-              <FormTextarea
-                label="Primary technical skills"
-                required
-                {...register("mentor_primary_skills")}
-                error={errors.mentor_primary_skills?.message}
-                placeholder="e.g., Solidity, Rust, Frontend, Backend, Smart Contracts"
+              <Controller
+                name="mentor_primary_skills"
+                control={control}
+                render={({ field }) => (
+                  <div className="space-y-2">
+                    <label className="block text-sm font-mono uppercase tracking-wide text-white/90">
+                      Habilidades tecnicas principales
+                      <span className="text-monad-primary ml-1">*</span>
+                    </label>
+                    <div className="grid grid-cols-2 gap-3">
+                      {TECHNICAL_SKILLS.map((skill) => (
+                        <label key={skill} className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            value={skill}
+                            checked={field.value?.includes(skill)}
+                            onChange={(e) => {
+                              const updated = e.target.checked
+                                ? [...(field.value || []), skill]
+                                : (field.value || []).filter((v) => v !== skill);
+                              field.onChange(updated);
+                            }}
+                            className="w-4 h-4 rounded bg-white/5 border border-white/10 checked:bg-monad-primary checked:border-monad-primary"
+                          />
+                          <span className="text-sm text-white/80">{skill}</span>
+                        </label>
+                      ))}
+                    </div>
+                    {errors.mentor_primary_skills && (
+                      <p className="text-red-500 text-sm">{errors.mentor_primary_skills.message}</p>
+                    )}
+                  </div>
+                )}
               />
 
               <FormCheckbox
-                label="I have experience with Monad or EVM development"
+                label="Tengo experiencia con Monad o desarrollo EVM"
                 {...register("mentor_monad_experience")}
               />
 
               {watchMonadExperience && (
                 <FormTextarea
-                  label="Tell us about your Monad/EVM experience"
+                  label="Cuentanos sobre tu experiencia con Monad/EVM"
+                  required
                   {...register("mentor_monad_experience_details")}
                   error={errors.mentor_monad_experience_details?.message}
-                  placeholder="Describe your experience with Monad or EVM chains"
+                  placeholder="Describe tu experiencia con Monad o cadenas EVM"
                 />
               )}
 
               <FormTextarea
-                label="Other blockchain experience"
+                label="Otra experiencia en blockchain"
                 required
                 {...register("mentor_blockchain_experience")}
                 error={errors.mentor_blockchain_experience?.message}
-                placeholder="Describe your experience with other blockchains and projects"
+                placeholder="Describe tu experiencia con otras blockchains y proyectos"
               />
 
-              <FormTextarea
-                label="Non-technical skills (optional)"
-                {...register("mentor_non_technical_skills")}
-                error={errors.mentor_non_technical_skills?.message}
-                placeholder="e.g., UX/UI, Pitching, Business model, Marketing"
+              <Controller
+                name="mentor_non_technical_skills"
+                control={control}
+                render={({ field }) => (
+                  <div className="space-y-2">
+                    <label className="block text-sm font-mono uppercase tracking-wide text-white/90">
+                      Habilidades no tecnicas (opcional)
+                    </label>
+                    <div className="grid grid-cols-2 gap-3">
+                      {NON_TECHNICAL_SKILLS.map((skill) => (
+                        <label key={skill} className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            value={skill}
+                            checked={field.value?.includes(skill)}
+                            onChange={(e) => {
+                              const updated = e.target.checked
+                                ? [...(field.value || []), skill]
+                                : (field.value || []).filter((v) => v !== skill);
+                              field.onChange(updated);
+                            }}
+                            className="w-4 h-4 rounded bg-white/5 border border-white/10 checked:bg-monad-primary checked:border-monad-primary"
+                          />
+                          <span className="text-sm text-white/80">{skill}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                )}
               />
             </div>
 
-            {/* Experience */}
+            {/* Experiencia de Mentoria */}
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">
-                Mentoring Experience
+                Experiencia como Mentor
               </h2>
 
               <FormCheckbox
-                label="I have mentored at hackathons before"
+                label="He sido mentor en hackathons anteriormente"
                 {...register("mentor_previous_experience")}
               />
 
               {watchPreviousExperience && (
                 <FormTextarea
-                  label="Tell us about your previous mentoring experience"
+                  label="Cuentanos sobre tu experiencia previa como mentor"
+                  required
                   {...register("mentor_previous_details")}
                   error={errors.mentor_previous_details?.message}
-                  placeholder="Which hackathons? How many teams?"
+                  placeholder="En que hackathons? Cuantos equipos?"
                 />
               )}
 
               <FormTextarea
-                label="Brief bio"
+                label="Bio breve"
                 required
                 {...register("mentor_bio")}
                 error={errors.mentor_bio?.message}
-                placeholder="Tell us about your background (50-500 characters)"
+                placeholder="Cuentanos sobre tu trayectoria (50-500 caracteres)"
                 maxLength={500}
                 showCount
                 currentLength={watchBio?.length}
               />
             </div>
 
-            {/* Commitment */}
+            {/* Compromiso */}
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">
-                Commitment
+                Compromiso
               </h2>
 
               <FormTextarea
-                label="Why do you want to mentor at MonadBlitz?"
+                label="Por que quieres ser mentor en MonadBlitz?"
                 required
                 {...register("mentor_why")}
                 error={errors.mentor_why?.message}
-                placeholder="Share your motivation for mentoring"
+                placeholder="Comparte tu motivacion para ser mentor"
               />
 
               <FormSelect
-                label="How many teams can you commit to helping?"
+                label="A cuantos equipos puedes comprometerte a ayudar?"
                 required
                 {...register("mentor_team_commitment")}
                 error={errors.mentor_team_commitment?.message}
                 options={[
-                  { value: "1-2", label: "1-2 teams" },
-                  { value: "3-5", label: "3-5 teams" },
-                  { value: "5+", label: "5+ teams" },
+                  { value: "1-2", label: "1-2 equipos" },
+                  { value: "3-5", label: "3-5 equipos" },
+                  { value: "5+", label: "5+ equipos" },
                   { value: "flexible", label: "Flexible" },
                 ]}
               />
             </div>
 
-            {/* Submit */}
+            {/* Enviar */}
             <div className="pt-6">
               <button
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full bg-monad-primary text-white font-bold px-8 py-4 rounded-full font-mono uppercase tracking-wide hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? "Submitting..." : "Submit Application"}
+                {isSubmitting ? "Enviando..." : "Enviar Aplicacion"}
               </button>
             </div>
           </form>

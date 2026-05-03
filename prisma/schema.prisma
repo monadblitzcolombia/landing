@@ -47,11 +47,11 @@ model Application {
   availability String?
 
   // Mentor-specific fields
-  mentorPrimarySkills          String?  @map("mentor_primary_skills")
+  mentorPrimarySkills          String[] @default([]) @map("mentor_primary_skills")
   mentorMonadExperience        Boolean? @map("mentor_monad_experience")
   mentorMonadExperienceDetails String?  @map("mentor_monad_experience_details")
   mentorBlockchainExperience   String?  @map("mentor_blockchain_experience")
-  mentorNonTechnicalSkills     String?  @map("mentor_non_technical_skills")
+  mentorNonTechnicalSkills     String[] @default([]) @map("mentor_non_technical_skills")
   mentorPreviousExperience     Boolean? @map("mentor_previous_experience")
   mentorPreviousDetails        String?  @map("mentor_previous_details")
   mentorBio                    String?  @map("mentor_bio")

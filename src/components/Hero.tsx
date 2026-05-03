@@ -156,6 +156,27 @@ export default function Hero() {
                 Unirse a la Comunidad
               </motion.a>
             </motion.div>
+            <motion.div
+              variants={fadeUp}
+              className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start px-2 sm:px-0 mt-4"
+            >
+              <motion.a
+                href="/apply/mentor"
+                className="border border-monad-primary/50 text-monad-primary font-medium px-6 sm:px-8 py-3 rounded-full hover:bg-monad-primary hover:text-white transition-all text-center font-mono text-sm sm:text-base"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Aplicar como Mentor
+              </motion.a>
+              <motion.a
+                href="/apply/judge"
+                className="border border-monad-primary/50 text-monad-primary font-medium px-6 sm:px-8 py-3 rounded-full hover:bg-monad-primary hover:text-white transition-all text-center font-mono text-sm sm:text-base"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Aplicar como Judge
+              </motion.a>
+            </motion.div>
           </motion.div>
 
           {/* Right: Map */}

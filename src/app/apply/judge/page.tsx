@@ -14,20 +14,20 @@ import Link from "next/link";
 const EXPERTISE_AREAS = [
   "DeFi",
   "NFTs",
-  "Infrastructure",
+  "Infraestructura",
   "Gaming",
   "Social",
-  "Developer Tools",
-  "Other",
+  "Herramientas de Desarrollo",
+  "Otro",
 ];
 
-const SPECIFIC_EXPERIENCES = ["Monad", "EVM chains", "Other L1s", "L2s", "Cross-chain"];
+const SPECIFIC_EXPERIENCES = ["Monad", "Cadenas EVM", "Otros L1s", "L2s", "Cross-chain"];
 
 const JUDGING_CRITERIA = [
-  { key: "innovation", label: "Innovation" },
-  { key: "technical", label: "Technical Execution" },
-  { key: "team", label: "Team" },
-  { key: "market", label: "Market Potential" },
+  { key: "innovation", label: "Innovacion" },
+  { key: "technical", label: "Ejecucion Tecnica" },
+  { key: "team", label: "Equipo" },
+  { key: "market", label: "Potencial de Mercado" },
   { key: "ux", label: "UX/UI" },
 ];
 
@@ -53,6 +53,7 @@ export default function JudgeApplicationPage() {
   });
 
   const watchPreviousExperience = watch("judge_previous_experience");
+  const watchConflicts = watch("judge_conflicts");
   const watchBio = watch("judge_bio");
 
   const onSubmit = async (data: JudgeApplication) => {
@@ -68,13 +69,13 @@ export default function JudgeApplicationPage() {
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.error || "Failed to submit application");
+        throw new Error(error.error || "Error al enviar la aplicacion");
       }
 
       setIsSuccess(true);
     } catch (error) {
       console.error("Submission error:", error);
-      alert(error instanceof Error ? error.message : "Failed to submit application");
+      alert(error instanceof Error ? error.message : "Error al enviar la aplicacion");
     } finally {
       setIsSubmitting(false);
     }
@@ -103,16 +104,15 @@ export default function JudgeApplicationPage() {
               />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-white mb-2">Application Submitted!</h2>
+          <h2 className="text-2xl font-bold text-white mb-2">Aplicacion Enviada!</h2>
           <p className="text-white/70 mb-6">
-            Thank you for applying to be a judge. We&apos;ll review your application and get back to
-            you soon.
+            Gracias por aplicar como jurado. Revisaremos tu aplicacion y te contactaremos pronto.
           </p>
           <Link
             href="/"
             className="inline-block bg-monad-primary text-white px-6 py-3 rounded-full font-mono uppercase tracking-wide hover:brightness-110 transition-all"
           >
-            Back to Home
+            Volver al Inicio
           </Link>
         </motion.div>
       </div>
@@ -128,9 +128,9 @@ export default function JudgeApplicationPage() {
           transition={{ duration: 0.6 }}
         >
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Judge Application</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Aplicacion de Jurado</h1>
             <p className="text-white/70 text-lg">
-              Help evaluate and recognize exceptional blockchain projects in Colombia
+              Ayuda a evaluar y reconocer proyectos blockchain excepcionales en Colombia
             </p>
           </div>
 
@@ -138,22 +138,22 @@ export default function JudgeApplicationPage() {
             onSubmit={handleSubmit(onSubmit)}
             className="bg-white/5 border border-white/10 rounded-2xl p-8 space-y-6"
           >
-            {/* Basic Information */}
+            {/* Informacion Basica */}
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">
-                Basic Information
+                Informacion Basica
               </h2>
 
               <FormField
-                label="Full Name"
+                label="Nombre Completo"
                 required
                 {...register("full_name")}
                 error={errors.full_name?.message}
-                placeholder="Juan Pérez"
+                placeholder="Juan Perez"
               />
 
               <FormField
-                label="Email"
+                label="Correo Electronico"
                 type="email"
                 required
                 {...register("email")}
@@ -161,10 +161,12 @@ export default function JudgeApplicationPage() {
                 placeholder="juan@example.com"
               />
 
-              <p className="text-sm text-white/50">Fill at least 2 of the following 4 fields</p>
+              <p className="text-sm text-white/50">
+                Completa al menos 2 de los siguientes 4 campos
+              </p>
 
               <FormField
-                label="Phone"
+                label="Telefono"
                 type="tel"
                 {...register("phone")}
                 error={errors.phone?.message}
@@ -172,71 +174,77 @@ export default function JudgeApplicationPage() {
               />
 
               <FormField
-                label="LinkedIn Profile"
+                label="Perfil de LinkedIn"
                 {...register("linkedin")}
                 error={errors.linkedin?.message}
                 placeholder="https://linkedin.com/in/monadcolombia"
               />
 
               <FormField
-                label="Twitter/X Handle"
+                label="Twitter/X"
                 {...register("twitter")}
                 error={errors.twitter?.message}
                 placeholder="@monadcolombia"
               />
 
               <FormField
-                label="Instagram Handle"
+                label="Instagram"
                 {...register("instagram")}
                 error={errors.instagram?.message}
                 placeholder="@monadcolombia"
               />
             </div>
 
-            {/* Availability */}
+            {/* Disponibilidad */}
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">
-                Availability
+                Disponibilidad
               </h2>
 
               <FormSelect
-                label="Which event can you judge?"
+                label="En que evento puedes ser jurado?"
                 required
                 {...register("city")}
                 error={errors.city?.message}
                 options={[
-                  { value: "medellin", label: "Medellín (June 6, 2026)" },
-                  { value: "bogota", label: "Bogotá (July 4, 2026)" },
-                  { value: "both", label: "Both events" },
+                  { value: "medellin", label: "Medellin (Junio 6, 2026)" },
+                  { value: "bogota", label: "Bogota (Julio 4, 2026)" },
+                  { value: "both", label: "Ambos eventos" },
                 ]}
               />
 
-              <FormTextarea
-                label="Availability during event"
+              <FormSelect
+                label="Disponibilidad durante el evento"
                 required
                 {...register("availability")}
                 error={errors.availability?.message}
-                placeholder="Can you attend final presentations? Estimated time available?"
+                options={[
+                  { value: "todo_el_evento", label: "Todo el evento" },
+                  { value: "solo_hackathon", label: "Solo dias de hackathon" },
+                  { value: "solo_presentaciones", label: "Solo presentaciones finales" },
+                  { value: "medio_dia", label: "Medio dia" },
+                  { value: "flexible", label: "Flexible / a confirmar" },
+                ]}
               />
             </div>
 
-            {/* Professional Background */}
+            {/* Perfil Profesional */}
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">
-                Professional Background
+                Perfil Profesional
               </h2>
 
               <FormField
-                label="Current role and company"
+                label="Rol actual y empresa"
                 required
                 {...register("judge_current_role")}
                 error={errors.judge_current_role?.message}
-                placeholder="e.g., Lead Developer at Monad Labs"
+                placeholder="ej. Lead Developer en Monad Labs"
               />
 
               <div className="grid md:grid-cols-2 gap-6">
                 <FormField
-                  label="Years of blockchain/Web3 experience"
+                  label="Anos de experiencia en blockchain/Web3"
                   type="number"
                   required
                   {...register("judge_years_blockchain", { valueAsNumber: true })}
@@ -245,7 +253,7 @@ export default function JudgeApplicationPage() {
                 />
 
                 <FormField
-                  label="Years of total tech/business experience"
+                  label="Anos de experiencia total en tech/negocios"
                   type="number"
                   required
                   {...register("judge_years_total", { valueAsNumber: true })}
@@ -255,32 +263,32 @@ export default function JudgeApplicationPage() {
               </div>
 
               <FormTextarea
-                label="Professional bio"
+                label="Bio profesional"
                 required
                 {...register("judge_bio")}
                 error={errors.judge_bio?.message}
-                placeholder="Tell us about your background (100-800 characters)"
+                placeholder="Cuentanos sobre tu trayectoria (100-800 caracteres)"
                 maxLength={800}
                 showCount
                 currentLength={watchBio?.length}
               />
             </div>
 
-            {/* Expertise */}
+            {/* Areas de Expertise */}
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">
-                Expertise & Focus Areas
+                Areas de Expertise
               </h2>
 
               <FormSelect
-                label="Technical expertise level"
+                label="Nivel de expertise tecnico"
                 required
                 {...register("judge_technical_level")}
                 error={errors.judge_technical_level?.message}
                 options={[
-                  { value: "highly_technical", label: "Highly Technical" },
-                  { value: "moderate", label: "Moderate" },
-                  { value: "business_focused", label: "Business Focused" },
+                  { value: "highly_technical", label: "Altamente Tecnico" },
+                  { value: "moderate", label: "Moderado" },
+                  { value: "business_focused", label: "Enfoque en Negocios" },
                 ]}
               />
 
@@ -290,7 +298,7 @@ export default function JudgeApplicationPage() {
                 render={({ field }) => (
                   <div className="space-y-2">
                     <label className="block text-sm font-mono uppercase tracking-wide text-white/90">
-                      Areas of expertise
+                      Areas de expertise
                       <span className="text-monad-primary ml-1">*</span>
                     </label>
                     <div className="grid grid-cols-2 gap-3">
@@ -325,7 +333,7 @@ export default function JudgeApplicationPage() {
                 render={({ field }) => (
                   <div className="space-y-2">
                     <label className="block text-sm font-mono uppercase tracking-wide text-white/90">
-                      Specific experience with
+                      Experiencia especifica con
                       <span className="text-monad-primary ml-1">*</span>
                     </label>
                     <div className="grid grid-cols-2 gap-3">
@@ -357,23 +365,24 @@ export default function JudgeApplicationPage() {
               />
             </div>
 
-            {/* Judging Experience */}
+            {/* Experiencia como Jurado */}
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">
-                Judging Experience
+                Experiencia como Jurado
               </h2>
 
               <FormCheckbox
-                label="I have judged hackathons before"
+                label="He sido jurado en hackathons anteriormente"
                 {...register("judge_previous_experience")}
               />
 
               {watchPreviousExperience && (
                 <FormTextarea
-                  label="Tell us about your previous judging experience"
+                  label="Cuentanos sobre tu experiencia previa como jurado"
+                  required
                   {...register("judge_previous_details")}
                   error={errors.judge_previous_details?.message}
-                  placeholder="Which hackathons? How many?"
+                  placeholder="En que hackathons? Cuantos?"
                 />
               )}
 
@@ -383,11 +392,11 @@ export default function JudgeApplicationPage() {
                 render={({ field }) => (
                   <div className="space-y-2">
                     <label className="block text-sm font-mono uppercase tracking-wide text-white/90">
-                      Rank judging criteria by importance (1-5)
+                      Ordena los criterios de evaluacion por importancia (1-5)
                       <span className="text-monad-primary ml-1">*</span>
                     </label>
                     <p className="text-xs text-white/50 mb-3">
-                      1 = Most Important, 5 = Least Important
+                      1 = Mas Importante, 5 = Menos Importante
                     </p>
                     <div className="space-y-3">
                       {JUDGING_CRITERIA.map((criterion) => (
@@ -413,56 +422,68 @@ export default function JudgeApplicationPage() {
                         </div>
                       ))}
                     </div>
+                    {errors.judge_criteria_ranking && (
+                      <p className="text-red-500 text-sm mt-2">
+                        {(errors.judge_criteria_ranking as { message?: string }).message ||
+                          "Por favor completa todos los criterios"}
+                      </p>
+                    )}
                   </div>
                 )}
               />
             </div>
 
-            {/* Conflicts of Interest */}
+            {/* Conflictos de Interes */}
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">
-                Conflicts of Interest
+                Conflictos de Interes
               </h2>
 
-              <FormTextarea
-                label="Are you affiliated with any projects planning to participate?"
+              <FormSelect
+                label="Estas afiliado a algun proyecto que planea participar?"
                 required
                 {...register("judge_conflicts")}
                 error={errors.judge_conflicts?.message}
-                placeholder="If yes, please provide details. If no, write 'None'."
+                options={[
+                  { value: "ninguno", label: "No, ninguno" },
+                  { value: "si", label: "Si, tengo conflictos" },
+                ]}
               />
 
-              <FormTextarea
-                label="Any other potential conflicts?"
-                {...register("judge_other_conflicts")}
-                error={errors.judge_other_conflicts?.message}
-                placeholder="Optional"
-              />
+              {watchConflicts === "si" && (
+                <FormTextarea
+                  label="Describe tus conflictos de interes"
+                  required
+                  {...register("judge_conflict_details")}
+                  error={errors.judge_conflict_details?.message}
+                  placeholder="Describe los proyectos con los que tienes relacion"
+                />
+              )}
             </div>
 
-            {/* Motivation */}
+            {/* Motivacion */}
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">
-                Motivation
+                Motivacion
               </h2>
 
               <FormTextarea
-                label="Why do you want to judge MonadBlitz?"
+                label="Por que quieres ser jurado en MonadBlitz?"
                 required
                 {...register("judge_why")}
                 error={errors.judge_why?.message}
-                placeholder="Share your motivation for judging"
+                placeholder="Comparte tu motivacion para ser jurado"
               />
             </div>
 
-            {/* Submit */}
+            {/* Enviar */}
             <div className="pt-6">
               <button
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full bg-monad-primary text-white font-bold px-8 py-4 rounded-full font-mono uppercase tracking-wide hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? "Submitting..." : "Submit Application"}
+                {isSubmitting ? "Enviando..." : "Enviar Aplicacion"}
               </button>
             </div>
           </form>

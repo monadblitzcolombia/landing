@@ -92,7 +92,7 @@ export const FOOTER_NAV: Record<string, { title: string; links: FooterLink[] }> 
       { label: "Monad Momentum", href: "https://momentum.monad.xyz/" },
       { label: "Monad Madness", href: "https://madness.monad.xyz/" },
       { label: "Aplicar como Mentor", href: "/apply/mentor" },
-      { label: "Aplicar como Judge", href: "/apply/judge" },
+      { label: "Aplicar como Jurado", href: "/apply/judge" },
     ],
   },
   comunidad: {

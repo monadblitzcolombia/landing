@@ -22,10 +22,6 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
       },
     });
 
-    if (status === "approved" || status === "rejected") {
-      console.log("Notification email would be sent to:", data.email);
-    }
-
     return NextResponse.json({ data });
   } catch (error) {
     console.error("Error updating application:", error);

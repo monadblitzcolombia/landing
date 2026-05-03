@@ -161,34 +161,35 @@ export default function JudgeApplicationPage() {
                 placeholder="juan@example.com"
               />
 
+              <p className="text-sm text-white/50">Fill at least 2 of the following 4 fields</p>
+
               <FormField
                 label="Phone"
                 type="tel"
                 {...register("phone")}
                 error={errors.phone?.message}
-                placeholder="+57 300 123 4567"
+                placeholder="3001234567"
               />
 
               <FormField
                 label="LinkedIn Profile"
-                required
                 {...register("linkedin")}
                 error={errors.linkedin?.message}
-                placeholder="https://linkedin.com/in/yourprofile"
+                placeholder="https://linkedin.com/in/monadcolombia"
               />
 
               <FormField
                 label="Twitter/X Handle"
                 {...register("twitter")}
                 error={errors.twitter?.message}
-                placeholder="@yourhandle"
+                placeholder="@monadcolombia"
               />
 
               <FormField
                 label="Instagram Handle"
                 {...register("instagram")}
                 error={errors.instagram?.message}
-                placeholder="@yourhandle"
+                placeholder="@monadcolombia"
               />
             </div>
 

@@ -1,40 +1,55 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { prisma } from "@/lib/db";
 import { mentorSchema, judgeSchema } from "@/lib/validations/applications";
+import type { Role, City, TechnicalLevel } from "@prisma/client";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    // Validate based on role
     const schema = body.role === "mentor" ? mentorSchema : judgeSchema;
-    const validatedData = schema.parse(body);
+    const validated = schema.parse(body);
 
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
-    );
-
-    // Insert into database
-    const { data, error } = await supabase
-      .from("applications")
-      .insert(validatedData)
-      .select()
-      .single();
-
-    if (error) {
-      console.error("Database error:", error);
-      throw error;
-    }
-
-    // Log confirmation email (for MVP - replace with actual email service later)
-    console.log("📧 Confirmation email would be sent to:", validatedData.email);
-    console.log(
-      `Subject: MonadBlitz ${validatedData.role === "mentor" ? "Mentor" : "Judge"} Application Received`
-    );
-    console.log(
-      "Body: Thank you for applying! We'll review your application and get back to you soon."
-    );
+    const data = await prisma.application.create({
+      data: {
+        role: validated.role as Role,
+        fullName: validated.full_name,
+        email: validated.email,
+        phone: validated.phone ?? null,
+        linkedin: validated.linkedin || null,
+        twitter: validated.twitter ?? null,
+        instagram: validated.instagram ?? null,
+        city: validated.city as City,
+        availability: validated.availability ?? null,
+        ...(validated.role === "mentor" && {
+          mentorPrimarySkills: validated.mentor_primary_skills,
+          mentorMonadExperience: validated.mentor_monad_experience,
+          mentorMonadExperienceDetails: validated.mentor_monad_experience_details ?? null,
+          mentorBlockchainExperience: validated.mentor_blockchain_experience,
+          mentorNonTechnicalSkills: validated.mentor_non_technical_skills ?? null,
+          mentorPreviousExperience: validated.mentor_previous_experience,
+          mentorPreviousDetails: validated.mentor_previous_details ?? null,
+          mentorBio: validated.mentor_bio,
+          mentorWhy: validated.mentor_why,
+          mentorTeamCommitment: validated.mentor_team_commitment,
+        }),
+        ...(validated.role === "judge" && {
+          judgeCurrentRole: validated.judge_current_role,
+          judgeYearsBlockchain: validated.judge_years_blockchain,
+          judgeYearsTotal: validated.judge_years_total,
+          judgeBio: validated.judge_bio,
+          judgeTechnicalLevel: validated.judge_technical_level as TechnicalLevel,
+          judgeExpertiseAreas: validated.judge_expertise_areas,
+          judgeSpecificExperience: validated.judge_specific_experience,
+          judgePreviousExperience: validated.judge_previous_experience,
+          judgePreviousDetails: validated.judge_previous_details ?? null,
+          judgeCriteriaRanking: validated.judge_criteria_ranking,
+          judgeConflicts: validated.judge_conflicts,
+          judgeOtherConflicts: validated.judge_other_conflicts ?? null,
+          judgeWhy: validated.judge_why,
+        }),
+      },
+    });
 
     return NextResponse.json({
       success: true,

@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { prisma } from "@/lib/db";
 
 export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
-  // Simple password check
   const authHeader = request.headers.get("authorization");
   if (authHeader !== `Bearer ${process.env.ADMIN_PASSWORD}`) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -14,38 +13,17 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     const body = await request.json();
     const { status, reviewer_notes } = body;
 
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
-    );
-
-    const { data, error } = await supabase
-      .from("applications")
-      .update({
+    const data = await prisma.application.update({
+      where: { id },
+      data: {
         status,
-        reviewer_notes,
-        reviewed_at: new Date().toISOString(),
-      })
-      .eq("id", id)
-      .select()
-      .single();
+        reviewerNotes: reviewer_notes,
+        reviewedAt: new Date(),
+      },
+    });
 
-    if (error) {
-      console.error("Database error:", error);
-      throw error;
-    }
-
-    // Log notification email (for MVP - replace with actual email service later)
     if (status === "approved" || status === "rejected") {
-      console.log("📧 Notification email would be sent to:", data.email);
-      console.log(
-        `Subject: MonadBlitz Application ${status === "approved" ? "Approved" : "Update"}`
-      );
-      console.log(
-        status === "approved"
-          ? "Body: Congratulations! Your application has been approved."
-          : "Body: Thank you for your interest. We'll keep your application on file for future events."
-      );
+      console.log("Notification email would be sent to:", data.email);
     }
 
     return NextResponse.json({ data });

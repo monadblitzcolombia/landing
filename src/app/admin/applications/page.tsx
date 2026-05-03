@@ -1,9 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import type { Database } from "@/lib/supabase/types";
-
-type Application = Database["public"]["Tables"]["applications"]["Row"];
+import type { Application } from "@prisma/client";
 
 export default function AdminApplicationsPage() {
   const [applications, setApplications] = useState<Application[]>([]);
@@ -162,7 +160,7 @@ export default function AdminApplicationsPage() {
                     onClick={() => setSelectedApp(app)}
                   >
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
-                      {app.full_name}
+                      {app.fullName}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-white/70 capitalize">
                       {app.role}
@@ -184,7 +182,7 @@ export default function AdminApplicationsPage() {
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-white/70">
-                      {new Date(app.created_at).toLocaleDateString()}
+                      {new Date(app.createdAt).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                       <button
@@ -217,14 +215,14 @@ export default function AdminApplicationsPage() {
           >
             <div className="flex justify-between items-start mb-6">
               <div>
-                <h3 className="text-2xl font-bold text-white">{selectedApp.full_name}</h3>
+                <h3 className="text-2xl font-bold text-white">{selectedApp.fullName}</h3>
                 <p className="text-white/70 capitalize">{selectedApp.role} Application</p>
               </div>
               <button
                 onClick={() => setSelectedApp(null)}
                 className="text-white/70 hover:text-white"
               >
-                ✕
+                X
               </button>
             </div>
 
@@ -256,20 +254,20 @@ export default function AdminApplicationsPage() {
                     <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
                       Skills & Experience
                     </h4>
-                    <p className="text-white">{selectedApp.mentor_primary_skills}</p>
+                    <p className="text-white">{selectedApp.mentorPrimarySkills}</p>
                     <p className="text-white">
-                      Blockchain: {selectedApp.mentor_blockchain_experience}
+                      Blockchain: {selectedApp.mentorBlockchainExperience}
                     </p>
                   </div>
                   <div className="space-y-2">
                     <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">Bio</h4>
-                    <p className="text-white">{selectedApp.mentor_bio}</p>
+                    <p className="text-white">{selectedApp.mentorBio}</p>
                   </div>
                   <div className="space-y-2">
                     <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
                       Motivation
                     </h4>
-                    <p className="text-white">{selectedApp.mentor_why}</p>
+                    <p className="text-white">{selectedApp.mentorWhy}</p>
                   </div>
                 </>
               )}
@@ -280,21 +278,21 @@ export default function AdminApplicationsPage() {
                     <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
                       Professional Background
                     </h4>
-                    <p className="text-white">{selectedApp.judge_current_role}</p>
+                    <p className="text-white">{selectedApp.judgeCurrentRole}</p>
                     <p className="text-white/70">
-                      {selectedApp.judge_years_blockchain} years blockchain /{" "}
-                      {selectedApp.judge_years_total} years total
+                      {selectedApp.judgeYearsBlockchain} years blockchain /{" "}
+                      {selectedApp.judgeYearsTotal} years total
                     </p>
                   </div>
                   <div className="space-y-2">
                     <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">Bio</h4>
-                    <p className="text-white">{selectedApp.judge_bio}</p>
+                    <p className="text-white">{selectedApp.judgeBio}</p>
                   </div>
                   <div className="space-y-2">
                     <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
                       Motivation
                     </h4>
-                    <p className="text-white">{selectedApp.judge_why}</p>
+                    <p className="text-white">{selectedApp.judgeWhy}</p>
                   </div>
                 </>
               )}

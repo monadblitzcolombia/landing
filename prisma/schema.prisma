@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  mentor
+  judge
+}
+
+enum City {
+  medellin
+  bogota
+  both
+}
+
+enum ApplicationStatus {
+  pending
+  approved
+  rejected
+}
+
+enum TechnicalLevel {
+  highly_technical
+  moderate
+  business_focused
+}
+
+model Application {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+
+  role Role
+
+  fullName  String  @map("full_name")
+  email     String
+  phone     String?
+  linkedin  String?
+  twitter   String?
+  instagram String?
+
+  city         City
+  availability String?
+
+  // Mentor-specific fields
+  mentorPrimarySkills          String?  @map("mentor_primary_skills")
+  mentorMonadExperience        Boolean? @map("mentor_monad_experience")
+  mentorMonadExperienceDetails String?  @map("mentor_monad_experience_details")
+  mentorBlockchainExperience   String?  @map("mentor_blockchain_experience")
+  mentorNonTechnicalSkills     String?  @map("mentor_non_technical_skills")
+  mentorPreviousExperience     Boolean? @map("mentor_previous_experience")
+  mentorPreviousDetails        String?  @map("mentor_previous_details")
+  mentorBio                    String?  @map("mentor_bio")
+  mentorWhy                    String?  @map("mentor_why")
+  mentorTeamCommitment         String?  @map("mentor_team_commitment")
+
+  // Judge-specific fields
+  judgeCurrentRole        String?          @map("judge_current_role")
+  judgeYearsBlockchain    Int?             @map("judge_years_blockchain")
+  judgeYearsTotal         Int?             @map("judge_years_total")
+  judgeBio                String?          @map("judge_bio")
+  judgeTechnicalLevel     TechnicalLevel?  @map("judge_technical_level")
+  judgeExpertiseAreas     String[]         @map("judge_expertise_areas")
+  judgeSpecificExperience String[]         @map("judge_specific_experience")
+  judgePreviousExperience  Boolean?        @map("judge_previous_experience")
+  judgePreviousDetails    String?          @map("judge_previous_details")
+  judgeCriteriaRanking    Json?            @map("judge_criteria_ranking")
+  judgeConflicts          String?         @map("judge_conflicts")
+  judgeOtherConflicts     String?         @map("judge_other_conflicts")
+  judgeWhy                String?         @map("judge_why")
+
+  // Review fields
+  status        ApplicationStatus @default(pending)
+  reviewedAt    DateTime?         @map("reviewed_at")
+  reviewedBy    String?           @map("reviewed_by")
+  reviewerNotes String?           @map("reviewer_notes")
+
+  @@unique([email, role])
+  @@index([status])
+  @@index([createdAt(sort: Desc)])
+  @@index([role])
+  @@index([email])
+  @@map("applications")
+}

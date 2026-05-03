@@ -75,7 +75,7 @@ export default function AdminApplicationsPage() {
 
       await fetchApplications();
       setSelectedApp(null);
-      alert(`Aplicacion ${STATUS_LABELS[status]?.toLowerCase() || status} exitosamente`);
+      alert(`Aplicación ${STATUS_LABELS[status]?.toLowerCase() || status} exitosamente`);
     } catch (error) {
       console.error("Error updating status:", error);
       alert("Error al actualizar estado");
@@ -235,7 +235,7 @@ export default function AdminApplicationsPage() {
               <div>
                 <h3 className="text-2xl font-bold text-white">{selectedApp.fullName}</h3>
                 <p className="text-white/70">
-                  Aplicacion de {ROLE_LABELS[selectedApp.role] || selectedApp.role}
+                  Aplicación de {ROLE_LABELS[selectedApp.role] || selectedApp.role}
                 </p>
               </div>
               <button
@@ -291,14 +291,14 @@ export default function AdminApplicationsPage() {
                       Habilidades y Experiencia
                     </h4>
                     <p className="text-white">
-                      Tecnicas: {selectedApp.mentorPrimarySkills?.join(", ") || "-"}
+                      Técnicas: {selectedApp.mentorPrimarySkills?.join(", ") || "-"}
                     </p>
                     <p className="text-white">
                       Blockchain: {selectedApp.mentorBlockchainExperience}
                     </p>
                     {selectedApp.mentorNonTechnicalSkills?.length > 0 && (
                       <p className="text-white">
-                        No tecnicas: {selectedApp.mentorNonTechnicalSkills.join(", ")}
+                        No técnicas: {selectedApp.mentorNonTechnicalSkills.join(", ")}
                       </p>
                     )}
                     <p className="text-white/70">
@@ -314,7 +314,7 @@ export default function AdminApplicationsPage() {
                   </div>
                   <div className="space-y-2">
                     <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
-                      Motivacion
+                      Motivación
                     </h4>
                     <p className="text-white">{selectedApp.mentorWhy}</p>
                   </div>
@@ -342,13 +342,13 @@ export default function AdminApplicationsPage() {
                     </h4>
                     <p className="text-white">{selectedApp.judgeCurrentRole}</p>
                     <p className="text-white/70">
-                      {selectedApp.judgeYearsBlockchain} anos blockchain /{" "}
-                      {selectedApp.judgeYearsTotal} anos total
+                      {selectedApp.judgeYearsBlockchain} años blockchain /{" "}
+                      {selectedApp.judgeYearsTotal} años total
                     </p>
                     <p className="text-white/70">
-                      Nivel tecnico:{" "}
+                      Nivel técnico:{" "}
                       {selectedApp.judgeTechnicalLevel === "highly_technical"
-                        ? "Altamente Tecnico"
+                        ? "Altamente Técnico"
                         : selectedApp.judgeTechnicalLevel === "moderate"
                           ? "Moderado"
                           : "Enfoque en Negocios"}
@@ -371,13 +371,13 @@ export default function AdminApplicationsPage() {
                   </div>
                   <div className="space-y-2">
                     <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
-                      Motivacion
+                      Motivación
                     </h4>
                     <p className="text-white">{selectedApp.judgeWhy}</p>
                   </div>
                   <div className="space-y-2">
                     <h4 className="font-mono uppercase tracking-wide text-white/70 text-sm">
-                      Conflictos de Interes
+                      Conflictos de Interés
                     </h4>
                     <p className="text-white">
                       {selectedApp.judgeConflicts === "ninguno" ? "Ninguno" : "Si"}

@@ -174,7 +174,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Aplicar como Judge
+                Aplicar como Jurado
               </motion.a>
             </motion.div>
           </motion.div>

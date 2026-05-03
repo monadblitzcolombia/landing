@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FOOTER_NAV, SOCIAL_LINKS } from "@/lib/constants";
 
 const COLUMNS = ["principal", "construir", "programas", "comunidad"] as const;
@@ -78,12 +79,12 @@ export default function Footer() {
           {/* Legal */}
           <div className="flex items-center gap-4 text-xs text-white/30 font-mono">
             <span>&copy; 2026 Monad</span>
-            <a href="#" className="hover:text-white/50 transition-colors">
-              Privacy
-            </a>
-            <a href="#" className="hover:text-white/50 transition-colors">
-              Terms
-            </a>
+            <Link href="/privacidad" className="hover:text-white/50 transition-colors">
+              Privacidad
+            </Link>
+            <Link href="/terminos" className="hover:text-white/50 transition-colors">
+              Términos
+            </Link>
           </div>
         </div>
       </div>

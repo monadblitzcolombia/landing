@@ -54,13 +54,13 @@ export default function MentorApplicationPage() {
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.error || "Error al enviar la aplicacion");
+        throw new Error(error.error || "Error al enviar la aplicación");
       }
 
       setIsSuccess(true);
     } catch (error) {
       console.error("Submission error:", error);
-      alert(error instanceof Error ? error.message : "Error al enviar la aplicacion");
+      alert(error instanceof Error ? error.message : "Error al enviar la aplicación");
     } finally {
       setIsSubmitting(false);
     }
@@ -89,9 +89,9 @@ export default function MentorApplicationPage() {
               />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-white mb-2">Aplicacion Enviada!</h2>
+          <h2 className="text-2xl font-bold text-white mb-2">Aplicación Enviada!</h2>
           <p className="text-white/70 mb-6">
-            Gracias por aplicar como mentor. Revisaremos tu aplicacion y te contactaremos pronto.
+            Gracias por aplicar como mentor. Revisaremos tu aplicación y te contactaremos pronto.
           </p>
           <Link
             href="/"
@@ -113,9 +113,9 @@ export default function MentorApplicationPage() {
           transition={{ duration: 0.6 }}
         >
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Aplicacion de Mentor</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Aplicación de Mentor</h1>
             <p className="text-white/70 text-lg">
-              Ayuda a formar la proxima generacion de builders blockchain en Colombia
+              Ayuda a formar la próxima generación de builders blockchain en Colombia
             </p>
           </div>
 
@@ -123,10 +123,10 @@ export default function MentorApplicationPage() {
             onSubmit={handleSubmit(onSubmit)}
             className="bg-white/5 border border-white/10 rounded-2xl p-8 space-y-6"
           >
-            {/* Informacion Basica */}
+            {/* Información Básica */}
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">
-                Informacion Basica
+                Información Básica
               </h2>
 
               <FormField
@@ -138,7 +138,7 @@ export default function MentorApplicationPage() {
               />
 
               <FormField
-                label="Correo Electronico"
+                label="Correo Electrónico"
                 type="email"
                 required
                 {...register("email")}
@@ -197,7 +197,7 @@ export default function MentorApplicationPage() {
               />
 
               <p className="text-sm text-white/50">
-                El evento es de un solo dia. Se requiere disponibilidad completa.
+                El evento es de un solo día. Se requiere disponibilidad completa.
               </p>
             </div>
 
@@ -213,7 +213,7 @@ export default function MentorApplicationPage() {
                 render={({ field }) => (
                   <div className="space-y-2">
                     <label className="block text-sm font-mono uppercase tracking-wide text-white/90">
-                      Habilidades tecnicas principales
+                      Habilidades técnicas principales
                       <span className="text-monad-primary ml-1">*</span>
                     </label>
                     <div className="grid grid-cols-2 gap-3">
@@ -249,7 +249,7 @@ export default function MentorApplicationPage() {
 
               {watchMonadExperience && (
                 <FormTextarea
-                  label="Cuentanos sobre tu experiencia con Monad/EVM"
+                  label="Cuéntanos sobre tu experiencia con Monad/EVM"
                   required
                   {...register("mentor_monad_experience_details")}
                   error={errors.mentor_monad_experience_details?.message}
@@ -271,7 +271,7 @@ export default function MentorApplicationPage() {
                 render={({ field }) => (
                   <div className="space-y-2">
                     <label className="block text-sm font-mono uppercase tracking-wide text-white/90">
-                      Habilidades no tecnicas (opcional)
+                      Habilidades no técnicas (opcional)
                     </label>
                     <div className="grid grid-cols-2 gap-3">
                       {NON_TECHNICAL_SKILLS.map((skill) => (
@@ -310,7 +310,7 @@ export default function MentorApplicationPage() {
 
               {watchPreviousExperience && (
                 <FormTextarea
-                  label="Cuentanos sobre tu experiencia previa como mentor"
+                  label="Cuéntanos sobre tu experiencia previa como mentor"
                   required
                   {...register("mentor_previous_details")}
                   error={errors.mentor_previous_details?.message}
@@ -323,7 +323,7 @@ export default function MentorApplicationPage() {
                 required
                 {...register("mentor_bio")}
                 error={errors.mentor_bio?.message}
-                placeholder="Cuentanos sobre tu trayectoria (50-500 caracteres)"
+                placeholder="Cuéntanos sobre tu trayectoria (50-500 caracteres)"
                 maxLength={500}
                 showCount
                 currentLength={watchBio?.length}
@@ -341,7 +341,7 @@ export default function MentorApplicationPage() {
                 required
                 {...register("mentor_why")}
                 error={errors.mentor_why?.message}
-                placeholder="Comparte tu motivacion para ser mentor"
+                placeholder="Comparte tu motivación para ser mentor"
               />
 
               <FormSelect
@@ -365,7 +365,7 @@ export default function MentorApplicationPage() {
                 disabled={isSubmitting}
                 className="w-full bg-monad-primary text-white font-bold px-8 py-4 rounded-full font-mono uppercase tracking-wide hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? "Enviando..." : "Enviar Aplicacion"}
+                {isSubmitting ? "Enviando..." : "Enviar Aplicación"}
               </button>
             </div>
           </form>

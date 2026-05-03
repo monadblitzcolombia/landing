@@ -1,5 +1,18 @@
 # Monad Tour Colombia 2026
 
+```text
+ __  __                       _   _____
+|  \/  | ___  _ __   __ _  __| | |_   _|___  _   _ _ __
+| |\/| |/ _ \| '_ \ / _` |/ _` |   | | / _ \| | | | '__|
+| |  | | (_) | | | | (_| | (_| |   | || (_) | |_| | |
+|_|  |_|\___/|_| |_|\__,_|\__,_|   |_| \___/ \__,_|_|
+  ____      _                 _     _         ____   ___ ____   __
+ / ___|___ | | ___  _ __ ___ | |__ (_) __ _  |___ \ / _ \___ \ / /_
+| |   / _ \| |/ _ \| '_ ` _ \| '_ \| |/ _` |   __) | | | |__) | '_ \
+| |__| (_) | | (_) | | | | | | |_) | | (_| |  / __/| |_| / __/| (_) |
+ \____\___/|_|\___/|_| |_| |_|_.__/|_|\__,_| |_____|\___/_____|\___/
+```
+
 Landing page oficial del Monad Tour Colombia - una serie de hackathons MonadBlitz en 4 ciudades colombianas.
 
 ![Monad](https://img.shields.io/badge/Monad-6E54FF?style=for-the-badge&logo=ethereum&logoColor=white)

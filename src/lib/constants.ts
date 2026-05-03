@@ -6,7 +6,7 @@ export const CITIES: City[] = [
     name: "Medellín",
     lat: 6.2442,
     lng: -75.5812,
-    date: "30 de Mayo, 2026",
+    date: "6 de Junio, 2026",
     confirmed: true,
     registrationUrl: "https://luma.com/o56ekpyb",
     description: "La ciudad de la innovación recibe a MonadBlitz.",
@@ -91,6 +91,8 @@ export const FOOTER_NAV: Record<string, { title: string; links: FooterLink[] }> 
       { label: "DeltaV", href: "https://deltav.monad.xyz/" },
       { label: "Monad Momentum", href: "https://momentum.monad.xyz/" },
       { label: "Monad Madness", href: "https://madness.monad.xyz/" },
+      { label: "Aplicar como Mentor", href: "/apply/mentor" },
+      { label: "Aplicar como Judge", href: "/apply/judge" },
     ],
   },
   comunidad: {

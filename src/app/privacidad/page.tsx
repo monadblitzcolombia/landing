@@ -20,10 +20,30 @@ export default function PrivacidadPage() {
 
         <div className="space-y-8 text-white/70 leading-relaxed">
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">1. Información que Recopilamos</h2>
+            <h2 className="text-xl font-bold text-white mb-3">1. Marco Legal y Responsable</h2>
+            <p>
+              Esta politica se rige por la Ley 1581 de 2012 y el Decreto 1377 de 2013 de Colombia
+              sobre proteccion de datos personales. El responsable del tratamiento de datos es
+              Medellin Blockchain Community, organizador de los eventos MonadBlitz Hackathon en
+              Colombia.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-white mb-3">2. Consentimiento</h2>
+            <p>
+              Al enviar un formulario de registro o aplicacion en este sitio, autorizas de manera
+              libre, previa, expresa e informada el tratamiento de tus datos personales conforme a
+              los fines descritos en esta politica. Puedes retirar tu consentimiento en cualquier
+              momento contactando al equipo organizador.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-white mb-3">3. Informacion que Recopilamos</h2>
             <p>
               Al registrarte o aplicar como mentor/jurado en los eventos MonadBlitz Hackathon,
-              recopilamos la siguiente información:
+              recopilamos la siguiente informacion:
             </p>
             <ul className="list-disc list-inside mt-3 space-y-1">
               <li>Nombre completo</li>
@@ -39,7 +59,7 @@ export default function PrivacidadPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">2. Uso de la Información</h2>
+            <h2 className="text-xl font-bold text-white mb-3">4. Uso de la Informacion</h2>
             <p>Utilizamos tu información personal para:</p>
             <ul className="list-disc list-inside mt-3 space-y-1">
               <li>Gestionar tu registro y participación en los eventos MonadBlitz</li>
@@ -50,7 +70,7 @@ export default function PrivacidadPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">3. Compartir Información</h2>
+            <h2 className="text-xl font-bold text-white mb-3">5. Compartir Informacion</h2>
             <p>
               No vendemos, alquilamos ni compartimos tu información personal con terceros con fines
               comerciales. Podemos compartir información con:
@@ -65,40 +85,54 @@ export default function PrivacidadPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">4. Almacenamiento y Seguridad</h2>
+            <h2 className="text-xl font-bold text-white mb-3">
+              6. Almacenamiento, Seguridad y Retencion
+            </h2>
             <p>
-              Tu información se almacena en servidores seguros. Implementamos medidas de seguridad
-              técnicas y organizativas para proteger tus datos contra acceso no autorizado, pérdida
-              o alteración.
+              Tu informacion se almacena en servidores seguros. Implementamos medidas de seguridad
+              tecnicas y organizativas para proteger tus datos contra acceso no autorizado, perdida
+              o alteracion.
+            </p>
+            <p className="mt-3">
+              Conservamos tus datos personales durante un periodo maximo de 12 meses despues del
+              ultimo evento en el que participaste. Pasado este periodo, los datos seran eliminados
+              de forma segura, salvo que exista una obligacion legal que requiera su conservacion.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">5. Tus Derechos</h2>
-            <p>Tienes derecho a:</p>
+            <h2 className="text-xl font-bold text-white mb-3">7. Tus Derechos</h2>
+            <p>
+              De acuerdo con la Ley 1581 de 2012 (articulos 15 y 16), como titular de los datos
+              tienes derecho a:
+            </p>
             <ul className="list-disc list-inside mt-3 space-y-1">
-              <li>Acceder a tu información personal</li>
-              <li>Solicitar la corrección de datos incorrectos</li>
-              <li>Solicitar la eliminación de tus datos</li>
-              <li>Retirar tu consentimiento en cualquier momento</li>
+              <li>Conocer, actualizar y rectificar tu informacion personal</li>
+              <li>
+                Solicitar la eliminacion de tus datos cuando no exista obligacion legal de
+                conservarlos
+              </li>
+              <li>Revocar la autorizacion otorgada para el tratamiento de tus datos</li>
+              <li>Presentar quejas ante la Superintendencia de Industria y Comercio (SIC)</li>
             </ul>
             <p className="mt-3">
-              Para ejercer estos derechos, contacta al equipo organizador a través de nuestros
-              canales oficiales.
+              Para ejercer estos derechos, contacta al equipo organizador a traves de nuestras redes
+              sociales oficiales o en los canales de Discord de Monad.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">6. Cookies</h2>
+            <h2 className="text-xl font-bold text-white mb-3">8. Cookies</h2>
             <p>
-              Este sitio puede utilizar cookies esenciales para su funcionamiento. No utilizamos
-              cookies de seguimiento ni publicidad de terceros.
+              Este sitio utiliza cookies esenciales para su funcionamiento (como la sesion de
+              administracion). No utilizamos cookies de seguimiento ni publicidad de terceros. Al
+              aceptar el banner de cookies, consientes el uso de estas cookies esenciales.
             </p>
           </section>
 
           <section>
             <h2 className="text-xl font-bold text-white mb-3">
-              7. Fotografía y Contenido del Evento
+              9. Fotografia y Contenido del Evento
             </h2>
             <p>
               Durante los eventos MonadBlitz se pueden tomar fotografías y videos. Al asistir al
@@ -108,7 +142,7 @@ export default function PrivacidadPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">8. Cambios a esta Política</h2>
+            <h2 className="text-xl font-bold text-white mb-3">10. Cambios a esta Politica</h2>
             <p>
               Nos reservamos el derecho de actualizar esta política de privacidad. Los cambios serán
               publicados en esta página con la fecha de actualización correspondiente.
@@ -116,10 +150,11 @@ export default function PrivacidadPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-white mb-3">9. Contacto</h2>
+            <h2 className="text-xl font-bold text-white mb-3">11. Contacto</h2>
             <p>
-              Si tienes preguntas sobre esta política de privacidad, puedes contactarnos a través de
-              nuestras redes sociales oficiales o en los canales de Discord de Monad.
+              Si tienes preguntas sobre esta politica de privacidad o deseas ejercer tus derechos
+              como titular de datos, puedes contactarnos a traves de nuestras redes sociales
+              oficiales o en los canales de Discord de Monad.
             </p>
           </section>
         </div>

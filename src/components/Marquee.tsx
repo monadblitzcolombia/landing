@@ -21,9 +21,12 @@ export default function Marquee() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: catIndex * 0.1, ease: EASING }}
             >
-              <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[3px] text-white/40 text-center mb-4">
+              <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[3px] text-white/40 text-center mb-1">
                 {`// ${category.title}`}
               </p>
+              {category.subtitle && (
+                <p className="text-xs text-white/30 text-center mb-4">{category.subtitle}</p>
+              )}
 
               {/* Scrolling marquee */}
               <div

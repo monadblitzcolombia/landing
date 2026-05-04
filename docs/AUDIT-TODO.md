@@ -56,20 +56,17 @@ Items identified during the full project audit (May 2026). Sorted by priority.
 - **Issue:** No concrete numbers about past events (attendees, projects built, teams formed).
 - **Recommendation:** Add stats from Mexico Blitz or other past events to build credibility and FOMO.
 
-### 11. No "notify me" for future events
+### ~~11. No "notify me" for future events~~ FIXED
 
-- **Issue:** With only 2 cities now, visitors from other Colombian cities have no way to express interest.
-- **Recommendation:** Add a simple email capture for "Te avisamos cuando haya eventos en tu ciudad".
+- Added email notification via Nodemailer. On every application submit, an email is sent to `medellinblockchaincommunity@gmail.com` with all submitted data. Requires `GMAIL_APP_PASSWORD` env variable.
 
-### 12. No urgency/scarcity messaging
+### ~~12. No urgency/scarcity messaging~~ FIXED
 
-- **Issue:** No "X spots remaining" or "limited capacity" messaging.
-- **Recommendation:** If events have capacity limits, show remaining spots near the registration CTA.
+- Added "Cupos limitados - 100 por ciudad" message in the Countdown section, visible while the event countdown is active.
 
-### 13. Missing partner context
+### ~~13. Missing partner context~~ FIXED
 
-- **Issue:** University logos are shown but there's no explanation of the partnership (venue? academic credit? student access?).
-- **Recommendation:** Add a short description per partner category.
+- Added `subtitle` field to `PartnerCategory` type. Each category now shows context: "Sedes de workshops previos al hackathon" for universities, etc.
 
 ---
 
@@ -86,10 +83,9 @@ Items identified during the full project audit (May 2026). Sorted by priority.
 - **File:** `src/components/Countdown.tsx:217`
 - **Issue:** Google Calendar event is set 10:00-22:00, which is correct. Just verify this matches actual event timing.
 
-### 16. Missing judges/mentors showcase
+### ~~16. Missing judges/mentors showcase~~ FIXED
 
-- **Issue:** Application forms exist for judges and mentors, but there's no public page showing confirmed judges/mentors.
-- **Recommendation:** Once applications are approved, create a "Nuestro equipo" section or page.
+- Created `/equipo` page with public API `/api/team` that shows approved mentors and judges. Shows a placeholder message when none are approved yet.
 
 ### 17. Missing rules/judging criteria page
 
@@ -123,11 +119,9 @@ Items identified during the full project audit (May 2026). Sorted by priority.
 
 ## Legal & Compliance
 
-### 22. Verify privacy policy covers application data collection
+### ~~22. Verify privacy policy covers application data collection~~ FIXED
 
-- **File:** `src/app/privacidad/page.tsx`
-- **Issue:** Application forms collect personal data (name, email, phone, social handles). Colombian data protection law (Ley 1581 de 2012) requires explicit consent.
-- **Action:** Review privacy policy to ensure it covers: what data is collected, how it's used, who has access, retention period, and how to request deletion.
+- Added Ley 1581 de 2012 and Decreto 1377 de 2013 references. Added explicit consent clause, data retention period (12 months), SIC complaint right, and responsible entity identification.
 
 ### ~~23. No cookie consent banner~~ FIXED
 
@@ -145,18 +139,17 @@ Items identified during the full project audit (May 2026). Sorted by priority.
 
 ## Summary
 
-| Status    | Count                                                             |
-| --------- | ----------------------------------------------------------------- |
-| FIXED     | 13 (items 1, 2, 3, 4, 5, 6, 8, 9, 20, 21, 23, 24 + images config) |
-| Remaining | 11                                                                |
+| Status    | Count                                                  |
+| --------- | ------------------------------------------------------ |
+| FIXED     | 18 (items 1-6, 8, 9, 11-13, 16, 20-24 + images config) |
+| Remaining | 6                                                      |
 
 ### Remaining by category
 
-| Priority      | Count  | Category                                |
-| ------------- | ------ | --------------------------------------- |
-| Performance   | 1      | Heavy client bundle (low priority)      |
-| Marketing     | 4      | Social proof, notify, urgency, partners |
-| Content       | 5      | Schedule, rules, showcase               |
-| Accessibility | 1      | Map keyboard (low priority)             |
-| Legal         | 1      | Privacy policy review                   |
-| **Total**     | **11** |                                         |
+| Priority      | Count | Category                           |
+| ------------- | ----- | ---------------------------------- |
+| Performance   | 1     | Heavy client bundle (low priority) |
+| Marketing     | 1     | Social proof (no data available)   |
+| Content       | 3     | Schedule, rules, past winners      |
+| Accessibility | 1     | Map keyboard (low priority)        |
+| **Total**     | **6** |                                    |

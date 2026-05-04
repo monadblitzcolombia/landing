@@ -126,12 +126,12 @@ export default function Navbar() {
           ))}
 
           <a
-            href="https://luma.com/medellinblockchain"
+            href="https://luma.com/o56ekpyb"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-monad-primary text-white text-sm font-bold px-5 py-2 rounded-full hover:brightness-110 transition-all font-mono uppercase tracking-wide btn-glow"
           >
-            Registrate
+            Regístrate
           </a>
         </div>
 
@@ -140,6 +140,7 @@ export default function Navbar() {
           className="md:hidden flex flex-col gap-1.5 p-2"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menu"
+          aria-expanded={menuOpen}
         >
           <span
             className={`block w-6 h-0.5 transition-transform ${
@@ -232,13 +233,13 @@ export default function Navbar() {
             </div>
 
             <a
-              href="https://luma.com/medellinblockchain"
+              href="https://luma.com/o56ekpyb"
               target="_blank"
               rel="noopener noreferrer"
               className="block bg-monad-primary text-white text-sm font-bold px-5 py-2 rounded-full text-center font-mono uppercase tracking-wide"
               onClick={() => setMenuOpen(false)}
             >
-              Registrate
+              Regístrate
             </a>
           </motion.div>
         )}

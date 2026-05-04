@@ -138,22 +138,22 @@ export default function Hero() {
               variants={fadeUp}
               className="text-base sm:text-lg text-white/60 max-w-md mx-auto lg:mx-0 mb-8 px-2 sm:px-0"
             >
-              Un día. Sin límites. Solo construye. Hackathons de un día en 4 ciudades de Colombia.
-              Si puedes shippear, este es tu lugar.
+              Un día. Sin límites. Solo construye. Hackathons de un día en Medellín y Bogotá. Si
+              puedes shippear, este es tu lugar.
             </motion.p>
             <motion.div
               variants={fadeUp}
               className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start px-2 sm:px-0"
             >
               <motion.a
-                href="https://luma.com/medellinblockchain"
+                href="https://luma.com/o56ekpyb"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-monad-primary text-white font-bold px-6 sm:px-8 py-3 rounded-full hover:brightness-110 transition-all text-center font-mono uppercase tracking-wide btn-glow text-sm sm:text-base"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Ver Calendario
+                Regístrate
               </motion.a>
               <motion.a
                 href="https://chat.whatsapp.com/JboPU2owNWU7ysj5TEvgyO"
@@ -164,27 +164,6 @@ export default function Hero() {
                 whileTap={{ scale: 0.98 }}
               >
                 Unirse a la Comunidad
-              </motion.a>
-            </motion.div>
-            <motion.div
-              variants={fadeUp}
-              className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start px-2 sm:px-0 mt-4"
-            >
-              <motion.a
-                href="/apply/mentor"
-                className="border border-monad-primary/50 text-monad-primary font-medium px-6 sm:px-8 py-3 rounded-full hover:bg-monad-primary hover:text-white transition-all text-center font-mono text-sm sm:text-base"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Aplicar como Mentor
-              </motion.a>
-              <motion.a
-                href="/apply/judge"
-                className="border border-monad-primary/50 text-monad-primary font-medium px-6 sm:px-8 py-3 rounded-full hover:bg-monad-primary hover:text-white transition-all text-center font-mono text-sm sm:text-base"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Aplicar como Jurado
               </motion.a>
             </motion.div>
           </motion.div>

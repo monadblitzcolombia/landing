@@ -24,6 +24,7 @@ export interface Partner {
 
 export interface PartnerCategory {
   title: string;
+  subtitle?: string;
   partners: Partner[];
 }
 

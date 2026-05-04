@@ -41,6 +41,7 @@ export const PARTNERS: Partner[] = [
 export const PARTNER_CATEGORIES: PartnerCategory[] = [
   {
     title: "APOYAN",
+    subtitle: "Sponsors y aliados que hacen posible el tour",
     partners: [
       { name: "DevLabX3", logo: "/images/partners/sponsors/devlabx3.svg" },
       { name: "Monad Foundation", logo: "/images/partners/sponsors/monad-foundation.png" },
@@ -48,6 +49,7 @@ export const PARTNER_CATEGORIES: PartnerCategory[] = [
   },
   {
     title: "UNIVERSIDADES",
+    subtitle: "Sedes de workshops previos al hackathon",
     partners: [
       { name: "UPB", logo: "/images/partners/universities/upb.png" },
       { name: "EAFIT", logo: "/images/partners/universities/eafit.png" },
@@ -59,6 +61,7 @@ export const PARTNER_CATEGORIES: PartnerCategory[] = [
   },
   {
     title: "COMUNIDADES ALIADAS",
+    subtitle: "Comunidades blockchain que difunden y apoyan el evento",
     partners: [
       { name: "Platohedro", logo: "/images/partners/communities/platohedro.png" },
       { name: "Criptoprofesor", logo: "/images/partners/communities/criptoprofesor.png" },

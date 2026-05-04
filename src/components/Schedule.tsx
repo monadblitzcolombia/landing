@@ -14,25 +14,25 @@ const SCHEDULE = [
   {
     time: "11:00",
     title: "Apertura oficial y kickoff",
-    description: "Bienvenida, reglas y formacion de equipos",
+    description: "Bienvenida, reglas y formación de equipos",
   },
   { time: "13:00", title: "Almuerzo", description: "Pausa para comer y recargar" },
   {
     time: "17:00",
     title: "Deadline de submissions",
-    description: "Ultimo momento para enviar tu proyecto",
+    description: "Último momento para enviar tu proyecto",
   },
   {
     time: "18:00",
     title: "Pitches, demos y networking",
-    description: "Presentaciones de proyectos ante jurados. Abre el bar",
+    description: "Presenta tu proyecto. Los ganadores los deciden los mismos builders. Abre el bar",
   },
   {
     time: "21:00",
-    title: "Premiacion",
+    title: "Premiación",
     description: "Anuncio de ganadores y ceremonia de premios",
   },
-  { time: "22:00", title: "Cierre del evento", description: "Fin oficial de MonadBlitz Medellin" },
+  { time: "22:00", title: "Cierre del evento", description: "Fin oficial de MonadBlitz Medellín" },
 ];
 
 const PRIZES = [
@@ -62,10 +62,11 @@ export default function Schedule() {
             {"// AGENDA"}
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-gray-900 max-w-2xl">
-            Un dia para construir
+            Un día. Sin límites. Solo construye.
           </h2>
           <p className="text-base sm:text-lg text-gray-500 mt-4 max-w-xl">
-            MonadBlitz es un hackathon de un dia. Llega, forma equipo, construye y presenta.
+            Llega, forma equipo, construye lo que quieras y shippea. Si es cool y corre en Monad,
+            vale.
           </p>
         </motion.div>
 
@@ -121,7 +122,7 @@ export default function Schedule() {
             $2,000 USD en premios
           </h3>
           <p className="text-sm text-gray-500 mb-8">
-            Prize pool distribuido entre los 3 mejores proyectos.
+            Sin jurados ocultos. Los ganadores los eligen los mismos participantes.
           </p>
 
           <div className="grid grid-cols-3 gap-4">
@@ -159,7 +160,7 @@ export default function Schedule() {
             Incluido en el evento
           </h4>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {["Brunch de bienvenida", "Almuerzo", "Snacks todo el dia", "Bebidas y cerveza"].map(
+            {["Brunch de bienvenida", "Almuerzo", "Snacks todo el día", "Bebidas y cerveza"].map(
               (item) => (
                 <div key={item} className="flex items-center gap-2">
                   <svg
@@ -181,7 +182,7 @@ export default function Schedule() {
             )}
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-3">
-            {["WiFi dedicado", "Swag Kit", "Mentoria"].map((item) => (
+            {["WiFi dedicado", "Swag Kit", "Mentoría"].map((item) => (
               <div key={item} className="flex items-center gap-2">
                 <svg
                   className="w-4 h-4 text-monad-primary flex-shrink-0"
@@ -210,7 +211,7 @@ export default function Schedule() {
           transition={{ delay: 0.5 }}
           className="text-xs text-gray-300 font-mono mt-8 text-center"
         >
-          * La agenda puede variar. Horarios sujetos a confirmacion final.
+          * La agenda puede variar. Horarios sujetos a confirmación final.
         </motion.p>
       </div>
     </section>

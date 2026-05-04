@@ -5,15 +5,19 @@ import { motion } from "framer-motion";
 
 const sections = [
   { id: "hero", label: "Inicio" },
+  { id: "countdown", label: "Countdown" },
   { id: "stats", label: "Stats" },
-  { id: "construir", label: "Construir" },
   { id: "eventos", label: "Eventos" },
+  { id: "agenda", label: "Agenda" },
+  { id: "construir", label: "Construir" },
   { id: "aliados", label: "Aliados" },
+  { id: "galeria", label: "Galeria" },
+  { id: "faq", label: "FAQ" },
   { id: "explorar", label: "Explorar" },
 ];
 
 // Sections with dark backgrounds
-const darkSections = new Set(["hero", "eventos"]);
+const darkSections = new Set(["hero", "countdown", "eventos", "aliados", "galeria"]);
 
 export default function ScrollNav() {
   const [activeSection, setActiveSection] = useState("hero");

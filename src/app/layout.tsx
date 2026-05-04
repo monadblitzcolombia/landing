@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Roboto_Mono, Space_Grotesk } from "next/font/google";
+import EventSchema from "@/components/EventSchema";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -64,9 +65,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="h-full antialiased">
+      <head>
+        <EventSchema />
+      </head>
       <body
         className={`${inter.variable} ${robotoMono.variable} ${spaceGrotesk.variable} ${inter.className} min-h-full flex flex-col noise-overlay`}
       >
+        <a href="#hero" className="skip-to-content">
+          Saltar al contenido
+        </a>
         {children}
       </body>
     </html>

@@ -23,7 +23,7 @@ export default function EventSchema() {
     },
     organizer: {
       "@type": "Organization",
-      name: "Monad Tour Colombia",
+      name: "Medellín Blockchain Community",
       url: "https://monadcolombia.xyz",
     },
     performer: {
@@ -57,7 +57,7 @@ export default function EventSchema() {
         name: "Necesito saber programar para participar en MonadBlitz?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Si, MonadBlitz es un hackathon enfocado en builders. Necesitas conocimientos basicos de programacion, idealmente en Solidity o desarrollo Web3.",
+          text: "No necesariamente. MonadBlitz esta abierto a todos los perfiles: devs, disenadores, product managers, creadores de contenido y mas. Los equipos necesitan al menos un perfil tecnico, pero se valora la diversidad de habilidades.",
         },
       },
       {

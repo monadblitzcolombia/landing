@@ -8,10 +8,10 @@ const robotoMono = Roboto_Mono({ subsets: ["latin"], variable: "--font-roboto-mo
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://monadtour.co"),
+  metadataBase: new URL("https://monadcolombia.xyz"),
   title: "Monad Tour Colombia 2026 | Hackathons MonadBlitz",
   description:
-    "Recorre Colombia con Monad. Hackathons, workshops y comunidad blockchain en Cartagena, Barranquilla, Medellín y Bogotá.",
+    "Recorre Colombia con Monad. Hackathons, workshops y comunidad blockchain en Medellín y Bogotá.",
   keywords: [
     "Monad",
     "blockchain",
@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     "developers",
     "smart contracts",
   ],
-  authors: [{ name: "Monad Foundation" }],
-  creator: "Monad Foundation",
-  publisher: "Monad Foundation",
+  authors: [{ name: "Medellín Blockchain Community" }],
+  creator: "Medellín Blockchain Community",
+  publisher: "Medellín Blockchain Community",
   robots: {
     index: true,
     follow: true,
@@ -43,17 +43,17 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Monad Tour Colombia 2026 | Hackathons MonadBlitz",
     description:
-      "Recorre Colombia con Monad. Hackathons, workshops y comunidad blockchain en Cartagena, Barranquilla, Medellín y Bogotá.",
+      "Recorre Colombia con Monad. Hackathons, workshops y comunidad blockchain en Medellín y Bogotá.",
     type: "website",
     locale: "es_CO",
-    url: "https://monadtour.co",
+    url: "https://monadcolombia.xyz",
     siteName: "Monad Tour Colombia",
   },
   twitter: {
     card: "summary_large_image",
     title: "Monad Tour Colombia 2026 | Hackathons MonadBlitz",
     description:
-      "Recorre Colombia con Monad. Hackathons, workshops y comunidad blockchain en Cartagena, Barranquilla, Medellín y Bogotá.",
+      "Recorre Colombia con Monad. Hackathons, workshops y comunidad blockchain en Medellín y Bogotá.",
     creator: "@monad_xyz",
   },
 };

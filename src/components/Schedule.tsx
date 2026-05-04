@@ -32,7 +32,7 @@ const SCHEDULE = [
     title: "Premiación",
     description: "Anuncio de ganadores y ceremonia de premios",
   },
-  { time: "22:00", title: "Cierre del evento", description: "Fin oficial de MonadBlitz Medellín" },
+  { time: "22:00", title: "Cierre del evento", description: "Fin oficial del MonadBlitz" },
 ];
 
 const PRIZES = [
@@ -119,7 +119,7 @@ export default function Schedule() {
             {"// PREMIOS"}
           </p>
           <h3 className="text-2xl sm:text-3xl font-extrabold font-heading text-gray-900 mb-2">
-            $2,000 USD en premios
+            $2,000 USD en premios por ciudad
           </h3>
           <p className="text-sm text-gray-500 mb-8">
             Sin jurados ocultos. Los ganadores los eligen los mismos participantes.

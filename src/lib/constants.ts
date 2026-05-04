@@ -27,42 +27,6 @@ export const CITIES: City[] = [
     eventType: "MonadBlitz Hackathon",
     venue: "Bogotá, Colombia",
   },
-  {
-    id: "cali",
-    name: "Cali",
-    lat: 3.4516,
-    lng: -76.532,
-    date: null,
-    dateISO: null,
-    confirmed: false,
-    registrationUrl: null,
-    description: "La capital de la salsa entra al ring. Próximamente.",
-    eventType: "MonadBlitz Hackathon",
-  },
-  {
-    id: "cartagena",
-    name: "Cartagena",
-    lat: 10.391,
-    lng: -75.5146,
-    date: null,
-    dateISO: null,
-    confirmed: false,
-    registrationUrl: null,
-    description: "La heroica se suma. Próximamente.",
-    eventType: "MonadBlitz Hackathon",
-  },
-  {
-    id: "barranquilla",
-    name: "Barranquilla",
-    lat: 10.9685,
-    lng: -74.7813,
-    date: null,
-    dateISO: null,
-    confirmed: false,
-    registrationUrl: null,
-    description: "La puerta de oro se activa. Próximamente.",
-    eventType: "MonadBlitz Hackathon",
-  },
 ];
 
 export const PARTNERS: Partner[] = [
@@ -127,7 +91,7 @@ export const FAQ_ITEMS: FAQItem[] = [
   {
     question: "¿Hay premios?",
     answer:
-      "Sí. MonadBlitz Medellín tiene un prize pool de $2,000 USD: $1,000 para el 1er lugar, $700 para el 2do y $300 para el 3ro.",
+      "Sí. Cada MonadBlitz tiene un prize pool de $2,000 USD por ciudad: $1,000 para el 1er lugar, $700 para el 2do y $300 para el 3ro.",
   },
   {
     question: "¿El evento es en español o inglés?",
@@ -160,9 +124,9 @@ export const FOOTER_NAV: Record<string, { title: string; links: FooterLink[] }> 
     links: [
       { label: "Empezar a Construir", href: "https://www.monad.xyz/build" },
       { label: "Portal de Developers", href: "https://developers.monad.xyz/" },
-      { label: "Documentacion", href: "https://docs.monad.xyz/" },
+      { label: "Documentación", href: "https://docs.monad.xyz/" },
       { label: "Directorio de Infra", href: "https://www.monad.xyz/infra" },
-      { label: "Foro de Investigacion", href: "https://forum.monad.xyz/" },
+      { label: "Foro de Investigación", href: "https://forum.monad.xyz/" },
     ],
   },
   programas: {

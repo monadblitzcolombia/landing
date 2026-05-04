@@ -84,7 +84,7 @@ export default async function Image() {
             marginBottom: "20px",
           }}
         >
-          Monad Presenta
+          MBC Presenta
         </span>
 
         {/* Main title */}
@@ -136,7 +136,7 @@ export default async function Image() {
             letterSpacing: "3px",
           }}
         >
-          MEDELLIN - BOGOTA - CALI - CARTAGENA - BARRANQUILLA
+          MEDELLIN - BOGOTA
         </span>
 
         {/* Tagline */}

@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 
 export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
-  const authHeader = request.headers.get("authorization");
-  if (authHeader !== `Bearer ${process.env.ADMIN_PASSWORD}`) {
+  if (!(await isAdminAuthenticated())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -12,6 +12,14 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
   try {
     const body = await request.json();
     const { status, reviewer_notes } = body;
+
+    const validStatuses = ["approved", "rejected"];
+    if (!validStatuses.includes(status)) {
+      return NextResponse.json(
+        { error: "Invalid status. Must be 'approved' or 'rejected'" },
+        { status: 400 }
+      );
+    }
 
     const data = await prisma.application.update({
       where: { id },

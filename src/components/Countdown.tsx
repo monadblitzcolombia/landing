@@ -138,7 +138,7 @@ export default function Countdown() {
           className="text-center"
         >
           <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[3px] text-monad-dark/40 mb-2">
-            {"// PROXIMO EVENTO"}
+            {"// PRÓXIMO EVENTO"}
           </p>
           <h3 className="text-lg sm:text-xl font-heading font-bold text-monad-dark mb-1">
             MonadBlitz {event.name}
@@ -148,7 +148,7 @@ export default function Countdown() {
           {/* Timer */}
           {showDashes ? (
             <div className="flex items-center justify-center gap-3 sm:gap-5 lg:gap-8">
-              <TimeUnit value="--" label="Dias" />
+              <TimeUnit value="--" label="Días" />
               <Separator />
               <TimeUnit value="--" label="Horas" />
               <Separator />
@@ -163,7 +163,7 @@ export default function Countdown() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, ease: EASING }}
             >
-              <TimeUnit value={pad(timeLeft.days)} label="Dias" />
+              <TimeUnit value={pad(timeLeft.days)} label="Días" />
               <Separator />
               <TimeUnit value={pad(timeLeft.hours)} label="Horas" />
               <Separator />
@@ -192,7 +192,7 @@ export default function Countdown() {
                 rel="noopener noreferrer"
                 className="bg-monad-primary text-white font-bold px-8 py-3 rounded-full hover:brightness-110 transition-all text-center font-mono uppercase tracking-wide btn-glow text-sm"
               >
-                Registrate Ahora
+                Regístrate Ahora
               </a>
               <AddToCalendarButton event={event} />
             </motion.div>
@@ -216,7 +216,7 @@ function AddToCalendarButton({
   const startDateTime = `${dateClean}T100000`;
   const endDateTime = `${dateClean}T220000`;
   const details = encodeURIComponent(
-    "MonadBlitz Hackathon - Monad Tour Colombia 2026. Un dia de hacking intensivo construyendo en Monad.\n\nMas info: https://monadcolombia.xyz"
+    "MonadBlitz Hackathon - Monad Tour Colombia 2026. Un día de hacking intensivo construyendo en Monad.\n\nMás info: https://monadcolombia.xyz"
   );
   const location = encodeURIComponent(event.venue || event.name + ", Colombia");
 

@@ -1,9 +1,20 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { rateLimit } from "@/lib/rate-limit";
 import { mentorSchema, judgeSchema } from "@/lib/validations/applications";
 import type { Role, City, TechnicalLevel } from "@prisma/client";
 
 export async function POST(request: Request) {
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  const { allowed, remaining } = rateLimit(ip);
+
+  if (!allowed) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      { status: 429, headers: { "Retry-After": "60", "X-RateLimit-Remaining": "0" } }
+    );
+  }
+
   try {
     const body = await request.json();
 
@@ -50,11 +61,10 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json({
-      success: true,
-      data,
-      message: "Application submitted successfully",
-    });
+    return NextResponse.json(
+      { success: true, data, message: "Application submitted successfully" },
+      { headers: { "X-RateLimit-Remaining": String(remaining) } }
+    );
   } catch (error) {
     console.error("Application submission error:", error);
 

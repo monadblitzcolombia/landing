@@ -11,13 +11,13 @@ const sections = [
   { id: "agenda", label: "Agenda" },
   { id: "construir", label: "Construir" },
   { id: "aliados", label: "Aliados" },
-  { id: "galeria", label: "Galeria" },
+  { id: "galeria", label: "Galería" },
   { id: "faq", label: "FAQ" },
   { id: "explorar", label: "Explorar" },
 ];
 
 // Sections with dark backgrounds
-const darkSections = new Set(["hero", "countdown", "eventos", "aliados", "galeria"]);
+const darkSections = new Set(["hero", "eventos", "aliados", "galeria", "highlights"]);
 
 export default function ScrollNav() {
   const [activeSection, setActiveSection] = useState("hero");
@@ -69,6 +69,7 @@ export default function ScrollNav() {
             href={`#${id}`}
             className="group relative flex items-center justify-center p-1"
             aria-label={label}
+            aria-current={isActive ? "true" : undefined}
           >
             {/* Tooltip */}
             <motion.span

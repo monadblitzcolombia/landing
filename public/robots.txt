@@ -3,6 +3,8 @@
 
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /api/
 
 # Sitemap
-Sitemap: https://monadtour.co/sitemap.xml
+Sitemap: https://monadcolombia.xyz/sitemap.xml

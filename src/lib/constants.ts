@@ -10,7 +10,7 @@ export const CITIES: City[] = [
     dateISO: "2026-06-06",
     confirmed: true,
     registrationUrl: "https://luma.com/o56ekpyb",
-    description: "La ciudad de la innovación recibe a MonadBlitz.",
+    description: "La capital de la montaña abre el tour. Un día, sin límites, solo construye.",
     eventType: "MonadBlitz Hackathon",
     venue: "Medellín, Colombia",
   },
@@ -23,7 +23,7 @@ export const CITIES: City[] = [
     dateISO: "2026-07-04",
     confirmed: true,
     registrationUrl: "https://luma.com/gytabj8l",
-    description: "La capital se une al tour Monad.",
+    description: "La capital se prende. Llega, construye, shippea.",
     eventType: "MonadBlitz Hackathon",
     venue: "Bogotá, Colombia",
   },
@@ -36,7 +36,7 @@ export const CITIES: City[] = [
     dateISO: null,
     confirmed: false,
     registrationUrl: null,
-    description: "La capital de la salsa se suma al tour blockchain.",
+    description: "La capital de la salsa entra al ring. Próximamente.",
     eventType: "MonadBlitz Hackathon",
   },
   {
@@ -48,7 +48,7 @@ export const CITIES: City[] = [
     dateISO: null,
     confirmed: false,
     registrationUrl: null,
-    description: "La ciudad amurallada se prepara para el blockchain.",
+    description: "La heroica se suma. Próximamente.",
     eventType: "MonadBlitz Hackathon",
   },
   {
@@ -60,93 +60,89 @@ export const CITIES: City[] = [
     dateISO: null,
     confirmed: false,
     registrationUrl: null,
-    description: "La puerta de oro de Colombia entra al mundo Web3.",
+    description: "La puerta de oro se activa. Próximamente.",
     eventType: "MonadBlitz Hackathon",
   },
 ];
 
 export const PARTNERS: Partner[] = [
-  { name: "Medellín Blockchain Community", logo: "/images/partners/medellin-blockchain.svg" },
-  { name: "DevLabX3", logo: "/images/partners/devlabx3.svg" },
-  { name: "Monad Foundation", logo: "/images/partners/monad-foundation.png" },
-  { name: "Criptoprofesor", logo: null },
-  { name: "Ultravioleta DAO", logo: null },
+  { name: "Medellín Blockchain Community", logo: "/images/medellin-blockchain.svg" },
+  { name: "DevLabX3", logo: "/images/partners/sponsors/devlabx3.svg" },
+  { name: "Monad Foundation", logo: "/images/partners/sponsors/monad-foundation.png" },
+  { name: "Criptoprofesor", logo: "/images/partners/communities/criptoprofesor.png" },
+  { name: "Ultravioleta DAO", logo: "/images/partners/communities/ultravioleta-dao.svg" },
+  { name: "Platohedro", logo: "/images/partners/communities/platohedro.png" },
 ];
 
 export const PARTNER_CATEGORIES: PartnerCategory[] = [
   {
-    title: "ORGANIZA",
-    partners: [
-      { name: "Medellín Blockchain Community", logo: "/images/partners/medellin-blockchain.svg" },
-    ],
-  },
-  {
     title: "APOYAN",
     partners: [
-      { name: "DevLabX3", logo: "/images/partners/devlabx3.svg" },
-      { name: "Monad Foundation", logo: "/images/partners/monad-foundation.png" },
+      { name: "DevLabX3", logo: "/images/partners/sponsors/devlabx3.svg" },
+      { name: "Monad Foundation", logo: "/images/partners/sponsors/monad-foundation.png" },
     ],
   },
   {
     title: "UNIVERSIDADES",
     partners: [
-      { name: "UPB", logo: "/images/partners/upb.png" },
-      { name: "EAFIT", logo: "/images/partners/eafit.png" },
-      { name: "UdeA", logo: "/images/partners/udea.png" },
-      { name: "ITM", logo: "/images/partners/itm.png" },
-      { name: "Tecnologico de Antioquia", logo: "/images/partners/tdea.png" },
-      { name: "CESDE", logo: "/images/partners/cesde.jpg" },
+      { name: "UPB", logo: "/images/partners/universities/upb.png" },
+      { name: "EAFIT", logo: "/images/partners/universities/eafit.png" },
+      { name: "UdeA", logo: "/images/partners/universities/udea.png" },
+      { name: "ITM", logo: "/images/partners/universities/itm.png" },
+      { name: "Tecnologico de Antioquia", logo: "/images/partners/universities/tdea.png" },
+      { name: "CESDE", logo: "/images/partners/universities/cesde.png" },
     ],
   },
   {
     title: "COMUNIDADES ALIADAS",
     partners: [
-      { name: "Criptoprofesor", logo: null },
-      { name: "Ultravioleta DAO", logo: null },
+      { name: "Platohedro", logo: "/images/partners/communities/platohedro.png" },
+      { name: "Criptoprofesor", logo: "/images/partners/communities/criptoprofesor.png" },
+      { name: "Ultravioleta DAO", logo: "/images/partners/communities/ultravioleta-dao.svg" },
     ],
   },
 ];
 
 export const FAQ_ITEMS: FAQItem[] = [
   {
-    question: "Necesito saber programar para participar?",
+    question: "¿Necesito saber programar para participar?",
     answer:
-      "Si, MonadBlitz es un hackathon enfocado en builders. Necesitas conocimientos basicos de programacion, idealmente en Solidity o desarrollo Web3. Sin embargo, los equipos pueden incluir roles no-tecnicos como diseno o producto.",
+      "No necesariamente. MonadBlitz está abierto a todos los perfiles: devs, diseñadores, product managers, creadores de contenido, community builders y más. Además puedes vicodear, usar herramientas de IA y no-code. Los equipos necesitan al menos un perfil técnico, pero valoramos la diversidad de habilidades. Si no programas, tu aporte en UX, estrategia, pitch o diseño es igual de importante para ganar.",
   },
   {
-    question: "El evento es gratis?",
+    question: "¿El evento es gratis?",
     answer:
-      "Si, la participacion en MonadBlitz es completamente gratuita. Solo necesitas registrarte a traves de Luma.",
+      "Sí, la participación en MonadBlitz es completamente gratuita. Solo necesitas registrarte a través de Luma.",
   },
   {
-    question: "Puedo ir solo o necesito equipo?",
+    question: "¿Puedo ir solo o necesito equipo?",
     answer:
-      "Puedes asistir solo. Al inicio del evento hay una dinamica de formacion de equipos donde puedes encontrar companeros. Tambien puedes llegar con tu equipo ya formado (maximo 5 personas).",
+      "Puedes asistir solo. Al inicio del evento hay una dinámica de formación de equipos donde puedes encontrar compañeros. También puedes llegar con tu equipo ya formado (máximo 3 personas).",
   },
   {
-    question: "Que necesito llevar?",
+    question: "¿Qué necesito llevar?",
     answer:
-      "Tu laptop con el entorno de desarrollo listo, cargador, y muchas ganas de construir. Nosotros proporcionamos internet de alta velocidad, brunch, almuerzo, snacks, bebidas y cerveza todo el dia, mas un swag kit.",
+      "Ganas de construir, ideas y ganas de aportar. Si tienes laptop, tráela con su cargador. Nosotros proporcionamos internet de alta velocidad, brunch, almuerzo, snacks, bebidas y cerveza todo el día, más un swag kit.",
   },
   {
-    question: "Hay premios?",
+    question: "¿Hay premios?",
     answer:
-      "Si. MonadBlitz Medellin tiene un prize pool de $2,000 USD: $1,000 para el 1er lugar, $700 para el 2do y $300 para el 3ro.",
+      "Sí. MonadBlitz Medellín tiene un prize pool de $2,000 USD: $1,000 para el 1er lugar, $700 para el 2do y $300 para el 3ro.",
   },
   {
-    question: "El evento es en espanol o ingles?",
+    question: "¿El evento es en español o inglés?",
     answer:
-      "El evento es principalmente en espanol, pero los mentores pueden asistir en ambos idiomas. La documentacion de Monad esta en ingles.",
+      "El evento es principalmente en español, pero los mentores pueden asistir en ambos idiomas. La documentación de Monad está en inglés.",
   },
   {
-    question: "Que es Monad?",
+    question: "¿Qué es Monad?",
     answer:
-      "Monad es una blockchain Layer 1 compatible con EVM que ofrece 10,000 transacciones por segundo, finalidad en menos de 1 segundo y gas fees minimos. Es la blockchain de mayor rendimiento compatible con Ethereum.",
+      "Monad es una blockchain Layer 1 de alto rendimiento, compatible con EVM. Rápida, barata y pensada para builders. Si ya conoces Ethereum, ya conoces Monad.",
   },
   {
-    question: "Como me preparo para el hackathon?",
+    question: "¿Cómo me preparo para el hackathon?",
     answer:
-      "Revisa la documentacion de Monad en docs.monad.xyz, familiarizate con Solidity y el desarrollo de smart contracts, y unete al Discord de Monad para conectar con la comunidad.",
+      "Llega con una idea o con ganas de unirte a una. Si quieres adelantar, explora docs.monad.xyz y únete al Discord de Monad. No hay restricciones de stack ni de herramientas: si es cool y corre en Monad, vale.",
   },
 ];
 

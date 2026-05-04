@@ -181,7 +181,7 @@ export default function Schedule() {
             )}
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-3">
-            {["WiFi dedicado", "Swag Kit", "Mentoria", "100 cupos"].map((item) => (
+            {["WiFi dedicado", "Swag Kit", "Mentoria"].map((item) => (
               <div key={item} className="flex items-center gap-2">
                 <svg
                   className="w-4 h-4 text-monad-primary flex-shrink-0"

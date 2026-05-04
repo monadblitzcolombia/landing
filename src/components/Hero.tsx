@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import ConcentricCircles from "./ConcentricCircles";
 
 const MapColombia = dynamic(() => import("./MapColombia"), {
@@ -98,12 +99,21 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
           >
-            <motion.p
+            <motion.div
               variants={fadeUp}
-              className="text-xs uppercase tracking-[4px] text-monad-light/60 mb-4 font-mono"
+              className="flex items-center justify-center lg:justify-start gap-4 sm:gap-5 mb-6"
             >
-              Monad Presenta
-            </motion.p>
+              <Image
+                src="/images/medellin-blockchain.svg"
+                alt="Medellín Blockchain Community"
+                width={300}
+                height={80}
+                className="h-12 sm:h-16 lg:h-20 w-auto brightness-0 invert opacity-60"
+              />
+              <span className="text-sm sm:text-base lg:text-lg uppercase tracking-[4px] text-monad-light/60 font-mono">
+                Presenta
+              </span>
+            </motion.div>
             <motion.h1
               variants={fadeUp}
               className="text-5xl sm:text-6xl lg:text-8xl xl:text-9xl font-extrabold tracking-tight leading-[1.05] mb-6 font-heading text-white"
@@ -128,8 +138,8 @@ export default function Hero() {
               variants={fadeUp}
               className="text-base sm:text-lg text-white/60 max-w-md mx-auto lg:mx-0 mb-8 px-2 sm:px-0"
             >
-              La blockchain de alto rendimiento llega a Colombia. 10,000 TPS, finalidad sub-segundo
-              y compatibilidad 100% EVM. Hackathons en 4 ciudades.
+              Un día. Sin límites. Solo construye. Hackathons de un día en 4 ciudades de Colombia.
+              Si puedes shippear, este es tu lugar.
             </motion.p>
             <motion.div
               variants={fadeUp}

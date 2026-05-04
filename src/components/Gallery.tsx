@@ -20,6 +20,21 @@ const USE_PLACEHOLDERS = false;
 
 const GALLERY_IMAGES: GalleryImage[] = [
   {
+    src: "/images/gallery/monadblitz-06.jpg",
+    alt: "MonadBlitz CDMX - hackathon en Ciudad de Mexico",
+    city: "CDMX",
+  },
+  {
+    src: "/images/gallery/monadblitz-07.jpg",
+    alt: "MonadBlitz Guadalajara - builders y comunidad con bandera de Mexico",
+    city: "Guadalajara",
+  },
+  {
+    src: "/images/gallery/monadblitz-08.jpg",
+    alt: "MonadBlitz Monterrey - ganadores del hackathon",
+    city: "Monterrey",
+  },
+  {
     src: "/images/gallery/monadblitz-01.jpg",
     alt: "MonadBlitz Shanghai - equipos trabajando en el hackathon",
     city: "Shanghai",
@@ -43,11 +58,6 @@ const GALLERY_IMAGES: GalleryImage[] = [
     src: "/images/gallery/monadblitz-05.jpg",
     alt: "Monad 101 - participantes del evento",
     city: "Asia Tour",
-  },
-  {
-    src: "/images/gallery/monadblitz-06.jpg",
-    alt: "MonadBlitz CDMX - hackathon en Ciudad de Mexico",
-    city: "CDMX",
   },
 ];
 
@@ -94,9 +104,7 @@ export default function Gallery() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1, ease: EASING }}
-              className={`relative overflow-hidden rounded-lg group ${
-                i === 0 || i === 5 ? "md:row-span-2 aspect-[3/4]" : "aspect-[4/3]"
-              }`}
+              className="relative overflow-hidden rounded-lg group aspect-[4/3]"
             >
               {USE_PLACEHOLDERS ? (
                 <>

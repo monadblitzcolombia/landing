@@ -298,6 +298,23 @@ body {
   }
 }
 
+/* Tweet embed dark theme overrides */
+.tweet-card [data-theme="light"] {
+  --tweet-bg-color: rgba(255, 255, 255, 0.03) !important;
+  --tweet-border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  --tweet-font-color: rgba(255, 255, 255, 0.85) !important;
+  --tweet-font-color-secondary: rgba(255, 255, 255, 0.45) !important;
+  --tweet-color-blue-secondary: #6e54ff !important;
+  color-scheme: dark;
+}
+
+.tweet-card div[data-theme] {
+  --tweet-bg-color: rgba(255, 255, 255, 0.03) !important;
+  --tweet-border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  --tweet-font-color: rgba(255, 255, 255, 0.85) !important;
+  --tweet-font-color-secondary: rgba(255, 255, 255, 0.45) !important;
+}
+
 /* Screen reader only utility */
 .sr-only {
   position: absolute;

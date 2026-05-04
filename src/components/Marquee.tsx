@@ -29,7 +29,7 @@ export default function Marquee() {
         </motion.div>
 
         {/* Partner categories */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
           {PARTNER_CATEGORIES.map((category, catIndex) => (
             <motion.div
               key={category.title}
@@ -54,7 +54,7 @@ export default function Marquee() {
                         alt={partner.name}
                         width={120}
                         height={36}
-                        className="h-7 sm:h-8 w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity duration-300"
+                        className={`h-7 sm:h-8 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300 ${partner.logo.endsWith(".svg") ? "brightness-0 invert" : ""}`}
                       />
                     ) : (
                       <span className="text-sm font-heading font-bold text-white/50 hover:text-white/90 whitespace-nowrap tracking-tight transition-colors duration-300">

@@ -66,33 +66,42 @@ export const CITIES: City[] = [
 ];
 
 export const PARTNERS: Partner[] = [
-  {
-    name: "Medellín Blockchain Community",
-    logo: "/images/partners/medellin-blockchain.svg",
-  },
+  { name: "Medellín Blockchain Community", logo: "/images/partners/medellin-blockchain.svg" },
   { name: "DevLabX3", logo: "/images/partners/devlabx3.svg" },
+  { name: "Monad Foundation", logo: "/images/partners/monad-foundation.png" },
+  { name: "Criptoprofesor", logo: null },
+  { name: "Ultravioleta DAO", logo: null },
 ];
 
 export const PARTNER_CATEGORIES: PartnerCategory[] = [
   {
     title: "ORGANIZA",
-    partners: [{ name: "Medellín Blockchain", logo: "/images/partners/medellin-blockchain.svg" }],
+    partners: [
+      { name: "Medellín Blockchain Community", logo: "/images/partners/medellin-blockchain.svg" },
+    ],
   },
   {
     title: "APOYAN",
     partners: [
       { name: "DevLabX3", logo: "/images/partners/devlabx3.svg" },
-      { name: "Monad Foundation", logo: "/images/monad/logo-mark.svg" },
+      { name: "Monad Foundation", logo: "/images/partners/monad-foundation.png" },
+    ],
+  },
+  {
+    title: "UNIVERSIDADES",
+    partners: [
+      { name: "UPB", logo: "/images/partners/upb.png" },
+      { name: "EAFIT", logo: "/images/partners/eafit.png" },
+      { name: "UdeA", logo: "/images/partners/udea.png" },
+      { name: "ITM", logo: "/images/partners/itm.png" },
+      { name: "Tecnologico de Antioquia", logo: "/images/partners/tdea.png" },
+      { name: "CESDE", logo: "/images/partners/cesde.jpg" },
     ],
   },
   {
     title: "COMUNIDADES ALIADAS",
     partners: [
-      { name: "UPB", logo: null },
-      { name: "EAFIT", logo: null },
-      { name: "ITM", logo: null },
-      { name: "UdeA", logo: null },
-      { name: "TdeA", logo: null },
+      { name: "Criptoprofesor", logo: null },
       { name: "Ultravioleta DAO", logo: null },
     ],
   },

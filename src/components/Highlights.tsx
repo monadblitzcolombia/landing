@@ -1,7 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Tweet } from "react-tweet";
+
+const INITIAL_COUNT = 3;
 
 const EASING = [0.16, 1, 0.3, 1] as const;
 
@@ -47,6 +50,9 @@ const HIGHLIGHT_TWEETS = [
 ];
 
 export default function Highlights() {
+  const [showAll, setShowAll] = useState(false);
+  const visibleTweets = showAll ? HIGHLIGHT_TWEETS : HIGHLIGHT_TWEETS.slice(0, INITIAL_COUNT);
+
   return (
     <section id="highlights" className="py-16 sm:py-20 px-6 bg-monad-dark overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -71,7 +77,7 @@ export default function Highlights() {
 
         {/* Tweet grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {HIGHLIGHT_TWEETS.map((tweet, i) => (
+          {visibleTweets.map((tweet, i) => (
             <motion.div
               key={tweet.id}
               initial={{ opacity: 0, y: 20 }}
@@ -84,6 +90,17 @@ export default function Highlights() {
             </motion.div>
           ))}
         </div>
+
+        {!showAll && HIGHLIGHT_TWEETS.length > INITIAL_COUNT && (
+          <div className="mt-8 text-center">
+            <button
+              onClick={() => setShowAll(true)}
+              className="px-8 py-3 border border-white/20 text-white/70 rounded-full font-mono text-sm uppercase tracking-wide hover:bg-white/5 hover:text-white transition-all"
+            >
+              Ver más ({HIGHLIGHT_TWEETS.length - INITIAL_COUNT} más)
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Roboto_Mono, Space_Grotesk } from "next/font/google";
 import EventSchema from "@/components/EventSchema";
+import CookieConsent from "@/components/CookieConsent";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -75,6 +76,7 @@ export default function RootLayout({
           Saltar al contenido
         </a>
         {children}
+        <CookieConsent />
       </body>
     </html>
   );

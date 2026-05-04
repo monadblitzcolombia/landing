@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { rateLimit } from "@/lib/rate-limit";
+import { sendApplicationNotification } from "@/lib/email";
 import { mentorSchema, judgeSchema } from "@/lib/validations/applications";
 import type { Role, City, TechnicalLevel } from "@prisma/client";
 
@@ -60,6 +61,12 @@ export async function POST(request: Request) {
         }),
       },
     });
+
+    // Fire-and-forget email notification
+    sendApplicationNotification({
+      ...validated,
+      fullName: validated.full_name,
+    }).catch((err) => console.error("Email notification failed:", err));
 
     return NextResponse.json(
       { success: true, data, message: "Application submitted successfully" },

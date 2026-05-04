@@ -6,273 +6,219 @@
 | |\/| |/ _ \| '_ \ / _` |/ _` |   | | / _ \| | | | '__|
 | |  | | (_) | | | | (_| | (_| |   | || (_) | |_| | |
 |_|  |_|\___/|_| |_|\__,_|\__,_|   |_| \___/ \__,_|_|
-  ____      _                 _     _         ____   ___ ____   __
- / ___|___ | | ___  _ __ ___ | |__ (_) __ _  |___ \ / _ \___ \ / /_
-| |   / _ \| |/ _ \| '_ ` _ \| '_ \| |/ _` |   __) | | | |__) | '_ \
-| |__| (_) | | (_) | | | | | | |_) | | (_| |  / __/| |_| / __/| (_) |
- \____\___/|_|\___/|_| |_| |_|_.__/|_|\__,_| |_____|\___/_____|\___/
+  ____      _                 _     _
+ / ___|___ | | ___  _ __ ___ | |__ (_) __ _
+| |   / _ \| |/ _ \| '_ ` _ \| '_ \| |/ _` |
+| |__| (_) | | (_) | | | | | | |_) | | (_| |
+ \____\___/|_|\___/|_| |_| |_|_.__/|_|\__,_|
 ```
 
-Landing page oficial del Monad Tour Colombia - una serie de hackathons MonadBlitz en 4 ciudades colombianas.
+Landing page for Monad Tour Colombia - MonadBlitz one-day hackathons in Medellin and Bogota.
 
-![Monad](https://img.shields.io/badge/Monad-6E54FF?style=for-the-badge&logo=ethereum&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-16.2.1-black?style=for-the-badge&logo=next.js&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-6.19-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
 
-## Sobre el Proyecto
+## Events
 
-Monad Tour Colombia es una iniciativa que lleva la blockchain de alto rendimiento Monad a través de Colombia, organizando hackathons MonadBlitz en las principales ciudades del país.
+| City     | Date         | Registration                                   |
+| -------- | ------------ | ---------------------------------------------- |
+| Medellin | June 6, 2026 | [luma.com/o56ekpyb](https://luma.com/o56ekpyb) |
+| Bogota   | July 4, 2026 | [luma.com/gytabj8l](https://luma.com/gytabj8l) |
 
-**Características de Monad:**
+## Tech Stack
 
-- 10,000 TPS (Transacciones por segundo)
-- 100% compatible con EVM
-- Finalidad de 0.8 segundos
-- Tiempo de bloque de 0.4 segundos
+- **Framework:** Next.js 16 (App Router + Turbopack)
+- **Language:** TypeScript 5 (strict mode)
+- **Styling:** Tailwind CSS v4 + Framer Motion
+- **Database:** PostgreSQL via Prisma ORM
+- **Email:** Nodemailer (Gmail SMTP)
+- **Forms:** React Hook Form + Zod validation
+- **Maps:** React Leaflet
+- **Deployment:** Railway
 
-## Stack Tecnológico
+## Setup
 
-### Core
+### Requirements
 
-- **Framework:** [Next.js 16.2.1](https://nextjs.org/) (App Router + Turbopack)
-- **Lenguaje:** [TypeScript 5](https://www.typescriptlang.org/)
-- **Estilos:** [Tailwind CSS v4](https://tailwindcss.com/) con PostCSS
+- Node.js 20+
+- PostgreSQL database
 
-### UI/UX
-
-- **Animaciones:** [Framer Motion 12.38.0](https://www.framer.com/motion/)
-- **Iconos:** [Lucide React](https://lucide.dev/)
-- **Mapas:** [React Leaflet 5.0.0](https://react-leaflet.js.org/) + [Leaflet 1.9.4](https://leafletjs.com/)
-- **Fuentes:** Google Fonts (Inter, Roboto Mono, Space Grotesk)
-
-### Herramientas de Desarrollo
-
-- **Linting:** ESLint 9 (Next.js config)
-- **Formateo:** Prettier
-- **Testing:** Vitest + React Testing Library
-- **Git Hooks:** Husky + lint-staged
-- **Type Checking:** TypeScript strict mode
-
-## Instalación y Desarrollo
-
-### Requisitos
-
-- Node.js 20.x o superior
-- npm 10.x o superior
-
-### Setup Local
+### Install
 
 ```bash
-# Clonar el repositorio
-git clone https://github.com/[org]/monad-tour-colombia.git
-cd monad-tour-colombia
-
-# Instalar dependencias
 npm install
-
-# Iniciar servidor de desarrollo
-npm run dev
 ```
 
-Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
+### Environment
 
-## Scripts Disponibles
+Copy `.env.local.example` to `.env.local` and fill in:
+
+```env
+DATABASE_URL=postgresql://user:password@host:5432/dbname
+ADMIN_PASSWORD=your-admin-password
+GMAIL_APP_PASSWORD=your-gmail-app-password
+```
+
+- `DATABASE_URL` - PostgreSQL connection string
+- `ADMIN_PASSWORD` - Password for the `/admin` dashboard
+- `GMAIL_APP_PASSWORD` - Gmail app-specific password for email notifications on new applications
+
+### Database
 
 ```bash
-# Desarrollo
-npm run dev          # Inicia servidor de desarrollo (Turbopack)
-npm start            # Inicia servidor de producción
-
-# Build
-npm run build        # Compila para producción
-npm run build:check  # Ejecuta lint + type-check + build
-
-# Calidad de Código
-npm run lint         # Ejecuta ESLint
-npm run lint:fix     # Ejecuta ESLint y corrige errores
-npm run type-check   # Verifica tipos de TypeScript
-npm run format       # Formatea código con Prettier
-npm run format:check # Verifica formateo sin modificar
-
-# Testing
-npm test             # Ejecuta tests en modo watch
-npm run test:ui      # Abre interfaz visual de Vitest
-npm run test:run     # Ejecuta tests una vez (CI)
+npm run db:push      # Push schema to database
+npm run db:migrate   # Run migrations (development)
+npm run db:studio    # Open Prisma Studio (database GUI)
 ```
 
-## Estructura del Proyecto
-
-```
-monad-tour-colombia/
-├── src/
-│   ├── app/
-│   │   ├── layout.tsx          # Layout raíz con metadata
-│   │   ├── page.tsx            # Página principal
-│   │   ├── globals.css         # Estilos globales + Tailwind
-│   │   ├── favicon.ico         # Favicon de Monad
-│   │   ├── icon.png            # App icon
-│   │   └── sitemap.ts          # Sitemap dinámico
-│   ├── components/
-│   │   ├── Navbar.tsx          # Navegación principal
-│   │   ├── Hero.tsx            # Hero section con mapa
-│   │   ├── Stats.tsx           # Estadísticas de Monad
-│   │   ├── EventsTable.tsx     # Tabla de eventos por ciudad
-│   │   ├── BuildFeatures.tsx   # Tarjetas de features
-│   │   ├── Marquee.tsx         # Marquee de partners
-│   │   ├── ExploreCards.tsx    # Cards de exploración
-│   │   ├── Footer.tsx          # Footer con navegación
-│   │   ├── ScrollNav.tsx       # Navegación lateral scroll
-│   │   ├── MapColombia.tsx     # Mapa interactivo Leaflet
-│   │   ├── BuildMegaMenu.tsx   # Mega menu dropdown
-│   │   ├── ConcentricCircles.tsx # Decoración SVG
-│   │   └── ScrambleLink.tsx    # Link con efecto scramble
-│   ├── lib/
-│   │   ├── constants.ts        # Ciudades, partners, links
-│   │   ├── buildMenuData.ts    # Datos del mega menu
-│   │   └── types.ts            # TypeScript interfaces
-│   ├── hooks/
-│   │   └── useTextScramble.ts  # Hook para efecto scramble
-│   └── __tests__/
-│       ├── setup.ts            # Configuración de tests
-│       └── components/
-│           └── *.test.tsx      # Tests de componentes
-├── public/
-│   ├── images/
-│   │   ├── monad/              # Logos de Monad
-│   │   └── partners/           # Logos de aliados
-│   └── robots.txt              # SEO robots
-├── .husky/                     # Git hooks
-├── vitest.config.ts            # Configuración de Vitest
-├── .prettierrc.json            # Configuración de Prettier
-├── eslint.config.mjs           # Configuración de ESLint
-├── tsconfig.json               # Configuración de TypeScript
-├── next.config.ts              # Configuración de Next.js
-├── postcss.config.mjs          # Configuración de PostCSS
-├── tailwind.config.ts          # Configuración de Tailwind
-└── package.json                # Dependencias y scripts
-```
-
-## Componentes Principales
-
-### Hero
-
-Sección principal con:
-
-- Mapa interactivo de Colombia (React Leaflet)
-- Animaciones parallax con scroll
-- Panel deslizante de estadísticas
-- Colombian flag accent
-
-### EventsTable
-
-Lista de eventos MonadBlitz:
-
-- Medellín - 30 de Mayo, 2026 ✅
-- Bogotá - 4 de Julio, 2026 ✅
-- Cali - Próximamente
-- Cartagena - Próximamente
-- Barranquilla - Próximamente
-
-### BuildFeatures
-
-Tarjetas interactivas con:
-
-- Ilustraciones SVG personalizadas
-- Parallax mouse tracking
-- Animaciones on scroll
-
-## SEO y Metadatos
-
-La página incluye:
-
-- Open Graph tags completos
-- Twitter Card support
-- Sitemap dinámico (`/sitemap.xml`)
-- Robots.txt configurado
-- Keywords optimizados
-- Canonical URLs
-
-## Pre-commit Hooks
-
-El proyecto usa Husky para ejecutar automáticamente antes de cada commit:
-
-- ESLint (con auto-fix)
-- Prettier (formateo automático)
-- Type checking (opcional)
-
-Para hacer commit sin hooks (emergencias):
+### Development
 
 ```bash
-git commit --no-verify -m "mensaje"
+npm run dev          # Start dev server (Turbopack)
 ```
 
-## Testing
+Open [http://localhost:3000](http://localhost:3000).
 
-Tests unitarios con Vitest:
+## Scripts
 
 ```bash
-# Ejecutar tests
-npm test
-
-# Ver interfaz visual
-npm run test:ui
-
-# Ejecutar una vez (CI)
-npm run test:run
+npm run dev          # Development server
+npm run build        # Production build (generates Prisma + Next.js)
+npm start            # Production server
+npm run lint         # ESLint
+npm run lint:fix     # ESLint with auto-fix
+npm run type-check   # TypeScript check
+npm run format       # Prettier format
+npm test             # Vitest (watch mode)
+npm run test:run     # Vitest (single run)
+npm run build:check  # lint + type-check + build
 ```
+
+## Project Structure
+
+```
+src/
+  app/
+    page.tsx                        # Landing page (all sections)
+    layout.tsx                      # Root layout, metadata, fonts
+    globals.css                     # Tailwind + custom styles
+    sitemap.ts                      # Dynamic sitemap
+    opengraph-image.tsx             # OG image generator
+    twitter-image.tsx               # Twitter card generator
+    apply/
+      mentor/page.tsx               # Mentor application form
+      judge/page.tsx                # Judge application form
+    equipo/page.tsx                 # Team showcase (approved mentors/judges)
+    privacidad/page.tsx             # Privacy policy (Ley 1581)
+    terminos/page.tsx               # Terms and conditions
+    admin/
+      layout.tsx                    # Admin auth wrapper
+      applications/page.tsx         # Applications dashboard
+    api/
+      applications/route.ts         # POST - submit application (rate-limited)
+      team/route.ts                 # GET - public approved members
+      admin/
+        login/route.ts              # POST - admin login
+        logout/route.ts             # POST - admin logout
+        verify/route.ts             # GET - check session
+        applications/route.ts       # GET - list applications
+        applications/[id]/route.ts  # PATCH - update status
+  components/
+    Navbar.tsx                      # Navigation + Build mega menu
+    Hero.tsx                        # Hero with map + CTAs
+    MapColombia.tsx                 # Interactive Leaflet map
+    Countdown.tsx                   # Event countdown timer
+    Stats.tsx                       # Monad network stats
+    EventsTable.tsx                 # Events list with registration
+    Schedule.tsx                    # Event day schedule
+    BuildFeatures.tsx               # Feature cards with parallax
+    ExploreCards.tsx                # Learning path cards
+    Gallery.tsx                     # Event photo gallery
+    Highlights.tsx                  # Embedded tweets
+    Marquee.tsx                     # Partner logo marquee
+    FAQ.tsx                         # FAQ accordion
+    Footer.tsx                      # Footer navigation
+    ScrollNav.tsx                   # Floating scroll navigation
+    CookieConsent.tsx               # Cookie consent banner
+    EventSchema.tsx                 # JSON-LD structured data
+    BuildMegaMenu.tsx               # Mega menu dropdown
+    ConcentricCircles.tsx           # SVG decoration
+    ScrambleLink.tsx                # Text scramble effect
+    forms/
+      FormField.tsx                 # Input wrapper
+      FormSelect.tsx                # Select wrapper
+      FormTextarea.tsx              # Textarea with counter
+      FormCheckbox.tsx              # Checkbox wrapper
+  lib/
+    constants.ts                    # Cities, partners, FAQs, links
+    types.ts                        # TypeScript interfaces
+    db.ts                           # Prisma client singleton
+    email.ts                        # Email notification sender
+    admin-auth.ts                   # Cookie-based admin auth (HMAC)
+    rate-limit.ts                   # In-memory rate limiter
+    validations/
+      applications.ts              # Zod schemas for forms
+    buildMenuData.ts               # Mega menu data
+  hooks/
+    useTextScramble.ts             # Scramble animation hook
+prisma/
+  schema.prisma                    # Database schema
+public/
+  images/
+    gallery/                       # Event photos
+    partners/
+      sponsors/                    # Sponsor logos
+      universities/                # University partner logos
+      communities/                 # Community partner logos
+```
+
+## Pages
+
+| Route           | Access  | Description                       |
+| --------------- | ------- | --------------------------------- |
+| `/`             | Public  | Landing page with all sections    |
+| `/apply/mentor` | Public  | Mentor application form           |
+| `/apply/judge`  | Public  | Judge application form            |
+| `/equipo`       | Public  | Approved mentors and judges       |
+| `/privacidad`   | Public  | Privacy policy (Ley 1581 de 2012) |
+| `/terminos`     | Public  | Terms and conditions              |
+| `/admin`        | Private | Applications dashboard (password) |
+
+## API
+
+| Method | Endpoint                      | Auth  | Description                |
+| ------ | ----------------------------- | ----- | -------------------------- |
+| POST   | `/api/applications`           | None  | Submit application (5/min) |
+| GET    | `/api/team`                   | None  | List approved team members |
+| POST   | `/api/admin/login`            | None  | Admin login                |
+| POST   | `/api/admin/logout`           | Admin | Admin logout               |
+| GET    | `/api/admin/verify`           | Admin | Check session              |
+| GET    | `/api/admin/applications`     | Admin | List all applications      |
+| PATCH  | `/api/admin/applications/:id` | Admin | Update application status  |
+
+## Security
+
+- Admin auth uses HTTP-only, secure, SameSite=strict cookies with HMAC-SHA256 tokens
+- Application submissions are rate-limited (5 requests per minute per IP)
+- Status updates validate `approved`/`rejected` values
+- Environment secrets stored in `.env.local` (not committed)
 
 ## Deployment
 
-### Vercel (Recomendado)
+Deployed on Railway with PostgreSQL.
 
 ```bash
-# Conectar repositorio en vercel.com
-# Deploy automático en cada push a main
+npm run build    # Runs prisma generate + next build
+npm start        # Starts production server
 ```
 
-### Manual
+Required environment variables must be set in the hosting platform.
 
-```bash
-npm run build
-npm start
-```
+## Partners
 
-## Ciudades del Tour
-
-| Ciudad       | Fecha            | Estado        | Registro                          |
-| ------------ | ---------------- | ------------- | --------------------------------- |
-| Medellín     | 30 de Mayo, 2026 | ✅ Confirmado | [Link](https://luma.com/o56ekpyb) |
-| Bogotá       | 4 de Julio, 2026 | ✅ Confirmado | [Link](https://luma.com/gytabj8l) |
-| Cali         | TBA              | Próximamente  | -                                 |
-| Cartagena    | TBA              | Próximamente  | -                                 |
-| Barranquilla | TBA              | Próximamente  | -                                 |
-
-## Partners y Aliados
-
-- **Medellín Blockchain Community**
-- **DevLabX3**
-
-## Links Útiles
-
-- [Monad Foundation](https://www.monad.xyz/)
-- [Documentación](https://docs.monad.xyz/)
-- [Portal de Developers](https://developers.monad.xyz/)
-- [Discord](https://discord.gg/monad)
-- [Twitter](https://x.com/monad_xyz)
-
-## Contribuir
-
-1. Fork el proyecto
-2. Crea una branch (`git checkout -b feature/nueva-feature`)
-3. Commit tus cambios (`git commit -m 'feat: agregar nueva feature'`)
-4. Push a la branch (`git push origin feature/nueva-feature`)
-5. Abre un Pull Request
-
-## Licencia
-
-© 2026 Monad Foundation. Todos los derechos reservados.
-
----
-
-**Construido con 💜 para la comunidad blockchain de Colombia**
+- Monad Foundation
+- DevLabX3
+- UPB, EAFIT, UdeA, ITM, TDEA, CESDE (university venues)
+- Platohedro, Criptoprofesor, Ultravioleta DAO (communities)

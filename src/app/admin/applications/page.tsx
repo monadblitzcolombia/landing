@@ -23,13 +23,6 @@ export default function AdminApplicationsPage() {
   );
   const [selectedApp, setSelectedApp] = useState<Application | null>(null);
 
-  const getToken = () => {
-    if (typeof window !== "undefined") {
-      return sessionStorage.getItem("admin_token") || "";
-    }
-    return "";
-  };
-
   const fetchApplications = async () => {
     setLoading(true);
     try {
@@ -37,11 +30,7 @@ export default function AdminApplicationsPage() {
       if (selectedRole !== "all") params.append("role", selectedRole);
       if (selectedStatus !== "all") params.append("status", selectedStatus);
 
-      const response = await fetch(`/api/admin/applications?${params}`, {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-      });
+      const response = await fetch(`/api/admin/applications?${params}`);
 
       if (!response.ok) throw new Error("Error al cargar aplicaciones");
 
@@ -64,10 +53,7 @@ export default function AdminApplicationsPage() {
     try {
       const response = await fetch(`/api/admin/applications/${id}`, {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getToken()}`,
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),
       });
 

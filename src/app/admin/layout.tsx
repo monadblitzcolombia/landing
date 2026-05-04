@@ -1,32 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    if (typeof window !== "undefined") {
-      return sessionStorage.getItem("admin_authenticated") === "true";
-    }
-    return false;
-  });
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
 
+  useEffect(() => {
+    fetch("/api/admin/verify")
+      .then((res) => res.json())
+      .then((data) => setIsAuthenticated(data.authenticated))
+      .catch(() => setIsAuthenticated(false));
+  }, []);
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/admin/applications", {
-        headers: {
-          Authorization: `Bearer ${password}`,
-        },
+      const response = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
       });
 
       if (response.ok) {
-        sessionStorage.setItem("admin_authenticated", "true");
-        sessionStorage.setItem("admin_token", password);
         setIsAuthenticated(true);
+        setPassword("");
         setError("");
       } else {
         setError("Contrasena incorrecta");
@@ -36,12 +37,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     }
   };
 
-  const handleLogout = () => {
-    sessionStorage.removeItem("admin_authenticated");
-    sessionStorage.removeItem("admin_token");
+  const handleLogout = async () => {
+    await fetch("/api/admin/logout", { method: "POST" });
     setIsAuthenticated(false);
     router.push("/");
   };
+
+  if (isAuthenticated === null) {
+    return (
+      <div className="min-h-screen bg-monad-dark flex items-center justify-center">
+        <p className="text-white/70">Cargando...</p>
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     return (

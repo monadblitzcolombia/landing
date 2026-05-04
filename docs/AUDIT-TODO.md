@@ -6,17 +6,13 @@ Items identified during the full project audit (May 2026). Sorted by priority.
 
 ## Security
 
-### 1. Admin auth - password stored in sessionStorage
+### ~~1. Admin auth - password stored in sessionStorage~~ FIXED
 
-- **File:** `src/app/admin/layout.tsx:28`
-- **Issue:** Plain-text password stored in `sessionStorage` as `admin_token`. Anyone with DevTools access can read it.
-- **Fix:** Use HTTP-only cookies or server-side sessions instead. Consider JWT with short expiry.
+- Replaced `sessionStorage` with HTTP-only, secure, SameSite=strict cookies via server-side auth (`/api/admin/login`, `/api/admin/logout`, `/api/admin/verify`). Password is never stored client-side.
 
-### 2. No rate limiting on application submissions
+### ~~2. No rate limiting on application submissions~~ FIXED
 
-- **File:** `src/app/api/applications/route.ts`
-- **Issue:** POST endpoint has no rate limiting. Could be spammed to fill the database.
-- **Fix:** Add rate limiting middleware (e.g. `next-rate-limit` or a simple in-memory token bucket).
+- Added in-memory rate limiter (5 requests/minute per IP) to the POST endpoint with `429` responses and `Retry-After` header.
 
 ### ~~3. PATCH admin endpoint doesn't validate status field~~ FIXED
 
@@ -26,21 +22,17 @@ Items identified during the full project audit (May 2026). Sorted by priority.
 
 ## Performance
 
-### 4. Gallery uses raw `<img>` instead of `next/image`
+### ~~4. Gallery uses raw `<img>` instead of `next/image`~~ FIXED
 
-- **File:** `src/components/Gallery.tsx:149`
-- **Issue:** 8 full-resolution JPGs loaded with raw `<img>` tags. No automatic WebP/AVIF conversion, no responsive srcSet, no blur placeholder.
-- **Fix:** Replace with `next/image` using `fill` prop and `sizes` attribute.
+- Replaced raw `<img>` tags with `next/image` using `fill` prop and `sizes="(max-width: 768px) 50vw, 33vw"` for automatic WebP/AVIF, responsive srcSet, and lazy loading.
 
 ### ~~5. next.config.ts missing `images` configuration~~ FIXED
 
 - Added `images: { formats: ['image/avif', 'image/webp'] }`.
 
-### 6. All 7 tweets loaded at once in Highlights
+### ~~6. All 7 tweets loaded at once in Highlights~~ FIXED
 
-- **File:** `src/components/Highlights.tsx:73`
-- **Issue:** 7 tweet embeds render simultaneously, each fetching its own assets. Heavy on mobile.
-- **Fix:** Show 3 initially with a "Ver mas" button, or use intersection observer to lazy-load rows.
+- Now shows 3 tweets initially with a "Ver mas" button to load the remaining 4.
 
 ### 7. Heavy client bundle from "use client" everywhere
 
@@ -137,39 +129,34 @@ Items identified during the full project audit (May 2026). Sorted by priority.
 - **Issue:** Application forms collect personal data (name, email, phone, social handles). Colombian data protection law (Ley 1581 de 2012) requires explicit consent.
 - **Action:** Review privacy policy to ensure it covers: what data is collected, how it's used, who has access, retention period, and how to request deletion.
 
-### 23. No cookie consent banner
+### ~~23. No cookie consent banner~~ FIXED
 
-- **Issue:** If any analytics or tracking is added later, a cookie consent banner will be needed.
-- **Action:** Low priority now since no cookies are set beyond essential ones.
+- Added `CookieConsent` component in root layout. Shows a banner with a link to the privacy policy. Consent is stored in `localStorage`.
 
 ---
 
 ## Infrastructure
 
-### 24. DATABASE_URL in .env file (not .env.local)
+### ~~24. DATABASE_URL in .env file (not .env.local)~~ FIXED
 
-- **File:** `.env`
-- **Issue:** The database URL with credentials is in `.env` instead of `.env.local`. While `.env*` is in `.gitignore`, `.env` is typically meant for non-secret defaults. Credentials should always be in `.env.local`.
-- **Fix:** Move `DATABASE_URL` to `.env.local` and keep `.env` empty or with placeholder values only.
+- `.env` now only contains placeholder values. Real credentials are in `.env.local`.
 
 ---
 
 ## Summary
 
-| Status    | Count                                        |
-| --------- | -------------------------------------------- |
-| FIXED     | 7 (items 3, 5, 8, 9, 20, 21 + images config) |
-| Remaining | 17                                           |
+| Status    | Count                                                             |
+| --------- | ----------------------------------------------------------------- |
+| FIXED     | 13 (items 1, 2, 3, 4, 5, 6, 8, 9, 20, 21, 23, 24 + images config) |
+| Remaining | 11                                                                |
 
 ### Remaining by category
 
-| Priority       | Count  | Category                                |
-| -------------- | ------ | --------------------------------------- |
-| Security       | 2      | Auth, rate limiting                     |
-| Performance    | 3      | Gallery images, tweets, bundle          |
-| Marketing      | 4      | Social proof, notify, urgency, partners |
-| Content        | 5      | Schedule, rules, showcase               |
-| Accessibility  | 1      | Map keyboard                            |
-| Legal          | 2      | Privacy, cookies                        |
-| Infrastructure | 1      | Env file                                |
-| **Total**      | **17** |                                         |
+| Priority      | Count  | Category                                |
+| ------------- | ------ | --------------------------------------- |
+| Performance   | 1      | Heavy client bundle (low priority)      |
+| Marketing     | 4      | Social proof, notify, urgency, partners |
+| Content       | 5      | Schedule, rules, showcase               |
+| Accessibility | 1      | Map keyboard (low priority)             |
+| Legal         | 1      | Privacy policy review                   |
+| **Total**     | **11** |                                         |

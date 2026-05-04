@@ -68,10 +68,10 @@ const EASING = [0.16, 1, 0.3, 1] as const;
 function TimeUnit({ value, label }: { value: string; label: string }) {
   return (
     <div className="flex flex-col items-center">
-      <span className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-heading text-white tabular-nums tracking-tight">
+      <span className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-heading text-monad-dark tabular-nums tracking-tight">
         {value}
       </span>
-      <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[2px] text-white/40 mt-1">
+      <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[2px] text-monad-dark/40 mt-1">
         {label}
       </span>
     </div>
@@ -120,10 +120,7 @@ export default function Countdown() {
   const showDashes = isOver && timeLeftJson === store.getServerSnapshot();
 
   return (
-    <section
-      id="countdown"
-      className="py-12 sm:py-16 px-6 bg-monad-dark border-y border-white/5 relative overflow-hidden"
-    >
+    <section id="countdown" className="py-12 sm:py-16 px-6 bg-white relative overflow-hidden">
       {/* Subtle gradient backdrop */}
       <div className="absolute inset-0 opacity-10">
         <div
@@ -140,10 +137,10 @@ export default function Countdown() {
           transition={{ duration: 0.7, ease: EASING }}
           className="text-center"
         >
-          <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[3px] text-white/40 mb-2">
+          <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[3px] text-monad-dark/40 mb-2">
             {"// PROXIMO EVENTO"}
           </p>
-          <h3 className="text-lg sm:text-xl font-heading font-bold text-white mb-1">
+          <h3 className="text-lg sm:text-xl font-heading font-bold text-monad-dark mb-1">
             MonadBlitz {event.name}
           </h3>
           <p className="text-sm font-mono text-monad-primary mb-8">{event.date}</p>
@@ -214,21 +211,24 @@ function AddToCalendarButton({
   if (!event.dateISO) return null;
 
   const title = encodeURIComponent(`MonadBlitz ${event.name}`);
-  const startDate = event.dateISO.replace(/-/g, "");
+  // Use Colombia timezone (America/Bogota) with ctz param so Google handles conversion
+  const dateClean = event.dateISO.replace(/-/g, "");
+  const startDateTime = `${dateClean}T100000`;
+  const endDateTime = `${dateClean}T220000`;
   const details = encodeURIComponent(
     "MonadBlitz Hackathon - Monad Tour Colombia 2026. Un dia de hacking intensivo construyendo en Monad.\n\nMas info: https://monadcolombia.xyz"
   );
   const location = encodeURIComponent(event.venue || event.name + ", Colombia");
 
-  // Google Calendar: full day event
-  const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${startDate}&details=${details}&location=${location}`;
+  // Google Calendar: timed event (10:00 - 20:00 COT)
+  const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDateTime}/${endDateTime}&details=${details}&location=${location}&ctz=America/Bogota`;
 
   return (
     <a
       href={googleUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-2 border border-white/20 text-white/70 font-medium px-6 py-3 rounded-full hover:border-monad-primary/50 hover:text-white transition-all text-center font-mono text-sm"
+      className="inline-flex items-center gap-2 border border-monad-dark/20 text-monad-dark/70 font-medium px-6 py-3 rounded-full hover:border-monad-primary/50 hover:text-monad-dark transition-all text-center font-mono text-sm"
       aria-label={`Agregar MonadBlitz ${event.name} a Google Calendar`}
     >
       <svg

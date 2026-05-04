@@ -85,13 +85,13 @@ export default function Gallery() {
           className="mb-12"
         >
           <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[3px] text-white/40 mb-4">
-            {"// GALERIA"}
+            {"// GALERÍA"}
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-white max-w-3xl">
             MonadBlitz alrededor del mundo
           </h2>
           <p className="text-base sm:text-lg text-white/50 mt-4 max-w-xl">
-            Momentos de los eventos pasados en Shanghai, CDMX y mas ciudades.
+            Momentos de los eventos pasados en CDMX, Guadalajara, Monterrey y más ciudades.
           </p>
         </motion.div>
 

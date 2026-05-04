@@ -177,10 +177,17 @@ export default function Countdown() {
             </p>
           )}
 
+          {/* Urgency */}
+          {!isOver && (
+            <p className="mt-6 text-xs font-mono text-monad-dark/50 uppercase tracking-wide">
+              Cupos limitados - 100 por ciudad
+            </p>
+          )}
+
           {/* CTA */}
           {event.registrationUrl && (
             <motion.div
-              className="mt-8 flex flex-col sm:flex-row gap-3 justify-center"
+              className="mt-4 flex flex-col sm:flex-row gap-3 justify-center"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -192,7 +199,7 @@ export default function Countdown() {
                 rel="noopener noreferrer"
                 className="bg-monad-primary text-white font-bold px-8 py-3 rounded-full hover:brightness-110 transition-all text-center font-mono uppercase tracking-wide btn-glow text-sm"
               >
-                Regístrate Ahora
+                Registrate Ahora
               </a>
               <AddToCalendarButton event={event} />
             </motion.div>
